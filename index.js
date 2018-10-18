@@ -8,32 +8,19 @@ const QUESTIONS = [
   {
     name: 'project-choice',
     type: 'list',
-    message: 'What project template would you like to generate?',
+    message: 'Who are we hitting?',
     choices: CHOICES
-  },
-  {
-    name: 'project-name',
-    type: 'input',
-    message: 'Project name:',
-    validate: function (input) {
-      if (/^([A-Za-z\-\_\d])+$/.test(input)) return true;
-      else return 'Project name may only include letters, numbers, underscores and hashes.';
-    }
   }
 ];
 
 inquirer.prompt(QUESTIONS)
   .then(answers => {
     const projectChoice = answers['project-choice'];
-    const projectName = answers['project-name'];
     const templatePath = `${__dirname}/templates/${projectChoice}`;
-  
-    fs.mkdirSync(`${CURR_DIR}/${projectName}`);
-
-    createDirectoryContents(templatePath, projectName);
+    createDirectoryContents(templatePath);
   });
 
-function createDirectoryContents (templatePath, newProjectPath) {
+function createDirectoryContents (templatePath) {
   const filesToCreate = fs.readdirSync(templatePath);
 
   filesToCreate.forEach(file => {
@@ -45,13 +32,14 @@ function createDirectoryContents (templatePath, newProjectPath) {
     if (stats.isFile()) {
       const contents = fs.readFileSync(origFilePath, 'utf8');
       
-      const writePath = `${CURR_DIR}/${newProjectPath}/${file}`;
+      const writePath = `${CURR_DIR}/${file}`;
       fs.writeFileSync(writePath, contents, 'utf8');
     } else if (stats.isDirectory()) {
-      fs.mkdirSync(`${CURR_DIR}/${newProjectPath}/${file}`);
+      fs.mkdirSync(`${CURR_DIR}/${file}`);
       
       // recursive call
-      createDirectoryContents(`${templatePath}/${file}`, `${newProjectPath}/${file}`);
+      createDirectoryContents(`${templatePath}/${file}`, `${file}`);
     }
   });
+  console.log('SLAP!');
 }

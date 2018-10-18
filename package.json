@@ -4,7 +4,7 @@
   "description": "Script to create Hugo and Jekyll templates",
   "main": "index.js",
   "bin": {
-    "generate": "./index.js"
+    "slap": "./index.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
