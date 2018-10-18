@@ -1,7 +1,7 @@
 // Reset
 a,
 article h2 a {
-  @include color(color, text);
+  color: $text;
 }
 article,
 footer,
@@ -16,32 +16,32 @@ article h2 a:active,
 article h2 a:hover,
 ul#portfolio h4 a:active,
 ul#portfolio h4 a:hover {
-  @include color(color, link);
+  color: $link;
   text-decoration: underline;
 }
 a svg {
-  @include color(fill, text);
+  fill: $text;
 }
 a:active svg,
 a:hover svg {
-  @include color(fill, link);
+  fill: $link;
 }
 a.meta,
 hr,
 .meta {
-  @include color(color, meta);
+  color: $meta;
 }
 a.meta:active,
 a.meta:hover {
-  @include color(color, accent);
+  color: $accent;
 }
 article {
   a {
-    @include color(color, link);
+    color: $link;
   }
   a:active,
   a:hover {
-    @include color(color, accent);
+    color: $accent;
   }
 }
 article p {
@@ -54,7 +54,7 @@ main {
   width: 100%;
 }
 blockquote {
-  @include color(border-left-color, link);
+  border-left-color: $link;
   border-left-style: solid;
   border-left-width: 1px;
   margin: 0 0 15px 0;
@@ -65,8 +65,8 @@ figure {
   font: 400 17px monospace;
 }
 figure {
-  @include color(background-color, text);
-  @include color(color, background);
+  background-color: $text;
+  color: $background;
 }
 figure,
 h1, h2, h3, h4,
@@ -76,7 +76,7 @@ p {
 }
 figure,
 pre {
-  @include color(box-shadow, box);
+  box-shadow: $box;
   margin-bottom: 21px;
 }
 figcaption p,
@@ -110,7 +110,7 @@ h4 {
 h2, h3, h4 {
   margin-top: 10px;
 }
-img, 
+img,
 svg {
   height: auto;
   width: 100%;
@@ -134,7 +134,7 @@ ol ul {
   padding-left: 20px;
 }
 p code {
-  @include color(background-color, text);
-  @include color(color, background);
+  background-color: $text;
+  color: $background;
   padding: 0 2px;
 }
