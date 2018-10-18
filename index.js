@@ -41,5 +41,4 @@ function createDirectoryContents (templatePath) {
       createDirectoryContents(`${templatePath}/${file}`, `${file}`);
     }
   });
-  console.log('SLAP!');
 }
