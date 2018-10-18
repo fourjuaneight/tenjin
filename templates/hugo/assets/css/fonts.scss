@@ -1,0 +1,50 @@
+@font-face {
+  font-display: swap;
+  font-family: '-optimized';
+  font-weight: 400;
+  font-style: normal;
+  src: local(-optimized),
+       local(-optimized),
+       url("fonts/-optimized.woff2") format("woff2"),
+       url("fonts/-optimized.woff") format("woff");
+}
+@font-face {
+  font-display: swap;
+  font-family: '';
+  font-weight: 400;
+  font-style: normal;
+  src: local(),
+       local(),
+       url("fonts/.woff2") format("woff2"),
+       url("fonts/.woff") format("woff");
+}
+@font-face {
+  font-display: swap;
+  font-family: '';
+  font-weight: 400;
+  font-style: italic;
+  src: local(),
+       local(),
+       url("fonts/.woff2") format("woff2"),
+       url("fonts/.woff") format("woff");
+}
+@font-face {
+  font-display: swap;
+  font-family: '';
+  font-weight: 600;
+  font-style: bold;
+  src: local(),
+       local(),
+       url("fonts/.woff2") format("woff2"),
+       url("fonts/.woff") format("woff");
+}
+
+body {
+  font-family: sans-serif;
+}
+.fonts-loaded-1 body {
+  font-family: '-optimized';
+}
+.fonts-loaded-2 body {
+  font-family: '';
+}

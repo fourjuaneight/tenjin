@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html lang="{{ with .Site.LanguageCode }}{{ . }}{{ else }}en-US{{ end }}">
+<head>
+  {{ .Hugo.Generator }}
+  <meta charset="utf-8" />
+  <title>{{ url := replace .Permalink ( printf "%s" .Site.BaseURL) "" }}{{ if eq url "/" }}{{ .Site.Title }}{{ else }}{{ if .Params.heading }}{{ .Params.heading }}{{ else }}{{ .Title }}{{ end }}{{ end }}</title>
+  <meta name="author" content="{{ .Site.Author.name }}">
+  <meta name="description" content="{{ .Site.Params.meta.description }}">
+  <meta name="keywords" content="{{ .Site.Params.meta.keywords }}">
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,initial-scale=1.0,maximum-scale=5.0,viewport-fit=cover">
+  <meta name="theme-color" content="#">
+
+  <!-- Manifest -->
+  <link rel="manifest" href={{ "/manifest.json" | relURL }}>
+
+  <!-- Stylesheets -->
+  {{ styles := resources.Get "css/main.scss" | toCSS | postCSS | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ styles.Permalink }}">
+
+  <!-- RSS -->
+  {{ with .OutputFormats.Get "rss" -}}
+      {{ printf `<link rel="%s" type="%s+%s" href="%s" title="%s" />` .Rel .MediaType.Type .MediaType.Suffix .Permalink $.Site.Title | safeHTML }}
+  {{ end -}}
+
+  <!-- Open Graph -->
+  <link rel="canonical" href="{{ .Permalink }}">
+  <base href="{{ .Site.BaseURL }}"/>
+  {{ template "_internal/twitter_cards.html" . }}
+  {{ avatar := resources.Get "icons/logo.png" }}
+  <meta name="twitter:image" content="{{ .Site.BaseURL }}/icons/{{ avatar.Permalink }}">
+  {{ template "_internal/opengraph.html" . }}
+  <meta property="og:image" content="{{ .Site.BaseURL }}/icons/{{ avatar.Permalink }}">
+  {{ template "_internal/schema.html" . }}
+
+  <!-- Favicon -->
+  {{ favicon := resources.Get "icons/favicon.png" }}
+  <link rel="shortcut icon" href="{{ favicon.Permalink }}">
+
+  <!-- Webclip and Apple Touch Icon -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="{{ .Site.Title }}">
+  {{ ati152 := resources.Get "icons/apple-touch-icon-152x152.png" }}
+  <link rel="apple-touch-icon" sizes="152x152" href="{{ ati152.Permalink }}">
+  {{ ati167 := resources.Get "icons/apple-touch-icon-167x167.png" }}
+  <link rel="apple-touch-icon" sizes="167x167" href="{{ ati167.Permalink }}">
+  {{ ati180 := resources.Get "icons/apple-touch-icon-180x180.png" }}
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ ati180.Permalink }}">
+  {{ spt := resources.Get "icons/safari-pinned-tab.svg" | minify }}
+  <link rel="mask-icon" color="#" href="{{ spt.Permalink }}">
+
+  <!-- Android Chrome Icon -->
+  {{ ac128 := resources.Get "icons/android-chrome-128x128.png" }}
+  <link rel="android-chrome" sizes="128x128" href="{{ ac128.Permalink }}">
+  {{ ac192 := resources.Get "icons/android-chrome-192x192.png" }}
+  <link rel="android-chrome" sizes="192x192" href="{{ ac192.Permalink }}">
+  {{ ac512 := resources.Get "icons/android-chrome-512x512.png" }}
+  <link rel="android-chrome" sizes="512x512" href="{{ ac512.Permalink }}">
+</head>
+<body>
+  {{ block "main" . }}
+  {{ end }}
+
+  {{ scripts := resources.Get "js/scripts.js" | minify }}
+  <script src="{{ scripts.Permalink }}"></script>
+</body>
+</html>

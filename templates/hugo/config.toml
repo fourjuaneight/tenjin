@@ -1,0 +1,36 @@
+baseURL = "/"
+copyright = ""
+enableEmoji = "true"
+enableRobotsTXT = "true"
+languageCode = "en-us"
+title = ""
+
+FootnoteReturnLinkContents = "↩"
+SectionPagesMenu = "main"
+
+[permalinks]
+  blog = "/:title/"
+
+[author]
+  name = ""
+  email = ""
+
+[blackfriday]
+  hrefTargetBlank = true
+  plainIDAnchors = true
+
+[params]
+  OpenLinksInNewWindow = true
+  social = ""
+
+[params.google]
+  analytics = ""
+  tagManager = ""
+  adsense = ""
+
+[params.meta]
+  description = ""
+  keywords = ""
+
+[outputs]
+  home = ["html", "rss"]

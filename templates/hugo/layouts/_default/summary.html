@@ -1,0 +1,10 @@
+<article class="post">
+  <h2 class="title"><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+  <p class="content">{{ .Summary }}</p>
+  {{ if .Params.showthedate }}
+  <section class="meta">
+    <time class="date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
+    <p class="author">by {{ .Params.author }}</p>
+  </section>
+  {{ end }}
+</article>

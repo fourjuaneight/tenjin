@@ -1,0 +1,10 @@
+{{ define "main" }}
+  {{ partial "header.html" . }}
+  <main class="list" role="main">
+    {{ paginator  := .Paginate (where .Data.Pages "Type" "home" ) 5 }}
+    {{ range paginator.Pages }}
+      {{ .Render "summary" }}
+    {{ end }}
+  </main>
+  {{ partial "footer.html" . }}
+{{ end }}

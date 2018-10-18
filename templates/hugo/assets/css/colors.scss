@@ -1,0 +1,11 @@
+// Theme definitions
+$light: (
+  : #,
+);
+$dark: (
+  : #,
+);
+@mixin color($property, $varName) {
+  #{$property}: map-get($light, $varName);
+  #{$property}: var(--#{$varName}, map-get($light, $varName));
+}

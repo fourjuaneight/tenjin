@@ -1,0 +1,5 @@
+{{ img := resources.Get (print "img/" (.Get "src")) | fingerprint }}
+<figure {{ with .Get "class" }}class="{{.}}"{{ end }}>
+  <img data-src="{{ img.Permalink }}" {{ with .Get "alt"}}alt="{{.}}"{{ end }} {{ with .Get "id" }}id="{{.}}"{{ end }} class="lazy"/>
+  {{ with .Get "caption" }}<figcaption>{{.}}</figcaption>{{ end }}
+</figure>
