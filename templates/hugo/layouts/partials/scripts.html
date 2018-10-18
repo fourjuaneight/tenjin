@@ -1,0 +1,33 @@
+<!-- Lazy Loader -->
+<script>
+  var myLazyLoad = new LazyLoad({
+    elements_selector: ".lazy",
+    threshold: 500,
+    class_loading: "loading",
+    class_error: "error"
+  });
+
+  var mutationObserver = new MutationObserver(function (mutations) {
+    mutations.forEach(function (mutation) {
+      myLazyLoad.update();
+    });
+  });
+
+  var b = document.getElementsByClassName("list")[0];
+  var config = { childList: true, subtree: true };
+  mutationObserver.observe(b, config);
+</script>
+<!-- SW -->
+<script>
+  if (navigator.serviceWorker) {
+    navigator.serviceWorker.register("/sw.js", { scope: "/" });
+    navigator.serviceWorker.ready.then(registration => {
+      console.log("Service Worker Ready");
+    });
+    window.addEventListener("load", () => {
+      if (navigator.serviceWorker.controller) {
+        navigator.serviceWorker.controller.postMessage({ command: "trimCaches" });
+      }
+    });
+  }
+</script>
