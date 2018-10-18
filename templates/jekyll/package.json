@@ -1,0 +1,30 @@
+{
+  "name": "",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "scripts": {
+    "build": "gulp build --max_old_space_size=8000; hugo",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "^9.0.1",
+    "cssnano": "^4.0.4",
+    "gulp-cache": "^1.0.2",
+    "gulp-concat-util": "^0.5.5",
+    "gulp-gm": "0.0.9",
+    "gulp-image-resize": "^0.13.0",
+    "gulp-imagemin": "^4.1.0",
+    "gulp-plumber": "^1.2.0",
+    "gulp-postcss": "^7.0.1",
+    "gulp-rename": "^1.4.0",
+    "gulp-sass": "^4.0.1",
+    "gulp": "^3.9.1",
+    "imagemin-mozjpeg": "^7.0.0",
+    "npm": "^6.4.1",
+    "postcss-cli": "^6.0.0"
+  }
+}

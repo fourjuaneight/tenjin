@@ -1,0 +1,8 @@
+_site
+.sass-cache
+.jekyll-metadata
+.bundle
+.idea
+.code
+.DS_Store
+www*
