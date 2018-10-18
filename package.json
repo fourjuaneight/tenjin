@@ -1,0 +1,26 @@
+{
+  "name": "create-static-site",
+  "version": "1.0.0",
+  "description": "Script to create Hugo and Jekyll templates",
+  "main": "index.js",
+  "bin": {
+    "generate": "./index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fourjuaneight/create-static-site.git"
+  },
+  "author": "Juan Villela",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fourjuaneight/create-static-site/issues"
+  },
+  "homepage": "https://github.com/fourjuaneight/create-static-site#readme",
+  "devDependencies": {
+    "fs": "0.0.1-security",
+    "inquirer": "^6.2.0"
+  }
+}
