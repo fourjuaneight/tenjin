@@ -8,7 +8,7 @@ const QUESTIONS = [
   {
     name: 'project-choice',
     type: 'list',
-    message: 'Who are we hitting?',
+    message: 'Choose your template',
     choices: CHOICES
   }
 ];
