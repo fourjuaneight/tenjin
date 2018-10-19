@@ -15,7 +15,7 @@ const autoprefixer    = require('autoprefixer'),
 gulp.task('critical', () => {
   const plugins = [autoprefixer({browsers: ['last 2 version']}), cssnano()];
   return (
-    gulp.src('assets/css/critical.scss')
+    gulp.src('_sass/critical.scss')
       .pipe(plumber())
       .pipe(sass().on('error', sass.logError))
       .pipe(postcss(plugins))
@@ -30,7 +30,7 @@ gulp.task('critical', () => {
         })
       )
       // insert file
-      .pipe(gulp.dest('layouts/partials'))
+      .pipe(gulp.dest('_includes'))
   );
 });
 
@@ -59,12 +59,12 @@ gulp.task('optimize', () => gulp.src('assets/img/*.jpg')
 
 // Watch asset folder for changes
 gulp.task('watch', ['critical', 'convert', 'optimize'], () => {
-  gulp.watch('assets/css/fonts.scss', ['critical']);
-  gulp.watch('assets/css/variables.scss', ['critical']);
-  gulp.watch('assets/css/extends.scss', ['critical']);
-  gulp.watch('assets/css/reset.scss', ['critical']);
-  gulp.watch('assets/css/layout.scss', ['critical']);
-  gulp.watch('assets/css/critical.scss', ['critical']);
+  gulp.watch('_sass/_fonts.scss', ['critical']);
+  gulp.watch('_sass/_variables.scss', ['critical']);
+  gulp.watch('_sass/_extends.scss', ['critical']);
+  gulp.watch('_sass/_reset.scss', ['critical']);
+  gulp.watch('_sass/_layout.scss', ['critical']);
+  gulp.watch('_sass/_critical.scss', ['critical']);
   gulp.watch('assets/img/*', ['convert']);
   gulp.watch('assets/img/*', ['optimize']);
 });
