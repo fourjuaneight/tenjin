@@ -34,11 +34,6 @@ function createDirectoryContents (templatePath) {
       
       const writePath = `${CURR_DIR}/${file}`;
       fs.writeFileSync(writePath, contents, 'utf8');
-    } else if (stats.isDirectory()) {
-      fs.mkdirSync(`${CURR_DIR}/${file}`);
-      
-      // recursive call
-      createDirectoryContents(`${templatePath}/${file}`, `${file}`);
     }
   });
 }
