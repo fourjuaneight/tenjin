@@ -9,3 +9,8 @@
     @content;
   }
  }
+ @mixin range($max,$min) {
+  @media screen and (max-width: $max) and (min-width: $min) {
+    @content;
+  }
+}
