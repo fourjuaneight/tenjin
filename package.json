@@ -1,0 +1,25 @@
+{
+  "name": "create-static-site",
+  "version": "1.0.0",
+  "description": "This is a simple script mostly copied from [Harriet ryder's article](https://medium.com/northcoders/creating-a-project-generator-with-node-29e13b3cd309) that uses [Inquirer.js](https://github.com/SBoudrias/Inquirer.js) and the [fs](https://nodejs.org/api/fs.html) module to generate a [Hugo](https://gohugo.io/) or [Jekyll](https://jekyllrb.com/) template onto the current directory.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fourjuaneight/create-static-site.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fourjuaneight/create-static-site/issues"
+  },
+  "homepage": "https://github.com/fourjuaneight/create-static-site#readme",
+  "engines": {
+    "node": "8.14.0"
+  },
+  "devDependencies": {
+    "inquirer": "^6.2.0"
+  }
+}
