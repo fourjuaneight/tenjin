@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 const inquirer = require('inquirer');
 const fs = require('fs');
+const ncp = require('ncp').ncp;
 const CHOICES = fs.readdirSync(`${__dirname}/templates`);
 const CURR_DIR = process.cwd();
 
@@ -17,23 +18,11 @@ inquirer.prompt(QUESTIONS)
   .then(answers => {
     const projectChoice = answers['project-choice'];
     const templatePath = `${__dirname}/templates/${projectChoice}`;
-    createDirectoryContents(templatePath);
+    ncp(templatePath, CURR_DIR, function (err) {
+      if (err) {
+        return console.error(err);
+      } else {
+        console.log('Done!');
+      }
+    });
   });
-
-function createDirectoryContents (templatePath) {
-  const filesToCreate = fs.readdirSync(templatePath);
-
-  filesToCreate.forEach(file => {
-    const origFilePath = `${templatePath}/${file}`;
-    
-    // get stats about the current file
-    const stats = fs.statSync(origFilePath);
-
-    if (stats.isFile()) {
-      const contents = fs.readFileSync(origFilePath, 'utf8');
-      
-      const writePath = `${CURR_DIR}/${file}`;
-      fs.writeFileSync(writePath, contents, 'utf8');
-    }
-  });
-}

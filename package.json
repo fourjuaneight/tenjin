@@ -20,6 +20,7 @@
     "node": "8.14.0"
   },
   "devDependencies": {
-    "inquirer": "^6.2.0"
+    "inquirer": "^6.2.0",
+    "ncp": "^2.0.0"
   }
 }
