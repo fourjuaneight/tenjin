@@ -20,17 +20,15 @@ SectionPagesMenu = "main"
   plainIDAnchors = true
 
 [params]
-  OpenLinksInNewWindow = true
+  description = ""
+  keywords = ""
   social = ""
+  OpenLinksInNewWindow = true
 
 [params.google]
   analytics = ""
   tagManager = ""
   adsense = ""
 
-[params.meta]
-  description = ""
-  keywords = ""
-
 [outputs]
-  home = ["html", "rss"]
+  home = ["html"]

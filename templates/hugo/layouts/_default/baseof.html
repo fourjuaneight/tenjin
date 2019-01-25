@@ -97,9 +97,15 @@
   {{ block "main" . }}
   {{ end }}
 
-  {{ partial "scripts.html" . }}
-
   {{ $js := resources.Get "js/lazy-loading.js" | minify }}
   <script src="{{ $js.Permalink }}"></script>
+  <script>
+    var myLazyLoad = new LazyLoad({
+      elements_selector: ".lazy",
+      threshold: 500,
+      class_loading: "loading",
+      class_error: "error"
+    });
+  </script>
 </body>
 </html>

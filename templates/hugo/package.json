@@ -7,24 +7,37 @@
     "build": "gulp build --max_old_space_size=8000; hugo",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://fourjuaneight@github.com/fourjuaneight/.git"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fourjuaneight//issues"
+  },
+  "homepage": "https://github.com/fourjuaneight/#readme",
+  "engines": {
+    "node": "8.14.0"
+  },
   "devDependencies": {
-    "autoprefixer": "^9.0.1",
-    "cssnano": "^4.0.4",
-    "gulp-cache": "^1.0.2",
+    "autoprefixer": "^9.1.5",
+    "cssnano": "^4.1.4",
+    "gulp": "^4.0.0",
     "gulp-concat-util": "^0.5.5",
-    "gulp-gm": "0.0.9",
-    "gulp-image-resize": "^0.13.0",
-    "gulp-imagemin": "^4.1.0",
     "gulp-plumber": "^1.2.0",
     "gulp-postcss": "^7.0.1",
     "gulp-rename": "^1.4.0",
     "gulp-sass": "^4.0.1",
-    "gulp": "^3.9.1",
-    "imagemin-mozjpeg": "^7.0.0",
-    "npm": "^6.4.1",
-    "postcss-cli": "^6.0.0"
+    "npm": "6.4.1",
+    "postcss-calc": "^7.0.1",
+    "postcss-cli": "^6.0.0",
+    "postcss-custom-properties": "^8.0.9",
+    "postcss-import": "^12.0.1",
+    "postcss-mixins": "^6.2.0",
+    "postcss-nested": "^4.1.0",
+    "postcss-simple-vars": "^5.0.1",
+    "sugarss": "^2.0.0"
   }
 }
