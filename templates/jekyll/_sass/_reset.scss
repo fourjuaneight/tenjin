@@ -1,32 +1,54 @@
 // Reset
-a,
-article h2 a {
-  color: $text;
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
 }
-article,
+html {
+  box-sizing: border-box;
+  -webkit-overflow-scrolling: touch;
+}
+html, body,
+h1, h2, h3, h4, h5, h6,
+a, p, span,
+em, small, strong,
+sub, sup,
+mark, del, ins, strike,
+abbr, dfn,
+blockquote, q, cite,
+code, pre,
+ol, ul, li, dl, dt, dd,
+div, section, article,
+main, aside, nav,
+header, hgroup, footer,
+img, figure, figcaption,
+address, time,
+audio, video,
+canvas, iframe,
+details, summary,
+fieldset, form, label, legend,
+table, caption,
+tbody, tfoot, thead,
+tr, th, td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+a,
+a:visited,
+article a {
+  color: inherit;
+}
 footer,
-header,
-main,
-nav.paginate {
+header {
   padding: 15px;
 }
 a:active,
 a:hover,
 article h2 a:active,
-article h2 a:hover,
-ul#portfolio h4 a:active,
-ul#portfolio h4 a:hover {
+article h2 a:hover {
   color: $link;
-  text-decoration: underline;
 }
-a svg {
-  fill: $text;
-}
-a:active svg,
-a:hover svg {
-  fill: $link;
-}
-a.meta,
 hr,
 .meta {
   color: $meta;
@@ -39,57 +61,18 @@ article {
   a {
     color: $link;
   }
-  a:active,
-  a:hover {
-    color: $accent;
-  }
 }
 article p {
   line-height: 27px;
 }
 article,
 main {
+  @extend %full-width;
   @extend %margin-center;
-  max-width: 700px;
-  width: 100%;
 }
 blockquote {
-  border-left-color: $link;
-  border-left-style: solid;
-  border-left-width: 1px;
-  margin: 0 0 15px 0;
+  border-left: 1px solid $link;
   padding-left: 15px;
-}
-code,
-figure {
-  font: 400 17px monospace;
-}
-figure {
-  background-color: $text;
-  color: $background;
-}
-figure,
-h1, h2, h3, h4,
-nav > *,
-p {
-  margin: 0;
-}
-figure,
-pre {
-  box-shadow: $box;
-  margin-bottom: 21px;
-}
-figcaption p,
-pre {
-  padding: 5px;
-}
-footer,
-header,
-nav {
-  @extend %flex;
-}
-header {
-  text-transform: uppercase;
 }
 header,
 h1, h2, h3, h4 {
@@ -111,30 +94,30 @@ h2, h3, h4 {
   margin-top: 10px;
 }
 img,
-svg {
+svg,
+video {
   height: auto;
   width: 100%;
 }
-li {
-  margin-bottom: 5px;
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
 }
-nav {
-  @extend %items-center;
-  justify-content: space-between;
-  a svg {
-    height: 55px;
-    width: 55px;
-  }
+[hidden] {
+  display: none !important;
 }
-ol,
-ul {
-  padding-left: 30px;
+
+[disabled] {
+  cursor: not-allowed;
 }
-ol ul {
-  padding-left: 20px;
+
+:focus:not(:focus-visible) {
+  outline: none;
 }
-p code {
-  background-color: $text;
-  color: $background;
-  padding: 0 2px;
+.sr-only {
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  overflow: hidden;
+  position: absolute !important;
+  width: 1px;
 }
