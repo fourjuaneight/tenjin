@@ -1,0 +1,23 @@
+// Linting HTML with CSS
+// Based on https://bitsofco.de/linting-html-using-css/
+*[style],
+html:not([lang]),
+html[lang=""],
+a:not([href]),
+a[href="#"],
+a[href=""],
+a[href*="javascript:void(0)"],
+img:not([alt]),
+img[alt=""],
+input:not([id]),
+select:not([id]),
+textarea:not([id]),
+label:not([for]),
+input:not([name]),
+select:not([name]),
+textarea:not([name]),
+form:not([name]):not([id]),
+a:empty,
+button:empty {
+  border: 5px solid red; /* Style to make the elements noticeable */
+}
