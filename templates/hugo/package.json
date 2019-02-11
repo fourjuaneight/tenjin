@@ -5,6 +5,7 @@
   "main": "gulpfile.js",
   "scripts": {
     "build": "gulp build --max_old_space_size=8000; hugo",
+    "clean": "rm -rf public resources",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
