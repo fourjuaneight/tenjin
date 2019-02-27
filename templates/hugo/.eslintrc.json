@@ -1,9 +1,12 @@
 {
   "env": {
     "browser": true,
+    "commonjs": true,
+    "es6": true,
     "jquery": true,
     "jest": true,
-    "node": true
+    "node": true,
+    "serviceworker": true
   },
   "extends": ["airbnb", "prettier"],
   "plugins": ["prettier"],
@@ -21,23 +24,38 @@
     "curly": 2,
     "dot-notation": 2,
     "func-names": 0,
-    "id-length": 2,
+    "id-length": [
+      2,
+      {
+        "exceptions": ["i","a","b"]
+      }
+    ],
     "import": 0,
+    "import/no-unresolved": [
+      2, 
+      { "caseSensitive": false }
+   ],
     "import/prefer-default-export": 0,
+    "linebreak-style": 0,
     "no-alert": 0,
     "no-await-in-loop": 0,
-    "no-debugger": 0,
+    "no-console": [
+      "error",
+      {
+        "allow": [
+          "warn",
+          "error"
+        ]
+      }
+    ],
     "no-const-assign": 2,
+    "no-debugger": 0,
     "no-dupe-class-members": 2,
     "no-else-return": 2,
     "no-inner-declarations": 2,
     "no-lonely-if": 2,
-    "no-magic-numbers": [
-      2,
-      {
-        "ignore": [-1, 0, 1]
-      }
-    ],
+    "no-magic-numbers": "off",
+    "no-param-reassign": ["error", { "props": false }],
     "no-shadow": [
       2,
       {
@@ -52,6 +70,7 @@
         ]
       }
     ],
+    "no-nested-ternary": "off",
     "no-unneeded-ternary": 2,
     "no-unused-expressions": 2,
     "no-unused-vars": [
@@ -77,9 +96,10 @@
     "prettier/prettier": [
       "error",
       {
-        "trailingComma": "es5",
+        "endOfLine":"auto",
+        "printWidth": 80,
         "singleQuote": true,
-        "printWidth": 80
+        "trailingComma": "es5"
       }
     ],
     "sort-imports": 2,
@@ -94,5 +114,9 @@
     "sort-vars": 2,
     "space-before-function-paren": 0,
     "strict": [2, "global"]
+  },
+  "settings": {
+    "import/no-unresolved": "off",
+    "import/resolver": "webpack"
   }
 }

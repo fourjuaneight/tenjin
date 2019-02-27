@@ -4,6 +4,7 @@
 const autoprefixer = require('autoprefixer');
 const concat = require('gulp-concat-util');
 const cssnano = require('cssnano');
+const gm = require('gulp-gm');
 const gulp = require('gulp');
 const plumber = require('gulp-plumber');
 const postcss = require('gulp-postcss');
@@ -32,6 +33,19 @@ function critical() {
       .pipe(gulp.dest('layouts/partials'))
 }
 
+// Image Conversion
+function convert() {
+  return gulp
+    .src(['assets/img/*.jpg','assets/img/*.png'])
+    .pipe(plumber())
+    .pipe(
+      gm(function(gmfile) {
+        return gmfile.setFormat('webp');
+      })
+    )
+    .pipe(gulp.dest('assets/img'));
+}
+
 // Watch asset folder for changes
 function watchFiles() {
   gulp.watch('assets/css/colors.scss', critical);
@@ -44,6 +58,7 @@ function watchFiles() {
 
 // Tasks
 gulp.task("critical", critical);
+gulp.task("convert", convert);
 
 // Run Watch as default
 gulp.task('watch', watchFiles);
