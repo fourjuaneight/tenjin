@@ -1,8 +1,37 @@
-[context.production.environment]
-  HUGO_VERSION = "0.52"
+[build]
+  publish = "public"
+  command = "npm run build"
+
+# Config for Github pull requests.
+[context.deploy-preview]
+  command = "npm run build-dev"
 
 [context.deploy-preview.environment]
-  HUGO_VERSION = "0.52"
+  HUGO_VERSION = "0.53"
+  HUGO_ENV = "development"
 
+# Default config for branch deploys.
 [context.branch-deploy]
-  HUGO_VERSION = "0.52"
+  # Build without minification & optimization.
+  command = "npm run build-dev"
+
+[context.branch-deploy.environment]
+  HUGO_VERSION = "0.53"
+  HUGO_ENV = "development"
+
+# Custom config for the staging branch.
+[context.staging]
+  # We want a production-like build.
+  command = "npm run build"
+
+[context.staging.environment]
+  HUGO_ENV = "development"
+
+# Production config.
+[context.production]
+  command = "npm run build"
+
+[context.production.environment]
+  HUGO_VERSION = "0.53"
+  HUGO_ENV = "production"
+  HUGO_ENABLEGITINFO = "true"
