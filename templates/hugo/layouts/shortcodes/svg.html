@@ -1,0 +1,4 @@
+{{ $img := resources.Get (print "img/" (.Get "src")) }}
+<figure {{ with .Get "id" }}id="{{.}}"{{ end }}>
+  <img data-src="{{ $img.RelPermalink }}" {{ with .Get "alt"}}alt="{{.}}"{{ end }} class="lazy {{ with .Get "class" }}{{.}}{{ end }}"/>
+</figure>

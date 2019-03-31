@@ -11,43 +11,21 @@
   <meta name="theme-color" content="#">
 
   <!-- Fonts -->
-  <link rel="preload" href={{ "fonts/-optimized.woff2" | relURL }} as="font" type="font/woff2" crossorigin>
+  {{ $lato2 := resources.Get "fonts/lato.woff2" }}
+  <link rel="preload" href="{{ $lato2.RelPermalink }}" as="font" type="font/woff2" crossorigin>
+  {{ $lato := resources.Get "fonts/lato.woff" }}
+  <link rel="preload" href="{{ $lato.RelPermalink }}" as="font" type="font/woff" crossorigin>
+  {{ $latoi2 := resources.Get "fonts/lato-italic.woff2" }}
+  <link rel="preload" href="{{ $latoi2.RelPermalink }}" as="font" type="font/woff2" crossorigin>
+  {{ $latoi := resources.Get "fonts/lato-italic.woff" }}
+  <link rel="preload" href="{{ $latoi.RelPermalink }}" as="font" type="font/woff" crossorigin>
+  {{ $latob2 := resources.Get "fonts/lato-bold.woff2" }}
+  <link rel="preload" href="{{ $latob2.RelPermalink }}" as="font" type="font/woff2" crossorigin>
+  {{ $latob := resources.Get "fonts/lato-bold.woff" }}
+  <link rel="preload" href="{{ $latob.RelPermalink }}" as="font" type="font/woff" crossorigin>
 
   <!-- Critical -->
   {{ partial "critical.html" . }}
-
-  <!-- Critical Font Loading -->
-  {{ $criticalJS := resources.Get "js/critical-fallback.js" | minify }}
-  <script>
-    (function() {
-      "use strict";
-      // Optimization for Repeat Views
-      if( sessionStorage.fontsLoadedCriticalFoftPreloadFallback ) {
-        document.documentElement.className += " fonts-loaded-2";
-        return;
-      } else if( "fonts" in document ) {
-        document.fonts.load("1em LatoSubset").then(function () {
-          document.documentElement.className += " fonts-loaded-1";
-          Promise.all([
-            document.fonts.load("400 1em "),
-            document.fonts.load("700 1em "),
-            document.fonts.load("italic 1em ")
-          ]).then(function () {
-            document.documentElement.className += " fonts-loaded-2";
-            // Optimization for Repeat Views
-            sessionStorage.fontsLoadedCriticalFoftPreloadFallback = true;
-          });
-        });
-      } else {
-        // use fallback
-        var ref = document.getElementsByTagName( "script" )[ 0 ];
-        var script = document.createElement( "script" );
-        script.src = "{{ $criticalJS.Permalink }}";
-        script.async = true;
-        ref.parentNode.insertBefore( script, ref );
-      }
-    })();
-  </script>
 
   <!-- Stylesheets -->
   {{ styles := resources.Get "css/main.scss" | toCSS | postCSS | minify | fingerprint }}
@@ -59,13 +37,12 @@
   {{ end -}}
 
   <!-- Open Graph -->
-  <link rel="canonical" href="{{ .Permalink }}">
-  <base href="{{ .Site.BaseURL }}"/>
+  <link rel="canonical" href="{{ .RelPermalink }}">
   {{ template "_internal/twitter_cards.html" . }}
-  {{ avatar := resources.Get "icons/logo.png" }}
-  <meta name="twitter:image" content="{{ .Site.BaseURL }}/icons/{{ $avatar.Permalink }}">
+  {{ $avatar := resources.Get "icons/avatar.png" }}
+  <meta name="twitter:image" content="{{ $avatar.RelPermalink }}">
   {{ template "_internal/opengraph.html" . }}
-  <meta property="og:image" content="{{ .Site.BaseURL }}/icons/{{ $avatar.Permalink }}">
+  <meta property="og:image" content="{{ $avatar.RelPermalink }}">
   {{ template "_internal/schema.html" . }}
 
   <!-- Favicon -->
@@ -92,20 +69,17 @@
   <link rel="icon" sizes="192x192" href="{{ $i192.Permalink }}">
   {{ i512 := resources.Get "icons/icon-512x512.png" }}
   <link rel="icon" sizes="512x512" href="{{ $i512.Permalink }}">
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  {{ if hugo.Environment | eq "production" }}
+    {{ partial "analytics.html" . }}
+  {{ end }}
 </head>
 <body>
   {{ block "main" . }}
   {{ end }}
 
-  {{ $js := resources.Get "js/lazy-loading.js" | minify }}
-  <script src="{{ $js.Permalink }}"></script>
-  <script>
-    var myLazyLoad = new LazyLoad({
-      elements_selector: ".lazy",
-      threshold: 500,
-      class_loading: "loading",
-      class_error: "error"
-    });
-  </script>
+  {{ $js := resources.Get "js/bundle.js" }}
+  <script src="{{ $js.RelPermalink }}"></script>
 </body>
 </html>
