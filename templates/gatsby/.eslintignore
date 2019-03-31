@@ -1,5 +1,5 @@
-webpack.config.babel.js
+babel.config.js
+eslint.config.js
 gulpfile.js
 postcss.config.js
-assets/js/bundle.js
-assets/js/barefoot.js
+prettier.config.js
