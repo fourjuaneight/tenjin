@@ -1,0 +1,21 @@
+image: registry.hub.docker.com/fourjuaneight/hugo-gulp:latest
+
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+
+test:
+  script:
+  - npm install
+  - npm run build
+  except:
+  - master
+
+pages:
+  script:
+  - npm install
+  - npm run build
+  artifacts:
+    paths:
+    - public
+  only:
+  - master
