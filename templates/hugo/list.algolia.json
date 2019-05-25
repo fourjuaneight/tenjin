@@ -1,0 +1,10 @@
+{{- $.Scratch.Add "index" slice -}}
+{{- $section := $.Site.GetPage "section" .Section }}
+{{- range .Site.AllPages -}}
+  {{- if or (and (.IsDescendant $section) (and (not .Draft) (not .Params.private))) ($section.IsHome) -}}
+    {{- if ne .Title "Contact Support" -}}
+      {{- $.Scratch.Add "index" (dict "objectID" .File.UniqueID "date" .Date.UTC.Unix "dir" .File.Dir "fuzzywordcount" .FuzzyWordCount "kind" .Kind "lang" .Language "permalink" .Permalink "relpermalink" .RelPermalink "summary" .Summary "title" .Title "type" .Type "weight" .Weight "wordcount" .WordCount "section" .Section "categories" .Params.Categories)}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- $.Scratch.Get "index" | jsonify -}}

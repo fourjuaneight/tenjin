@@ -1,3 +1,0 @@
-[context.production]
-  command = "jekyll build --config _config.yml"
-  environment = { JEKYLL_ENV = "production" }

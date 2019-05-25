@@ -1,0 +1,15 @@
+{{/*  Paginator  */}}
+{{/*  The template loads the pages in revers (no idea why). So that is why the Hugo logic is the oposite of what the <a> is actually linking to.  */}}
+{{ if or (.NextInSection) (.PrevInSection) }}
+  <nav class="paginate">
+    {{/*  Previous page icon and link  */}}
+    {{ if .NextInSection }}
+      <a href="{{ .NextInSection.Permalink }}" class="paginate__link paginate__prev">&lsaquo; Previous</a>
+    {{ end }}
+
+    {{/*  Next page icon and link  */}}
+    {{ if .PrevInSection }}
+      <a href="{{ .PrevInSection.Permalink }}" class="paginate__link paginate__next">Next &rsaquo;</a>
+    {{ end }}
+  </nav>
+{{ end }}

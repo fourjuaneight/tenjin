@@ -1,0 +1,9 @@
+<header class="header">
+  <a href="{{ .Site.BaseURL }}" class="header__home">{{ .Site.Title }}</a>
+  <nav class="header__nav">
+    <a href='{{ "about" | relURL }}' class="header__link">About</a>
+    <a href='{{ "blog" | relURL }}' class="header__link">Blog</a>
+    <a href='{{ "tertimonials" | relURL }}' class="header__link">Testimonials</a>
+    <a href='{{ "vip" | relURL }}' class="header__link">VIP</a>
+  </nav>
+</header>

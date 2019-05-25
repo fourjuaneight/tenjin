@@ -1,0 +1,6 @@
+{{ if .Params.toc }}
+  <aside class="toc">
+    <p class="toc__title">What's on this Page</p>
+    {{ .TableOfContents | replaceRE "<ul>\\n*<li>\\n*<ul>\\n*<li>\\n*<ul>" "<ul>" | replaceRE "</ul>\\n*</li>\\n*</ul>\\n*</li>\\n*</ul>" "</ul>" | safeHTML }}
+  </aside>
+{{ end }}

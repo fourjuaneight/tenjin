@@ -1,0 +1,15 @@
+<ul class="breadcrumb__nav">
+  {{ template "breadcrumb" (dict "p1" . "p2" .) }}
+</ul>
+{{/*  Hugo native breadcrumbing template  */}}
+{{ define "breadcrumb" }}
+  {{ if .p1.Parent }}
+    {{ template "breadcrumb" (dict "p1" .p1.Parent "p2" .p2 ) }}
+  {{ else if not .p1.IsHome }}
+    {{ template "breadcrumb" (dict "p1" .p1.Site.Home "p2" .p2 ) }}
+  {{ end }}
+  <li class="bread__item{{ if eq .p1 .p2 }} active{{ end }}">
+    {{/*  Last element is not a link  */}}
+    <a class="bread__link" {{ if ne .p1 .p2 }}href="{{ .p1.Permalink }}"{{ end }}>{{ .p1.Title }}</a>
+  </li>
+{{ end }}

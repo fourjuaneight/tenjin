@@ -1,0 +1,66 @@
+{{/*  Grabs current section to determine what filetree to load. sidenav is section specific.  */}}
+{{ $s := .Section }}
+{{/*  Grabs all child sections.  */}}
+{{ $sections := ($.Site.GetPage "section" $s).Sections }}
+{{/*  Grabs all child pages.  */}}
+{{ $pages := ($.Site.GetPage "section" $s).Pages }}
+{{/*  Grabs current relative URL.  */}}
+{{ $current := .RelPermalink }}
+<nav class="sidenav">
+  <ul class="sidenav__nav">
+    {{/*  Loops over child sections.  */}}
+    {{ range $sections }}
+    {{/*  Get current page slug.  */}}
+    {{ $currentPage := replaceRE "(.*)/(.*)/$" "$2" $current }}
+    {{/*  Get given link's slug.  */}}
+    {{ $parentPage := replaceRE "(.*)/(.*)/$" "$2" .RelPermalink }}
+    {{/*  Match given link's slug with that of the current page.  */}}
+    {{ $match := findRE $parentPage $current }}
+    {{/*  Check if current page and this section are the same. Works also if current page is a descendant of it.  */}}
+    <li class="sidenav__section{{ if or (eq .RelPermalink $current) ($match) }} active{{ end }}">
+      <div class="sidenav__heading">
+        <a href="{{ .Permalink }}" class="sidenav__link sidenav__section-title{{ if or (eq .RelPermalink $current) ($match) }} current{{ end }}">{{ .Title }}</a>
+        <div class="sidenav__arrow" aria-hidden="true"></div>
+      </div>
+      <ul class="sidenav__parent">
+        {{/*  Loops over child sections.  */}}
+        {{ range .Sections }}
+        {{/*  Get given link's slug.  */}}
+        {{ $parentPage := replaceRE "(.*)/(.*)/$" "$2" .RelPermalink }}
+        {{/*  Match given link's slug with that of the current page.  */}}
+        {{ $match := findRE $parentPage $current }}
+          {{/*  Check if current page and this section are the same.  */}}
+          <li class="sidenav__child{{ if or (eq .RelPermalink $current) ($match) }} active{{ end }}">
+            <div class="sidenav__heading sidenav__heading-secondGen">
+              <a href="{{ .Permalink }}" class="sidenav__link sidenav__child-link sidenav__subtitle{{ if or (eq .RelPermalink $current) ($match) }} current{{ end }}">{{ .Title }}</a>
+              <div class="sidenav__arrow" aria-hidden="true"></div>
+            </div>
+            <ul class="sidenav__parent-secondGen">
+                {{/*  Loops over child pages.  */}}
+                {{ range .Pages }}
+                <li class="sidenav__child-secondGen">
+                  <a href="{{ .Permalink }}" class="sidenav__link sidenav__child-link{{ if eq .RelPermalink $current }} current{{ end }}">{{ .Title }}</a>
+                </li>
+                {{ end }}
+              </ul>
+            </li>
+            {{ end }}
+            {{/*  Loops over child pages.  */}}
+            {{ range .Pages }}
+            <li class="sidenav__child">
+              <div class="sidenav__heading">
+                <a href="{{ .Permalink }}" class="sidenav__link sidenav__child-link{{ if eq .RelPermalink $current }} current{{ end }}">{{ .Title }}</a>
+              </div>
+            </li>
+            {{ end }}
+          </ul>
+        </li>
+        {{ end }}
+    {{/*  Loops over child pages. These are direct descendants of the primary section.  */}}
+    {{ range $pages }}
+      <li class="sidenav__section">
+        <a class="sidenav__link sidenav__section-title{{ if eq .RelPermalink $current }} current{{ end }}" href="{{ .Permalink }}">{{ .Title }}</a>
+      </li>
+    {{ end }}
+  </ul>
+</nav>
