@@ -1,0 +1,44 @@
+// Media Queries
+@mixin media-query-min($device) {
+  @media screen and (min-width: $device) {
+    @content;
+  }
+}
+
+@mixin media-query-max($device) {
+  @media screen and (max-width: $device) {
+    @content;
+  }
+}
+
+@mixin range($max, $min) {
+  @media screen and (max-width: $max) and (min-width: $min) {
+    @content;
+  }
+}
+
+@mixin transition($property) {
+  transition: $property 200ms ease-in-out;
+}
+
+@mixin transition-timed($property, $timing: 200ms) {
+  transition: $property $timing ease-in-out;
+}
+
+@mixin fit-height($offset) {
+  height: calc(100vh - $offset);
+}
+
+@mixin fit-width($offset) {
+  width: calc(100vw - $offset);
+}
+
+@mixin color($property, $var) {
+  #{$property}: $var;
+  #{$property}: var(--#{$var});
+}
+
+@mixin prop($property, $params, $var) {
+  #{$property}: $params $var;
+  #{$property}: $params var(--#{$var});
+}

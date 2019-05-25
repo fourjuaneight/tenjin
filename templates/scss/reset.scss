@@ -1,0 +1,235 @@
+// Reset
+abbr,
+address,
+article,
+aside,
+audio,
+blockquote,
+body,
+canvas,
+caption,
+cite,
+code,
+dd,
+del,
+details,
+dfn,
+div,
+dl,
+dt,
+em,
+fieldset,
+figcaption,
+figure,
+footer,
+form,
+header,
+hgroup,
+html,
+iframe,
+img,
+ins,
+label,
+legend,
+main,
+mark,
+nav,
+pre,
+q,
+section,
+small,
+span,
+strike,
+strong,
+sub,
+summary,
+sup,
+table,
+tbody,
+td,
+tfoot,
+th,
+thead,
+time,
+tr,
+video {
+  @extend %reset;
+
+  border: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html {
+  @include transition(font-size);
+
+  box-sizing: border-box;
+  font-size: 100%;
+  -webkit-overflow-scrolling: touch;
+
+  @include media-query-max(600px) {
+    font-size: 90%;
+  }
+}
+
+body {
+  @include color(color, $white);
+
+  font-size: 1em;
+  line-height: 1.2;
+  overflow-x: hidden;
+}
+
+a {
+  @include transition(color);
+}
+
+a,
+a:visited {
+  @include color(text-decoration-color, $link);
+
+  color: inherit;
+}
+
+a:active,
+a:hover {
+  @include color(color, $link);
+}
+
+hr,
+.meta {
+  @include color(color, $meta);
+}
+
+article,
+main {
+  @extend %full-width;
+  @extend %margin-center;
+}
+
+blockquote {
+  @include prop(border-left, 1px solid, $meta);
+
+  padding-left: 15px;
+}
+
+h1, h2, h3, h4 {
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+h2, h3, h4 {
+  margin-top: 10px;
+}
+
+h1 {
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 2.75rem;
+}
+
+h3 {
+  font-size: 2.5rem;
+}
+
+h4 {
+  font-size: 2.25rem;
+}
+
+img,
+image,
+svg,
+video {
+  @extend %full-width;
+
+  height: auto;
+}
+
+image {
+  object-fit: contain;
+  object-position: left bottom;
+}
+
+input,
+textarea {
+  @extend %border-curbed;
+
+  @include prop(border, 1px solid, $meta);
+
+  padding: 5px;
+}
+
+li,
+p {
+  margin: 5px 0;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.active {
+  display: block;
+}
+
+.button {
+  @extend %border-curbed;
+  @extend %inline-block;
+  @extend %relative;
+  @extend %transition;
+
+  @include color($white);
+
+  box-shadow: 0 5px 10px hsla(0, 0%, 0%, 0.12);
+  cursor: pointer;
+  font-size: 0.8rem;
+  height: 40px;
+  margin: 0 10px 15px;
+  min-width: 190px;
+  outline: none;
+  overflow: hidden;
+  padding: 0 25px;
+  text-decoration: none;
+  text-transform: uppercase;
+  vertical-align: middle;
+  white-space: nowrap;
+
+  &:hover {
+    box-shadow: 0 7px 20px rgba(0, 0, 0, 0.16);
+    transform: translate3d(0px,-1px,0px);
+  }
+}
+
+[disabled],
+.disabled {
+  cursor: not-allowed;
+}
+
+[hidden],
+.hidden {
+  display: none !important;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.sr-only {
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  overflow: hidden;
+  position: absolute !important;
+  width: 1px;
+}

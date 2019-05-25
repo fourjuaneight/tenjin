@@ -1,0 +1,201 @@
+%absolute {
+  position: absolute;
+}
+
+%align-self-center {
+  align-self: center;
+}
+
+%align-self-end {
+  align-self: end;
+}
+
+%align-self-start {
+  align-self: start;
+}
+
+%block {
+  display: block;
+}
+
+%border-curbed {
+  border-radius: 5px;
+}
+
+%content-center {
+  justify-content: center;
+}
+
+%content-end {
+  justify-content: end;
+}
+
+%content-flex-end {
+  justify-content: flex-end;
+}
+
+%content-flex-start {
+  justify-content: flex-start;
+}
+
+%content-space-around {
+  justify-content: space-around;
+}
+
+%content-space-between {
+  justify-content: space-between;
+}
+
+%content-start {
+  justify-content: start;
+}
+
+%fixed {
+  position: fixed;
+}
+
+%flex {
+  display: flex;
+}
+
+%flex-column {
+  flex-direction: column;
+}
+
+%flex-row {
+  flex-direction: row;
+}
+
+%flex-wrap {
+  flex-wrap: wrap;
+}
+
+%full-height {
+  height: 100%;
+}
+
+%full-width {
+  width: 100%;
+}
+
+%grid {
+  display: grid;
+}
+
+%grid-fallback {
+  display: flex;
+
+  @supports (display:grid) {
+   display: grid !important;
+  }
+}
+
+%inline-block {
+  display: inline-block;
+}
+
+%items-center {
+  align-items: center;
+}
+
+%items-end {
+  align-items: end;
+}
+
+%items-flex-end {
+  align-items: flex-end;
+}
+
+%items-flex-start {
+  align-items: flex-start;
+}
+
+%items-start {
+  align-items: start;
+}
+
+%just-self-center {
+  justify-self: center;
+}
+
+%just-self-end {
+  justify-self: end;
+}
+
+%just-self-start {
+  justify-self: start;
+}
+
+%margin-horizontal-center {
+  margin: 0 auto;
+}
+
+%margin-vertical-center {
+  margin: auto 0;
+}
+
+%margin-zero {
+  margin: 0;
+}
+
+%no-decoration {
+  text-decoration: none;
+}
+
+%none {
+  display: none;
+}
+
+%padding-zero {
+  padding: 0;
+}
+
+%relative {
+  position: relative;
+}
+
+%reset {
+  margin: 0;
+  padding: 0;
+}
+
+%sticky {
+  position: sticky;
+}
+
+%transition {
+  transition: all 200ms ease;
+}
+
+%underline {
+  @extend %relative;
+
+  color: inherit;
+  text-decoration-color: $link;
+  text-decoration-line: underline;
+  transition: color $timing ease;
+  z-index: 1;
+
+   &::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    bottom: 5px;
+    left: 0;
+    right: 0;
+    background-color: $link;
+    transform-origin: bottom center;
+    transform: scaleY(0);
+    transition: all 0$timing ease;
+  }
+
+  &:hover {
+    color: $white;
+
+    &::before {
+      transform: scaleY(1);
+      background-color: $link;
+    }
+  }
+}
