@@ -1,9 +1,4 @@
-/*
-Authored by Juan Villela.
-https://github.com/fourjuaneight
-*/
-
-function WebpIsSupported(callback) {
+const WebpIsSupported = callback => {
   // If the browser doesn't has the method createImageBitmap, you can't display webp format
   if (!window.createImageBitmap) {
     callback(false);

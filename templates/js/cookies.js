@@ -1,8 +1,3 @@
-/*
-Authored by Juan Villela.
-https://github.com/fourjuaneight
-*/
-
 const cookies = document.querySelector('div.cookies__dialogue');
 const accept = document.querySelector('button.cookies__button');
 
