@@ -4,20 +4,10 @@
 'use strict';
 
 // Load Plugins
-const autoprefixer = require('autoprefixer');
-const cache = require('gulp-cache');
-const concat = require('gulp-concat-util');
-const cp = require('child_process');
-const cssnano = require('cssnano');
 const gm = require('gulp-gm');
 const gulp = require('gulp');
 const htmlbeautify = require('gulp-jsbeautifier');
 const htmlmin = require('gulp-htmlmin');
-const imagemin = require('gulp-imagemin');
-const imageminMozjpeg = require('imagemin-mozjpeg');
-const imageminPNGquant = require('imagemin-pngquant');
-const imageminSVGo = require('imagemin-svgo');
-const imageminWebp = require('imagemin-webp');
 const plumber = require('gulp-plumber');
 const postcss = require('gulp-postcss');
 const rename = require('gulp-rename');
@@ -26,15 +16,14 @@ const sass = require('gulp-sass');
 
 // Critical CSS
 const critical = () => {
-  const plugins = [autoprefixer({browsers: ['> 5%']}), cssnano()];
   return gulp
       .src('assets/css/critical.scss')
       .pipe(plumber())
       .pipe(sass().on('error', sass.logError))
-      .pipe(postcss(plugins))
+      .pipe(postcss())
       // wrap with style tags
-      .pipe(concat.header('<style>'))
-      .pipe(concat.footer('</style>'))
+      .pipe(replace(/^/g, '<style>'))
+      .pipe(replace(/$/g, '</style>'))
       // convert it to an include file
       .pipe(
         rename({
@@ -44,15 +33,6 @@ const critical = () => {
       )
       // insert file
       .pipe(gulp.dest('layouts/partials'))
-}
-
-// Run Webpack
-const webpack = () => {
-  return cp.spawn('webpack', {
-    err: true,
-    stderr: true,
-    stdout: true
-  });
 }
 
 // Image Conversion
@@ -68,40 +48,12 @@ const convert = () => {
     .pipe(gulp.dest('assets/img'));
 }
 
-// Image Optimization
-const optimize = () => {
-  return gulp
-    .src(['assets/img/*.jpg','assets/img/*.png','assets/img/*.svg','assets/img/*.webp'])
-    .pipe(plumber())
-    .pipe(
-      cache(
-        imagemin({
-          use: [
-            imageminMozjpeg({
-              quality: 90
-            }),
-            imageminPNGquant({
-              quality: [0.7, 0.9]
-            }),
-            imageminSVGo({
-              removeViewBox: true
-            }),
-            imageminWebp({
-              quality: 90
-            })
-          ]
-        })
-      )
-    )
-    .pipe(gulp.dest('assets/img'));
-}
-
 /*
 HTML Cleanup:
 - Removed HTML comments.
 - Removed extra <p> tags.
 */
-const clean = () => {
+const fixHugo = () => {
   return gulp
   .src(['public/**/*.html'])
   .pipe(plumber())
@@ -129,16 +81,11 @@ const watchFiles = () => {
 
 // Tasks
 gulp.task('critical', critical);
-gulp.task('webpack', webpack);
 gulp.task('convert', convert);
-gulp.task('optimize', optimize);
-gulp.task('cleanup', clean);
+gulp.task('fixHugo', fixHugo);
 
 // Run Watch as default
 gulp.task('watch', watchFiles);
 
 // Build
-gulp.task('build', gulp.series(['critical', 'webpack']));
-
-// Build without optimization & minimization
-gulp.task('build-dev', gulp.series(['critical', 'webpack']));
+gulp.task('build', critical);

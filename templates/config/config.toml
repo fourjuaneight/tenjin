@@ -1,0 +1,42 @@
+baseURL = "/"
+enableEmoji = "true"
+enableRobotsTXT = "true"
+languageCode = "en-us"
+title = ""
+
+FootnoteReturnLinkContents = "&larrhk;"
+SectionPagesMenu = "main"
+disableKinds = ["taxonomyTerm"]
+summarylength = 40
+
+[taxonomies]
+  tags = "tags"
+
+[permalinks]
+  section = "/:filename/"
+  posts = "/posts/:filename/"
+  tags = "/tags/:slug/"
+
+[author]
+  name = ""
+  email = ""
+
+[blackfriday]
+  hrefTargetBlank = true
+  plainIDAnchors = true
+
+[params]
+  description = ""
+  social = ""
+  OpenLinksInNewWindow = true
+
+[outputFormats.jsonfeed]
+  MediaType = "application/json"
+  BaseName = "feed"
+  suffix = "json"
+  IsHTML = false
+  IsPlainText = true
+
+[outputs]
+  home = ["html"]
+  section = ["html", "jsonfeed", "rss"]

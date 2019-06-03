@@ -1,2 +1,2 @@
 # Ignoring bundle JS to avoid undoing minification
-assets/scripts.js
+assets/js/scripts.js

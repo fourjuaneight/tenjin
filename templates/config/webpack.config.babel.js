@@ -6,8 +6,7 @@ import path from 'path';
 export default {
   mode: process.env.NODE_ENV || 'production',
   entry: [
-    './assets/js/lazy.js',
-    './assets/js/cookies.js',
+    '',
   ],
   output: {
     path: path.resolve(__dirname, 'assets'),
