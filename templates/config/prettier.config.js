@@ -1,5 +1,6 @@
 // Learn more about Prettier:
 // https://prettier.io/
+// Dependencies: npm i -D prettier
 
 module.exports = {
   arrowParens: 'avoid',

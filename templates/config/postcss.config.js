@@ -1,15 +1,21 @@
 // Learn more about PostCSS:
 // https://github.com/postcss/postcss
+// Dependencies: npm i -D postcss-cli postcss-preset-env
 
-module.exports = ({}) => ({
-  plugins: {
-    'autoprefixer': {browsers: ['> 5%']},
-    'cssnano': {preset: 'default'},
-    'postcss-calc': {},
-    'postcss-custom-properties': {},
-    'postcss-import': {},
-    'postcss-mixins': {},
-    'postcss-nested': {},
-    'postcss-simple-vars': {},
-  }
-})
+module.exports = () => {
+  return {
+    plugins: {
+      'postcss-preset-env': {
+        stage: 3,
+        autoprefixer: {
+          flexbox: true,
+          grid: 'autoplace'
+        },
+        overrideBrowserslist: [
+          '> 5%',
+          'IE 11'
+        ]
+      }
+    }
+  };
+};

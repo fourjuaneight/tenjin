@@ -1,5 +1,6 @@
 // Learn more about Babel:
 // https://babeljs.io/
+// Dependencies: npm i -D @babel/core @babel/preset-env @babel/register babel-cli
 
 module.exports = api => {
   const presets = [

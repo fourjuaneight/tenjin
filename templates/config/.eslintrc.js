@@ -1,5 +1,6 @@
 // Learn more about ESLint:
 // https://eslint.org/
+// Dependencies: npm i -D eslint eslint-config-airbnb eslint-config-prettier babel-eslint
 
 module.exports = {
   env: {
