@@ -1,91 +1,95 @@
 // Learn more about Gulp:
 // https://gulpjs.com/
+// Dependencies: npm i -D gulp gulp-cache gulp-gm gulp-htmlmin gulp-imagemin imagemin-mozjpeg imagemin-pngquant gulp-postcss pump gulp-rename gulp-replace gulp-sass
 
 'use strict';
 
 // Load Plugins
+const { dest, parallel, series, src, watch } = require('gulp');
+const cache = require('gulp-cache');
 const gm = require('gulp-gm');
-const gulp = require('gulp');
-const htmlbeautify = require('gulp-jsbeautifier');
 const htmlmin = require('gulp-htmlmin');
-const plumber = require('gulp-plumber');
+const imagemin = require('gulp-imagemin');
+const imageminMozjpeg = require('imagemin-mozjpeg');
+const imageminPNGquant = require('imagemin-pngquant');
 const postcss = require('gulp-postcss');
+const pump = require('pump');
 const rename = require('gulp-rename');
 const replace = require('gulp-replace');
 const sass = require('gulp-sass');
 
 // Critical CSS
-const critical = () => {
-  return gulp
-      .src('assets/css/critical.scss')
-      .pipe(plumber())
-      .pipe(sass().on('error', sass.logError))
-      .pipe(postcss())
-      // wrap with style tags
-      .pipe(replace(/^/g, '<style>'))
-      .pipe(replace(/$/g, '</style>'))
-      // convert it to an include file
-      .pipe(
-        rename({
-          basename: 'critical',
-          extname: '.html',
-        })
-      )
-      // insert file
-      .pipe(gulp.dest('layouts/partials'))
-}
+const critical = cb =>
+  pump([
+    src('assets/css/critical.scss'),
+    sass().on('error', sass.logError),
+    postcss(),
+    htmlmin({ collapseWhitespace: true, minifyCSS: true }),
+    replace(/^/g, '<style>'),
+    replace(/$/g, '</style>'),
+    rename({
+      basename: 'critical',
+      extname: '.html',
+    }),
+    dest('layouts/partials')
+  ], cb);
 
-// Image Conversion
-const convert = () => {
-  return gulp
-    .src(['assets/img/*.jpg','assets/img/*.png'])
-    .pipe(plumber())
-    .pipe(
-      gm(function(gmfile) {
-        return gmfile.setFormat('webp');
+// Convert PNGs to Progressive JPEGs
+const toJPG = cb =>
+  pump([
+    src('assets/img/*.png'),
+    gm(gmfile => gmfile.setFormat('jpg')),
+    dest('assets/img')
+  ], cb);
+
+// Create Webps from JPEGs
+const toWebp = cb =>
+  pump([
+    src('assets/img/*.jpg'),
+    gm(gmfile => gmfile.setFormat('webp')),
+    dest('assets/img')
+  ], cb);
+
+// Optimize JPEGs and PNGs
+const optimize = cb =>
+  pump([
+    src(['assets/img/*.jpg', 'assets/img/*.png']),
+    cache(
+      imagemin({
+        use: [
+          imageminMozjpeg({
+            quality: 90,
+            progressive: true
+          }),
+          imageminPNGquant({
+            quality: [0.3, 0.5],
+          })
+        ],
       })
-    )
-    .pipe(gulp.dest('assets/img'));
-}
+    ),
+    dest('assets/img')
+  ], cb);
 
-/*
-HTML Cleanup:
-- Removed HTML comments.
-- Removed extra <p> tags.
-*/
-const fixHugo = () => {
-  return gulp
-  .src(['public/**/*.html'])
-  .pipe(plumber())
-  .pipe(htmlmin({ collapseWhitespace: true }))
-  .pipe(replace(/<p><(p|a|div|section|h1|h2|h3|h4|ul|li|img|figure|picture)(.*?)>/g, '<$1$2>'))
-  .pipe(replace(/<\/(p|a|div|section|h1|h2|h3|h4|ul|li|img|figure|picture)(.*?)><\/p>/g, '</$1$2>'))
-  .pipe(replace(/<p><\/p>/g, ''))
-  .pipe(htmlbeautify({
-    indent_char: ' ',
-    indent_size: 2
-  }))
-  .pipe(gulp.dest('public'));
-}
+
+// Hugo fix (removed extra <p> tags)
+const fix = cb =>
+  pump([
+    src('public/**/*.html'),
+    htmlmin({ collapseWhitespace: true }),
+    replace(/<p><(p|a|div|section|h1|h2|h3|h4|ul|li|img|figure|picture)(.*?)>/g, '<$1$2>'),
+    replace(/<\/(p|a|div|section|h1|h2|h3|h4|ul|li|img|figure|picture)(.*?)><\/p>/g, '</$1$2>'),
+    replace(/<p><\/p>/g, ''),
+    dest('public')
+  ], cb);
 
 // Watch asset folder for changes
-const watchFiles = () => {
-  gulp.watch('assets/css/critical.scss', critical);
-  gulp.watch('assets/css/extends.scss', critical);
-  gulp.watch('assets/css/fonts.scss', critical);
-  gulp.watch('assets/css/header.scss', critical);
-  gulp.watch('assets/css/mixins.scss', critical);
-  gulp.watch('assets/css/reset.scss', critical);
-  gulp.watch('assets/css/variables.scss', critical);
-}
+const watchFiles = () => watch('assets/css/*.scss', () => critical());
 
-// Tasks
-gulp.task('critical', critical);
-gulp.task('convert', convert);
-gulp.task('fixHugo', fixHugo);
-
-// Run Watch as default
-gulp.task('watch', watchFiles);
+// Watch
+exports.watch = watchFiles;
 
 // Build
-gulp.task('build', critical);
+const images = series(toJPG, toWebp, optimize);
+
+exports.post = fix;
+exports.build = parallel(critical, images);
