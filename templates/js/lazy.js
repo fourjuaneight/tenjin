@@ -1,4 +1,6 @@
-// Lazy Loader: https://github.com/verlok/lazyload#-recipes
+// Lazy Loader: https://github.com/verlok/lazyload
+// npm i -D vanilla-lazyload
+
 import LazyLoad from 'vanilla-lazyload';
 
 // Options
