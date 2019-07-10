@@ -4,7 +4,4 @@ babel.config.js
 gulpfile.js
 postcss.config.js
 prettier.config.js
-stylelint.config.js
 webpack.config.babel.js
-# Ignoring bundle JS to avoid undoing minification
-assets/js/scripts.js

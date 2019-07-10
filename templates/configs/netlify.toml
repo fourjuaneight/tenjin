@@ -1,0 +1,15 @@
+[build]
+  publish = "public"
+  command = "npm run build"
+
+# Config for Github pull requests.
+[context.deploy-preview]
+  command = "npm run development"
+
+# Default config for branch deploys.
+[context.branch-deploy]
+  command = "npm run development"
+
+# Production config.
+[context.production]
+  command = "npm run build"

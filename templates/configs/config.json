@@ -1,0 +1,61 @@
+{
+  "baseURL": "/",
+  "title": "",
+  "disableKinds": [
+    "taxonomyTerm"
+  ],
+  "FootnoteReturnLinkContents": "&Hat;",
+  "enableEmoji": "true",
+  "enableRobotsTXT": "true",
+  "languageCode": "en-us",
+  "metaDataFormat": "json",
+  "pygmentsCodeFences": true,
+  "pygmentsCodefencesGuessSyntax": true,
+  "pygmentsOptions": "lineseparator=<br>",
+  "pygmentsUseClasses": true,
+  "pygmentsUseClassic": false,
+  "summarylength": 40,
+  "blackfriday": {
+    "hrefTargetBlank": true,
+    "noreferrerLinks": true,
+    "noopenerLinks": true,
+    "OpenLinksInNewWindow": true,
+    "plainIDAnchors": true
+  },
+  "params": {
+    "description": "",
+    "social": ""
+  },
+  "taxonomies": {
+    "tags": "tags"
+  },
+  "permalinks": {
+    "blog": "/blog/:filename/",
+    "section": "/:filename/",
+    "tags": "/tags/:slug/"
+  },
+  "sitemap": {
+    "changefreq": "monthly",
+    "filename": "sitemap.xml",
+    "priority": 0.5
+  },
+  "outputFormats": {
+    "jsonfeed": {
+      "BaseName": "feed",
+      "MediaType": "application/json",
+      "IsHTML": false,
+      "IsPlainText": true,
+      "suffix": "json"
+    }
+  },
+  "outputs": {
+    "home": [
+      "html"
+    ],
+    "section": [
+      "html",
+      "jsonfeed",
+      "rss"
+    ]
+  }
+}
