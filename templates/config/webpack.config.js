@@ -1,12 +1,12 @@
 // Learn more about Webpack:
 // https://webpack.js.org/
-// Dependencies: npm i -D babel-loader sass-loader postcss-loader string-replace-loader copy-webpack-plugin mini-css-extract-plugin imagemin-webpack-plugin imagemin-mozjpeg imagemin-pngquant imagemin-webp workbox-webpack-plugin
+// Dependencies: npm i -D babel-loader css-loader sass-loader postcss-loader string-replace-loader extract-loader file-loader copy-webpack-plugin terser-webpack-plugin imagemin-webpack-plugin imagemin-mozjpeg imagemin-pngquant imagemin-webp workbox-webpack-plugin
 
 'use strict';
 
 const { resolve } = require('path'),
       CopyWebpackPlugin = require('copy-webpack-plugin'),
-      MiniCssExtractPlugin = require('mini-css-extract-plugin'),
+      TerserPlugin = require('terser-webpack-plugin'),
       ImageminPlugin = require('imagemin-webpack-plugin'),
       imageminMozjpeg = require('imagemin-mozjpeg'),
       imageminPngquant = require('imagemin-pngquant'),
@@ -27,22 +27,40 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        use: ['babel-loader']
+        use: ['babel-loader'],
       },
       {
-        test: /\critical.scss/,
+        test: /\.scss$/,
         use: [
-          'sass-loader',
-          'postcss-loader',
+          {
+            loader: 'file-loader',
+            options: {
+              name: '../layouts/partials/[name].html',
+            }
+          },
           {
             loader: 'string-replace-loader',
             options: {
               multiple: [
                 { search: '^', replace: '<style>', flags: 'g' },
                 { search: '$', replace: '</style>', flags: 'g' }
-             ]
+              ]
             }
-          }
+          },
+          {
+            loader: 'extract-loader'
+          },
+          {
+            loader: 'css-loader',
+            options: {url: false}
+          },
+          'postcss-loader',
+          {
+            loader: 'sass-loader',
+            options: {
+              includePaths: ['./assets/css']
+            }
+          },
         ]
       }
     ]
@@ -55,9 +73,6 @@ module.exports = {
         ignore: ['*.svg']
       }
     ]),
-    new MiniCssExtractPlugin({
-      filename: 'critical.css',
-    }),
     new ImageminPlugin({
       plugins: [
         imageminWebp({
@@ -97,5 +112,20 @@ module.exports = {
         }
       ]
     })
-  ]
+  ],
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          output: {
+            comments: false,
+          },
+        },
+      }),
+    ],
+  },
+  watchOptions: {
+    ignored: /node_modules/,
+    aggregateTimeout: 500
+  }
 }
