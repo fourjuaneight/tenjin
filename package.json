@@ -1,21 +1,21 @@
 {
-  "name": "create-static-site",
-  "version": "1.0.0",
-  "description": "This is a simple script mostly copied from [Harriet ryder's article](https://medium.com/northcoders/creating-a-project-generator-with-node-29e13b3cd309) that uses [Inquirer.js](https://github.com/SBoudrias/Inquirer.js) and the [fs](https://nodejs.org/api/fs.html) module to generate a [Hugo](https://gohugo.io/) or [Jekyll](https://jekyllrb.com/) template onto the current directory.",
+  "name": "static-templates",
+  "version": "2.0.0",
+  "description": "Simple script to copy code templates to current directory.",
   "main": "index.js",
   "scripts": {
-    "clean": "rm -rf node_modules"
+    "clean": "rm -rf node_modules package-lock.json"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fourjuaneight/create-static-site.git"
+    "url": "git+https://github.com/fourjuaneight/static-templates.git"
   },
   "author": "fourjuaneight",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/fourjuaneight/create-static-site/issues"
+    "url": "https://github.com/fourjuaneight/static-templates/issues"
   },
-  "homepage": "https://github.com/fourjuaneight/create-static-site#readme",
+  "homepage": "https://github.com/fourjuaneight/static-templates#readme",
   "engines": {
     "node": "10.15.1"
   },
@@ -23,7 +23,6 @@
     "natives": "1.1.3"
   },
   "dependencies": {
-    "inquirer": "^6.2.0",
-    "ncp": "^2.0.0"
+    "inquirer": "^6.2.0"
   }
 }

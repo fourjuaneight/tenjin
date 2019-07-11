@@ -1,27 +1,36 @@
 #!/usr/bin/env node
 
-const inquirer = require('inquirer');
-const fs = require('fs');
-const {ncp} = require('ncp');
+const { copyFile, readdirSync } = require('fs');
+const { join } = require('path');
+const { prompt } = require('inquirer');
 
-const CHOICES = fs.readdirSync(`${__dirname}/templates`);
+const templates = readdirSync(`${__dirname}/templates`);
 const CURR_DIR = process.cwd();
 
-const QUESTIONS = [
+const questions = [
   {
-    choices: CHOICES,
-    message: 'Choose your template',
-    name: 'project-choice',
+    choices: templates,
+    message: 'Choose a section',
+    name: 'type',
     type: 'list',
   },
 ];
 
-inquirer.prompt(QUESTIONS).then(answers => {
-  const projectChoice = answers['project-choice'];
-  const templatePath = `${__dirname}/templates/${projectChoice}`;
-  ncp(templatePath, CURR_DIR, err => {
-    if (err) {
-      console.error(`${err}`);
-    }
+prompt(questions).then(answers => {
+  const folder = answers.type;
+  const type = readdirSync(`${__dirname}/templates/${folder}`);
+  prompt({
+    choices: type,
+    message: 'Choose your template',
+    name: 'file',
+    type: 'list',
+  }).then(answers => {
+    const templatePath = `${__dirname}/templates/${folder}/${answers.file}`;
+    const dest = join(CURR_DIR, answers.file);
+    copyFile(templatePath, dest, err => {
+      if (err) throw err;
+    });
+  
   });
 });
+
