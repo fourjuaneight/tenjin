@@ -11,16 +11,16 @@ const questions = [
   {
     choices: templates,
     message: 'Choose a section',
-    name: 'type',
+    name: 'section',
     type: 'list',
   },
 ];
 
 prompt(questions).then(answers => {
-  const folder = answers.type;
-  const type = readdirSync(`${__dirname}/templates/${folder}`);
+  const folder = answers.section;
+  const section = readdirSync(`${__dirname}/templates/${folder}`);
   prompt({
-    choices: type,
+    choices: section,
     message: 'Choose your template',
     name: 'file',
     type: 'list',
