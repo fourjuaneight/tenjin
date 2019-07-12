@@ -4,19 +4,19 @@ const { copyFile, readdirSync } = require('fs');
 const { join } = require('path');
 const { prompt } = require('inquirer');
 
-const templates = readdirSync(`${__dirname}/templates`);
+const sections = readdirSync(`${__dirname}/templates`);
 const CURR_DIR = process.cwd();
 
 const questions = [
   {
-    choices: templates,
+    choices: sections,
     message: 'Choose a section',
     name: 'section',
     type: 'list',
   },
 ];
 
-prompt(questions).then(answers => {
+const templates = prompt(questions).then(answers => {
   const folder = answers.section;
   const section = readdirSync(`${__dirname}/templates/${folder}`);
   prompt({
@@ -30,7 +30,7 @@ prompt(questions).then(answers => {
     copyFile(templatePath, dest, err => {
       if (err) throw err;
     });
-  
   });
 });
 
+exports.default = templates;
