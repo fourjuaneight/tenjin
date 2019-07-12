@@ -1,88 +1,38 @@
-%absolute {
-  position: absolute;
+// Styling
+%backNone {
+  background: none;
 }
 
-%align-self-center {
-  align-self: center;
+%bord {
+  border-radius: .125rem;
 }
 
-%align-self-end {
-  align-self: end;
+%content {
+  content: '';
 }
 
-%align-self-start {
-  align-self: start;
+%noDeco {
+  text-decoration: none;
 }
 
+// Layout
 %block {
   display: block;
 }
 
-%border-curbed {
-  border-radius: 5px;
-}
-
-%content-center {
-  justify-content: center;
-}
-
-%content-end {
-  justify-content: end;
-}
-
-%content-flex-end {
-  justify-content: flex-end;
-}
-
-%content-flex-start {
-  justify-content: flex-start;
-}
-
-%content-space-around {
-  justify-content: space-around;
-}
-
-%content-space-between {
-  justify-content: space-between;
-}
-
-%content-start {
-  justify-content: start;
-}
-
-%fixed {
-  position: fixed;
+%inBlock {
+  display: inline-block;
 }
 
 %flex {
   display: flex;
 }
 
-%flex-column {
-  flex-direction: column;
-}
-
-%flex-row {
-  flex-direction: row;
-}
-
-%flex-wrap {
-  flex-wrap: wrap;
-}
-
-%full-height {
-  height: 100%;
-}
-
-%full-width {
-  width: 100%;
-}
-
 %grid {
   display: grid;
 }
 
-%grid-fallback {
+%gridFall {
   display: flex;
 
   @supports (display:grid) {
@@ -90,112 +40,311 @@
   }
 }
 
-%inline-block {
-  display: inline-block;
-}
-
-%items-center {
-  align-items: center;
-}
-
-%items-end {
-  align-items: end;
-}
-
-%items-flex-end {
-  align-items: flex-end;
-}
-
-%items-flex-start {
-  align-items: flex-start;
-}
-
-%items-start {
-  align-items: start;
-}
-
-%just-self-center {
-  justify-self: center;
-}
-
-%just-self-end {
-  justify-self: end;
-}
-
-%just-self-start {
-  justify-self: start;
-}
-
-%margin-horizontal-center {
-  margin: 0 auto;
-}
-
-%margin-vertical-center {
-  margin: auto 0;
-}
-
-%margin-zero {
-  margin: 0;
-}
-
-%no-decoration {
-  text-decoration: none;
-}
-
 %none {
   display: none;
 }
 
-%padding-zero {
-  padding: 0;
+// Flexbox
+%flexCol {
+  flex-direction: column;
 }
 
-%relative {
+%flexRow {
+  flex-direction: row;
+}
+
+%flexWrap {
+  flex-wrap: wrap;
+}
+
+// Align
+%itmCent {
+  align-items: center;
+}
+
+%itmEnd {
+  align-items: end;
+}
+
+%itmFlexEnd {
+  align-items: flex-end;
+}
+
+%itmFlexStr {
+  align-items: flex-start;
+}
+
+%itmStr {
+  align-items: start;
+}
+
+%alSelfCent {
+  align-self: center;
+}
+
+%alSelfEnd {
+  align-self: end;
+}
+
+%alSelfStr {
+  align-self: start;
+}
+
+// Justify
+%contCent {
+  justify-content: center;
+}
+
+%contEnd {
+  justify-content: end;
+}
+
+%contFlexEnd {
+  justify-content: flex-end;
+}
+
+%contFlexStart {
+  justify-content: flex-start;
+}
+
+%contArnd {
+  justify-content: space-around;
+}
+
+%contBtwn {
+  justify-content: space-between;
+}
+
+%contStr {
+  justify-content: start;
+}
+
+%justSlfCent {
+  justify-self: center;
+}
+
+%justSlfEnd {
+  justify-self: end;
+}
+
+%justSlfStr {
+  justify-self: start;
+}
+
+// Position
+%abs {
+  position: absolute;
+}
+
+%fixed {
+  position: fixed;
+}
+
+%rel {
   position: relative;
 }
 
-%reset {
-  margin: 0;
-  padding: 0;
-}
-
-%sticky {
+%sti {
   position: sticky;
 }
 
-%transition {
-  transition: all 200ms ease;
+%b0 {
+  bottom: 0;
 }
 
-%underline {
-  @extend %relative;
+%l0 {
+  left: 0;
+}
 
-  color: inherit;
-  text-decoration-color: $link;
-  text-decoration-line: underline;
-  transition: color $timing ease;
-  z-index: 1;
+%r0 {
+  right: 0;
+}
 
-   &::before {
-    content: '';
-    position: absolute;
-    z-index: -1;
-    top: 0;
-    bottom: 5px;
-    left: 0;
-    right: 0;
-    background-color: $link;
-    transform-origin: bottom center;
-    transform: scaleY(0);
-    transition: all 0$timing ease;
-  }
+%t0 {
+  top: 0;
+}
 
-  &:hover {
-    color: $white;
+// Spacing
+%mHor {
+  margin: 0 auto;
+}
 
-    &::before {
-      transform: scaleY(1);
-      background-color: $link;
-    }
-  }
+%mVert {
+  margin: auto 0;
+}
+
+%mA0 {
+  margin: 0;
+}
+
+%mA1 {
+  margin: 1rem;
+}
+
+%mA2 {
+  margin: 2rem;
+}
+
+%mAA {
+  margin: auto;
+}
+
+%mB0 {
+  margin-bottom: 0;
+}
+
+%mB1 {
+  margin-bottom: 1rem;
+}
+
+%mB2 {
+  margin-bottom: 2rem;
+}
+
+%mBA {
+  margin-bottom: auto;
+}
+
+%mL0 {
+  margin-left: 0;
+}
+
+%mL1 {
+  margin-left: 1rem;
+}
+
+%mL2 {
+  margin-left: 2rem;
+}
+
+%mLA {
+  margin-left: auto;
+}
+
+%mR0 {
+  margin-right: 0;
+}
+
+%mR1 {
+  margin-right: 1rem;
+}
+
+%mR2 {
+  margin-right: 2rem;
+}
+
+%mRA {
+  margin-right: auto;
+}
+
+%mT0 {
+  margin-top: 0;
+}
+
+%mT1 {
+  margin-top: 1rem;
+}
+
+%mT2 {
+  margin-top: 2rem;
+}
+
+%mTA {
+  margin-top: auto;
+}
+
+%pA0 {
+  padding: 0;
+}
+
+%pA1 {
+  padding: 1rem;
+}
+
+%pA2 {
+  padding: 2rem;
+}
+
+%pB0 {
+  padding-bottom: 0;
+}
+
+%pB1 {
+  padding-bottom: 1rem;
+}
+
+%pB2 {
+  padding-bottom: 2rem;
+}
+
+%pL0 {
+  padding-left: 0;
+}
+
+%pL1 {
+  padding-left: 1rem;
+}
+
+%pL2 {
+  padding-left: 2rem;
+}
+
+%pR0 {
+  padding-right: 0;
+}
+
+%pR1 {
+  padding-right: 1rem;
+}
+
+%pR2 {
+  padding-right: 2rem;
+}
+
+%pT0 {
+  padding-top: 0;
+}
+
+%pT1 {
+  padding-top: 1rem;
+}
+
+%pT2 {
+  padding-top: 2rem;
+}
+
+// Sizing
+%h100 {
+  height: 100%;
+}
+
+%w100 {
+  width: 100%;
+}
+
+// Animation
+%transAll {
+  transition: all var(--duration) ease;
+}
+
+// Bundles
+%noSpace {
+  @extend %mA0;
+  @extend %pA0;
+}
+
+%absPos {
+  @extend %abs;
+  @extend %b0;
+  @extend %l0;
+  @extend %r0;
+  @extend %t0;
+}
+
+%relPos {
+  @extend %rel;
+  @extend %b0;
+  @extend %l0;
+  @extend %r0;
+  @extend %t0;
 }

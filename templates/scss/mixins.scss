@@ -18,10 +18,10 @@
 }
 
 @mixin transition($property) {
-  transition: $property 200ms ease-in-out;
+  transition: $property var(--duration) ease-in-out;
 }
 
-@mixin transition-timed($property, $timing: 200ms) {
+@mixin transition-timed($property, $timing: var(--duration)) {
   transition: $property $timing ease-in-out;
 }
 
@@ -31,14 +31,4 @@
 
 @mixin fit-width($offset) {
   width: calc(100vw - $offset);
-}
-
-@mixin color($property, $var) {
-  #{$property}: $var;
-  #{$property}: var(--#{$var});
-}
-
-@mixin prop($property, $params, $var) {
-  #{$property}: $params $var;
-  #{$property}: $params var(--#{$var});
 }
