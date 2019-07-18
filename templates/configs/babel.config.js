@@ -7,7 +7,9 @@ module.exports = api => {
     [
       '@babel/preset-env',
       {
-        targets: '> 3%, defaults, safari >= 10, ios >= 10'
+        'include': [
+          'transform-arrow-functions',
+        ],
       },
     ],
   ];
@@ -17,3 +19,4 @@ module.exports = api => {
     presets,
   };
 };
+

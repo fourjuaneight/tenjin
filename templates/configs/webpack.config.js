@@ -1,17 +1,14 @@
 // Learn more about Webpack:
 // https://webpack.js.org/
-// Dependencies: npm i -D babel-loader css-loader sass-loader postcss-loader string-replace-loader extract-loader file-loader copy-webpack-plugin terser-webpack-plugin imagemin-webpack-plugin imagemin-mozjpeg imagemin-pngquant imagemin-webp workbox-webpack-plugin
+// Dependencies: npm i -D babel-loader css-loader sass-loader postcss-loader extract-loader file-loader copy-webpack-plugin terser-webpack-plugin imagemin-webpack-plugin imagemin-mozjpeg imagemin-pngquant imagemin-webp
 
-'use strict';
-
-const { resolve } = require('path'),
-      CopyWebpackPlugin = require('copy-webpack-plugin'),
-      TerserPlugin = require('terser-webpack-plugin'),
-      ImageminPlugin = require('imagemin-webpack-plugin'),
-      imageminMozjpeg = require('imagemin-mozjpeg'),
-      imageminPngquant = require('imagemin-pngquant'),
-      imageminWebp = require('imagemin-webp'),
-      { GenerateSW } = require('workbox-webpack-plugin');
+const { resolve } = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+const ImageminPlugin = require('imagemin-webpack-plugin');
+const imageminMozjpeg = require('imagemin-mozjpeg');
+const imageminPngquant = require('imagemin-pngquant');
+const imageminWebp = require('imagemin-webp');
 
 module.exports = {
   mode: process.env.NODE_ENV || 'production',
@@ -30,39 +27,30 @@ module.exports = {
         use: ['babel-loader'],
       },
       {
-        test: /\.scss$/,
+        test: /layout.scss$/,
         use: [
           {
             loader: 'file-loader',
             options: {
-              name: '../layouts/partials/[name].html',
-            }
+              name: 'css/styles.css',
+            },
           },
           {
-            loader: 'string-replace-loader',
-            options: {
-              multiple: [
-                { search: '^', replace: '<style>', flags: 'g' },
-                { search: '$', replace: '</style>', flags: 'g' }
-              ]
-            }
-          },
-          {
-            loader: 'extract-loader'
+            loader: 'extract-loader',
           },
           {
             loader: 'css-loader',
-            options: {url: false}
+            options: { url: false },
           },
           'postcss-loader',
           {
             loader: 'sass-loader',
             options: {
-              includePaths: ['./assets/css']
-            }
+              includePaths: ['./src/scss'],
+            },
           },
-        ]
-      }
+        ],
+      },
     ]
   },
   plugins: [
@@ -90,28 +78,6 @@ module.exports = {
         })
       ]
     }),
-    new GenerateSW({
-      cacheId: '',
-      clientsClaim: true,
-      globDirectory: '.',
-      globPatterns: ['**/*.{woff,png,jpg,svg,js,css}'],
-      precacheManifestFilename: resolve(__dirname, 'assets', 'manifest.json'),
-      skipWaiting: true,
-      swDest: resolve(__dirname, 'assets', 'sw.js'),
-      runtimeCaching: [
-        {
-          urlPattern: /img/,
-          handler: 'cacheFirst',
-          expiration: {
-            maxAgeSeconds: 30 * 24 * 60 * 60,
-          },
-        },
-        {
-          urlPattern: /.*/,
-          handler: 'networkFirst'
-        }
-      ]
-    })
   ],
   optimization: {
     minimizer: [
