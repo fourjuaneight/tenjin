@@ -1,22 +1,22 @@
 // Learn more about ESLint:
 // https://eslint.org/
-// Dependencies: npm i -D eslint eslint-config-airbnb eslint-config-prettier babel-eslint
+// Dependencies: npm i -D eslint babel-eslint eslint-config-airbnb eslint-config-prettier eslint-plugin-html eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-prettier eslint-plugin-react eslint-plugin-react-hooks prettier
 
 module.exports = {
   env: {
     browser: true,
-    commonjs: true,
-    es6: true,
-    jquery: true,
     jest: true,
+    jquery: true,
     node: true,
-    serviceworker: true
   },
-  extends: ['airbnb', 'prettier'],
-  plugins: ['prettier'],
+  extends: [
+    'airbnb',
+    'prettier',
+    'prettier/react'
+  ],
   parser: 'babel-eslint',
   parserOptions: {
-    ecmaVersion: 8,
+    ecmaVersion: 2018,
     ecmaFeatures: {
       experimentalObjectRestSpread: true,
       impliedStrict: true,
@@ -24,8 +24,16 @@ module.exports = {
     },
     sourceType: 'module'
   },
+  plugins: [
+    'html',
+    'prettier',
+    'react-hooks',
+  ],
   rules: {
-    'arrow-body-style': ['error', 'always'],
+    'arrow-body-style': [
+      2,
+      'as-needed'
+    ],
     'curly': 2,
     'dot-notation': 2,
     'func-names': 0,
@@ -36,11 +44,41 @@ module.exports = {
       }
     ],
     'import': 0,
+    'import/extensions': 0,
+    'import/extensions': 'error',
+    'import/newline-after-import': 'off',
+    'import/no-named-as-default': 'error',
+    'import/no-amd': 'error',
+    'import/no-commonjs': 'off',
+    'import/no-named-default': 'error',
+    'import/no-namespace': 'off',
+    'import/no-nodejs-modules': 'off',
     'import/no-unresolved': [
       2,
       { 'caseSensitive': false }
-   ],
+    ],
+    'import/order': [
+      1,
+      {
+        groups: [
+          'builtin',
+          ['external', 'internal'],
+          'parent',
+          ['sibling', 'index'],
+        ],
+      },
+    ],
     'import/prefer-default-export': 0,
+    'jsx-a11y/accessible-emoji': 0,
+    'jsx-a11y/anchor-is-valid': [
+      'warn',
+      {
+        'aspects': [
+          'invalidHref'
+        ]
+      }
+    ],
+    'jsx-a11y/href-no-hash': 'off',
     'linebreak-style': 0,
     'no-alert': 0,
     'no-await-in-loop': 0,
@@ -60,7 +98,23 @@ module.exports = {
     'no-inner-declarations': 2,
     'no-lonely-if': 2,
     'no-magic-numbers': 'off',
-    'no-param-reassign': ['error', { 'props': false }],
+    'no-nested-ternary': 'off',
+    'no-param-reassign': [
+      2,
+      {
+        'props': false
+      }
+    ],
+    'no-return-assign': [
+      'error',
+      'except-parens'
+    ],
+    'no-restricted-syntax': [
+      2,
+      'ForInStatement',
+      'LabeledStatement',
+      'WithStatement'
+    ],
     'no-shadow': [
       2,
       {
@@ -75,20 +129,30 @@ module.exports = {
         ]
       }
     ],
-    'no-nested-ternary': 'off',
     'no-unneeded-ternary': 2,
-    'no-unused-expressions': 2,
-    'no-unused-vars': [
+    'no-unused-expressions': [
       2,
       {
-        'args': 'none'
+        'allowTaggedTemplates': true
+      }
+    ],
+    'no-unused-vars': [
+      1,
+      {
+        'ignoreSiblings': true,
+        'argsIgnorePattern': 'res|next|^err'
       }
     ],
     'no-useless-return': 2,
     'no-var': 2,
     'one-var': [2, 'never'],
     'prefer-arrow-callback': 2,
-    'prefer-const': 2,
+    'prefer-const': [
+      'error',
+      {
+        'destructuring': 'all',
+      }
+    ],
     'prefer-promise-reject-errors': 2,
     'quotes': [
       'error',
@@ -119,7 +183,26 @@ module.exports = {
         ]
       }
     ],
-    'sort-imports': 2,
+    'radix': 0,
+    'react-hooks/exhaustive-deps': 'warn',
+    'react-hooks/rules-of-hooks': 'error',
+    'react/display-name': 1,
+    'react/forbid-prop-types': 0,
+    'react/jsx-filename-extension': [
+      1,
+      {
+        'extensions': [
+          '.js',
+          '.jsx'
+        ]
+      }
+    ],
+    'react/no-array-index-key': 0,
+    'react/no-unescaped-entities': 0,
+    'react/prefer-stateless-function': 0,
+    'react/react-in-jsx-scope': 0,
+    'react/require-default-props': 0,
+    'sort-imports': 0,
     'sort-keys': [
       2,
       'asc',
@@ -131,9 +214,5 @@ module.exports = {
     'sort-vars': 2,
     'space-before-function-paren': 0,
     'strict': [2, 'global']
-  },
-  'settings': {
-    'import/no-unresolved': 'off',
-    'import/resolver': 'webpack'
   }
 }
