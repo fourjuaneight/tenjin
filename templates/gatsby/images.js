@@ -10,7 +10,7 @@ const Image = props => (
         allImageSharp {
           edges {
             node {
-              fluid(maxWidth: 640, maxHeight: 320) {
+              fluid(maxWidth: 100) {
                 ...GatsbyImageSharpFluid
                 originalName
               }
@@ -42,8 +42,8 @@ const Image = props => (
 Image.propTypes = {
   alt: PropTypes.string.isRequired,
   filename: PropTypes.string.isRequired,
-  imgStyle: PropTypes.object.isRequired,
-  style: PropTypes.object.isRequired,
+  imgStyle: PropTypes.object,
+  style: PropTypes.object,
 };
 
 export default Image;
