@@ -1,44 +1,36 @@
 // Learn more about Gulp:
 // https://gulpjs.com/
-// Dependencies: npm i -D gulp gulp-cache gulp-gm gulp-htmlmin gulp-imagemin imagemin-mozjpeg imagemin-pngquant gulp-postcss pump gulp-rename gulp-replace gulp-sass
+// Dependencies: npm i -D gulp gulp-cache gulp-htmlmin gulp-imagemin imagemin-mozjpeg pump gulp-replace gulp-responsive
 
 'use strict';
 
 // Load Plugins
 const { dest, parallel, series, src, watch } = require('gulp');
 const cache = require('gulp-cache');
-const gm = require('gulp-gm');
 const htmlmin = require('gulp-htmlmin');
 const imagemin = require('gulp-imagemin');
 const imageminMozjpeg = require('imagemin-mozjpeg');
-const imageminPNGquant = require('imagemin-pngquant');
-const postcss = require('gulp-postcss');
 const pump = require('pump');
-const rename = require('gulp-rename');
 const replace = require('gulp-replace');
-const sass = require('gulp-sass');
+const responsive = require('gulp-responsive');
 
-// Critical CSS
-const critical = cb =>
-  pump([
-    src('assets/css/critical.scss'),
-    sass().on('error', sass.logError),
-    postcss(),
-    htmlmin({ collapseWhitespace: true, minifyCSS: true }),
-    replace(/^/g, '<style>'),
-    replace(/$/g, '</style>'),
-    rename({
-      basename: 'critical',
-      extname: '.html',
-    }),
-    dest('layouts/partials')
-  ], cb);
+// Configs
+const formatJPG = {
+  '*.png': {
+    format: 'jpg',
+  }
+};
+const formatWebp = {
+  '*.jpg': {
+    format: 'webp',
+  }
+};
 
 // Convert PNGs to Progressive JPEGs
 const toJPG = cb =>
   pump([
     src('assets/img/*.png'),
-    gm(gmfile => gmfile.setFormat('jpg')),
+    responsive(formatJPG, {progressive: true}),
     dest('assets/img')
   ], cb);
 
@@ -46,14 +38,14 @@ const toJPG = cb =>
 const toWebp = cb =>
   pump([
     src('assets/img/*.jpg'),
-    gm(gmfile => gmfile.setFormat('webp')),
+    responsive(formatWebp),
     dest('assets/img')
   ], cb);
 
 // Optimize JPEGs and PNGs
 const optimize = cb =>
   pump([
-    src(['assets/img/*.jpg', 'assets/img/*.png']),
+    src('assets/img/*.jpg'),
     cache(
       imagemin({
         use: [
@@ -61,9 +53,6 @@ const optimize = cb =>
             quality: 90,
             progressive: true
           }),
-          imageminPNGquant({
-            quality: [0.3, 0.5],
-          })
         ],
       })
     ),
