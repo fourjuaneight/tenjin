@@ -6,7 +6,6 @@ module.exports = {
   env: {
     browser: true,
     jest: true,
-    jquery: true,
     node: true,
   },
   extends: [
@@ -34,13 +33,14 @@ module.exports = {
       2,
       'as-needed'
     ],
+    'class-methods-use-this': 0,
     'curly': 2,
     'dot-notation': 2,
     'func-names': 0,
     'id-length': [
       2,
       {
-        'exceptions': ['i','a','b']
+        'exceptions': ['i','a','b','x','y']
       }
     ],
     'import': 0,

@@ -4,11 +4,11 @@
 
 # Config for Github pull requests.
 [context.deploy-preview]
-  command = "npm run development"
+  command = "npm run build:development"
 
 # Default config for branch deploys.
 [context.branch-deploy]
-  command = "npm run development"
+  command = "npm run build:development"
 
 # Production config.
 [context.production]
