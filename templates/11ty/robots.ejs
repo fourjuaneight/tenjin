@@ -1,0 +1,13 @@
+---json
+{
+  "layout": false,
+  "eleventyExcludeFromCollections": true,
+  "permalink": "/robots.txt"
+}
+---
+User-agent: *
+<% if (process.env.ELEVENTY_ENV === "production") { %>
+  Allow: /
+<% } else { %>
+  Disallow: /
+<% } %>
