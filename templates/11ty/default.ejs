@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en-us" data-theme="light">
+  <%- include("components/head") %>
+  <body>
+    <%- include("components/header") %>
+    <main><%- content %></main>
+    <%- include("components/footer") %>
+    <script defer src="<%= meta.domain %>/scripts.js"></script>
+    <% if (process.env.ELEVENTY_ENV === "production") { %>
+      <script>
+        if (navigator.serviceWorker) {
+          navigator.serviceWorker.register('<%= meta.domain %>/sw.js', { scope: '/' });
+          navigator.serviceWorker.ready.then(registration => {
+            console.log('Service Worker Ready');
+          });
+          window.addEventListener('load', () => {
+            if (navigator.serviceWorker.controller) {
+              navigator.serviceWorker.controller.postMessage({ command: 'trimCaches' });
+            }
+          });
+        }
+      </script>
+    <% } %>
+  </body>
+</html>
