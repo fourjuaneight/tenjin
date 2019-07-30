@@ -326,25 +326,3 @@
 %transAll {
   transition: all var(--duration) ease;
 }
-
-// Bundles
-%noSpace {
-  @extend %mA0;
-  @extend %pA0;
-}
-
-%absPos {
-  @extend %abs;
-  @extend %b0;
-  @extend %l0;
-  @extend %r0;
-  @extend %t0;
-}
-
-%relPos {
-  @extend %rel;
-  @extend %b0;
-  @extend %l0;
-  @extend %r0;
-  @extend %t0;
-}
