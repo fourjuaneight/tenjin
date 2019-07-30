@@ -1,0 +1,16 @@
+---json
+{
+  "layout": "default"
+}
+---
+
+<article>
+  <h1><%= title %></h1>
+  <% if (typeof date === "string") { %>
+    <section>
+      <time datetime="<%= date %>"><%= date %></time>
+      <p><span aria-hidden="true">#</span><a href="<%= meta.domain %>/tags/<%= tags %>" itemprop="about"><%= tags %></a></p>
+    </section>
+  <% } %>
+  <p><%- content %></p>
+</article>

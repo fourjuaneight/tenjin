@@ -1,0 +1,19 @@
+---json
+{
+  "pagination": {
+    "data": "collections",
+    "size": 1,
+    "alias": "tag",
+    "filter": ["all", "posts", "feed", "tags"],
+    "addAllPagesToCollections": true
+  },
+  "title": "Tag Archive",
+  "layout": "default",
+  "permalink": "/tags/<%= tag %>/"
+}
+---
+
+<h1><%= tag %></h1>
+<section>
+<%- include("./_includes/list", {items: collections[ tag ]}); %>
+</section>

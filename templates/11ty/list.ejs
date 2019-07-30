@@ -1,0 +1,13 @@
+<%
+  const posts = items
+  posts.forEach(item => {
+%>
+  <article>
+    <a href="<%= meta.domain %><%= item.url %>"><h2><%= item.data.title %></h2></a>
+    <section>
+      <time datetime="<%= item.date.toUTCString() %>"><span aria-label="Posted on">&tau;</span><%= item.date.toISOString().substring(0, 10) %></time>
+      <p><span aria-hidden="true">#</span><a href="<%= meta.domain %>/tags/<%= item.data.tags %>" itemprop="about"><%= item.data.tags %></a></p>
+    </section>
+    <p><%= item.data.summary %></p>
+  </article>
+<% }) %>
