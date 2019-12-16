@@ -3,9 +3,9 @@
 const micromatch = require('micromatch');
 
 module.exports = {
-  '*.js': files => {
-    const match = micromatch.not(files, 'configs/*.js');
+  '**/*.js': files => {
+    const match = micromatch.not(files, 'config/*.js');
     return `eslint --fix ${match.join(' ')}`;
   },
-  '*.+(js|css|ms)': ['prettier --write', 'git add'], // eslint-disable-line
+  '**/*.+(js|css|ms)': ['prettier --write', 'git add'],
 };
