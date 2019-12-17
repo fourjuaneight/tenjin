@@ -12,12 +12,10 @@ const imageminWebp = require('imagemin-webp');
 
 module.exports = {
   mode: process.env.NODE_ENV || 'production',
-  entry: [
-    '',
-  ],
+  entry: [''],
   output: {
     path: resolve(__dirname, 'assets'),
-    filename: 'scripts.js'
+    filename: 'scripts.js',
   },
   module: {
     rules: [
@@ -51,15 +49,15 @@ module.exports = {
           },
         ],
       },
-    ]
+    ],
   },
   plugins: [
     new CopyWebpackPlugin([
       {
         from: resolve(__dirname, 'assets', 'img'),
         to: resolve(__dirname, 'assets', 'img'),
-        ignore: ['*.svg']
-      }
+        ignore: ['*.svg'],
+      },
     ]),
     new ImageminPlugin({
       plugins: [
@@ -70,13 +68,13 @@ module.exports = {
         imageminMozjpeg({
           test: /\.(jpe?g)$/,
           quality: 90,
-          progressive: true
+          progressive: true,
         }),
         imageminPngquant({
           test: /\.(png)$/,
-          quality: [0.3, 0.5]
-        })
-      ]
+          quality: [0.3, 0.5],
+        }),
+      ],
     }),
   ],
   optimization: {
@@ -92,6 +90,6 @@ module.exports = {
   },
   watchOptions: {
     ignored: /node_modules/,
-    aggregateTimeout: 500
-  }
-}
+    aggregateTimeout: 500,
+  },
+};

@@ -1,7 +1,0 @@
-# Ignoring as following the linter rules will break some of the rules
-.eslintrc.js
-babel.config.js
-gulpfile.js
-postcss.config.js
-prettier.config.js
-webpack.config.babel.js

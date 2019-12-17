@@ -11,13 +11,13 @@ let markdownLink = require('markdown-it-link-attributes');
 let options = {
   html: true,
   breaks: true,
-  linkify: true
+  linkify: true,
 };
 let linkOps = {
   attrs: {
     target: '_blank',
-    rel: 'noopener noreferrer'
-  }
+    rel: 'noopener noreferrer',
+  },
 };
 
 const elConf = config => {
@@ -25,9 +25,7 @@ const elConf = config => {
   config.addPlugin(syntaxHighlight);
 
   // Libraries
-  config.setLibrary('md', markdown(options)
-    .use(markdownLink, linkOps)
-  );
+  config.setLibrary('md', markdown(options).use(markdownLink, linkOps));
 
   // Transform
   config.addTransform('minifier', minifier);
@@ -44,11 +42,13 @@ const elConf = config => {
   const livePosts = post => post.date <= now && !post.data.draft;
   config.addCollection('posts', collection => {
     return [
-      ...collection.getFilteredByGlob('./src/posts/*.md').filter(livePosts)
+      ...collection.getFilteredByGlob('./src/posts/*.md').filter(livePosts),
     ].reverse();
   });
   config.addCollection('feed', collection => {
-    return [...collection.getFilteredByGlob('./src/posts/*.md').filter(livePosts)]
+    return [
+      ...collection.getFilteredByGlob('./src/posts/*.md').filter(livePosts),
+    ]
       .reverse()
       .slice(0, 5);
   });
@@ -63,6 +63,6 @@ const elConf = config => {
     },
     passthroughFileCopy: true,
   };
-}
+};
 
 module.exports = elConf;

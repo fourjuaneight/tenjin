@@ -2,3 +2,4 @@
 .eslintrc.js
 lint-staged.config.js
 prettier.config.js
+templates/config
