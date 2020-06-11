@@ -1,0 +1,29 @@
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: fourjuaneight/hugo-testing
+    steps:
+      - checkout
+      - run:
+          name: Install Dependencies
+          command: npm install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package-lock.json" }}
+          paths:
+            - ./node_modules
+      - run:
+          name: Build Site
+          command: npm run build:testing
+      - save_cache:
+          key: build-cache-{{ checksum "package-lock.json" }}
+          paths:
+            - ./dist
+      - run:
+          name: Dead Link Check
+          command: npm run test:links
+      - run:
+          name: Lighthouse Audit
+          command: npm run test:perf
+      - store_artifacts:
+          path: ./audits
