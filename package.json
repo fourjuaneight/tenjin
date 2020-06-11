@@ -10,7 +10,7 @@
     "clean": "rm -rf node_modules package-lock.json"
   },
   "engines": {
-    "node": "10.15.1"
+    "node": "12.16.0"
   },
   "resolutions": {
     "natives": "1.1.3"
