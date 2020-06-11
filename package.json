@@ -1,6 +1,6 @@
 {
   "name": "static-templates",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "Simple script to copy code templates to current directory.",
   "main": "index.js",
   "bin": {
