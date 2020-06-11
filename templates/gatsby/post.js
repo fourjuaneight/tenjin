@@ -4,8 +4,7 @@ import { graphql } from 'gatsby';
 
 import Layout from '../components/layout';
 
-/* eslint-disable react/no-danger */
-/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/no-danger, react/destructuring-assignment */
 export default class single extends Component {
   render() {
     const { markdownRemark } = this.props.data;
