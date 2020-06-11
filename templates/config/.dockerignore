@@ -4,4 +4,5 @@ public
 build
 .dockerignore
 Dockerfile
+Dockerfile.dev
 Dockerfile.prod
