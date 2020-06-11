@@ -1,13 +1,20 @@
-const { readFileSync } = require('fs');
+/* eslint-disable class-methods-use-this */
+const { readdirSync, readFileSync } = require('fs');
+const { resolve } = require('path');
+const { minify } = require('terser');
 const babel = require('@babel/core');
-const Terser = require('terser');
 
 // file paths
-const color = readFileSync('assets/js/color.js', 'utf8', data => data);
-const noise = readFileSync('assets/js/noise.js', 'utf8', data => data);
+const jsFiles = readdirSync(resolve('./assets/js'));
+const jsData = jsFiles
+  .map(file =>
+    readFileSync(resolve(`./assets/js/${file}`), 'utf8', data => data)
+  )
+  .join('\n');
 const outputFile = 'scripts.js';
 
 module.exports = class {
+  // template "frontmatter"
   data() {
     return {
       eleventyExcludeFromCollections: true,
@@ -17,11 +24,12 @@ module.exports = class {
   }
 
   async render() {
+    // transpile with babel; uses local config file and browserslist in package.json
     const compiled = await babel
-      .transformAsync(`${color}${noise}`)
+      .transformAsync(jsData)
       .then(result => result.code);
 
-    const minified = await Terser.minify(compiled);
+    const minified = await minify(compiled);
 
     return minified.code;
   }

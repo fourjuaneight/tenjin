@@ -1,14 +1,17 @@
-const util = require('util');
-const sass = require('sass');
-const renderSass = util.promisify(sass.render);
-
-const postcss = require('postcss');
+/* eslint-disable class-methods-use-this */
 const cssnano = require('cssnano');
+const postcss = require('postcss');
 const postcssPresetEnv = require('postcss-preset-env');
+const sass = require('sass');
+const { promisify } = require('util');
+
+const renderSass = promisify(sass.render);
+
+// postCSS config
 const presetEnv = postcssPresetEnv({
   autoprefixer: {
     flexbox: true,
-    grid: false,
+    grid: true,
   },
   features: {
     'custom-properties': {
@@ -18,6 +21,7 @@ const presetEnv = postcssPresetEnv({
   },
   stage: 3,
 });
+// use cssnano for minification and presetEnv for prefixing config
 const postcssProcessor = postcss([cssnano, presetEnv]);
 
 // file paths
@@ -25,6 +29,7 @@ const inputFile = 'assets/scss/main.scss';
 const outputFile = 'styles.css';
 
 module.exports = class {
+  // template "frontmatter"
   data() {
     return {
       eleventyExcludeFromCollections: true,
@@ -34,13 +39,17 @@ module.exports = class {
   }
 
   async render() {
+    // scss to css
     const { css } = await renderSass({
       file: inputFile,
     });
 
-    return postcssProcessor.process(css, {
-      from: inputFile,
-      to: outputFile,
-    });
+    // output processed file
+    return postcssProcessor
+      .process(css, {
+        from: inputFile,
+        to: outputFile,
+      })
+      .then(result => result.css);
   }
 };

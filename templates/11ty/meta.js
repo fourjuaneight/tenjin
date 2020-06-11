@@ -15,7 +15,7 @@ const meta = async () => {
   }
   return {
     datefmt: { day: 'numeric', month: 'long', year: 'numeric' },
-    description:'',
+    description: '',
     domain: url,
     image: '',
     social: '',

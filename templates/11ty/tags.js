@@ -4,8 +4,8 @@ const tags = collection => {
     if ('tag' in item.data) {
       let tagsList = item.data.tag;
 
-      tagsList = tagsList.filter(item => {
-        switch (item) {
+      tagsList = tagsList.filter(tag => {
+        switch (tag) {
           case 'all':
           case 'tags':
           case 'feed':

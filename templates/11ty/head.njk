@@ -1,0 +1,53 @@
+{% set pageTitle = meta.title %}
+{% set pageDesc = meta.description %}
+{% set pageUrl = meta.baseUrl %}
+
+{% if title %}
+  {% set pageTitle = title + ' - ' + meta.title %}
+{% endif %}
+{% if description %}
+  {% set pageDesc = description %}
+{% endif %}
+{% if permalink %}
+  {% set pageUrl = meta.baseUrl + permalink %}
+{% endif %}
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,initial-scale=1.0,maximum-scale=5.0,viewport-fit=cover">
+  <title>{{ pageTitle }}</title>
+  <link rel="canonical" href="{{ pageUrl }}">
+  <meta name="viewport" content="width=device-width,minimum-scale=1.0,initial-scale=1.0,maximum-scale=5.0,viewport-fit=cover">
+  <meta name="description" content="{{ pageDesc }}">
+  <meta property="og:description" content="{{ pageDesc }}">
+  <meta property="og:site_name" content="{{ pageTitle }}">
+  <meta property="og:title" content="{{ pageTitle }}">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="{{ meta.baseUrl }}icons/icon.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="512">
+  <meta property="og:image:height" content="512">
+  <meta property="og:url" content="{{ pageUrl }}">
+  <meta name="image" content="{{ meta.baseUrl }}icons/icon.png">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:description" content="{{ pageDesc }}">
+  <meta name="twitter:title" content="{{ pageTitle }}">
+  <meta property="twitter:site" content="{{ meta.social }}">
+  <meta name="twitter:image" content="{{ meta.baseUrl }}icons/icon.png">
+  <link rel="sitemap" type="application/xml" href="{{ meta.baseUrl }}sitemap.xml">
+  <link rel="manifest" href="{{ meta.baseUrl }}manifest.json">
+  <meta name="theme-color" content="{{ meta.theme }}">
+  <link rel="shortcut icon" href="{{ meta.baseUrl }}icons/favicon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="{{ meta.title }}">
+  <link rel="apple-touch-icon" sizes="152x152" href="{{ meta.baseUrl }}icons/apple-touch-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="{{ meta.baseUrl }}icons/apple-touch-icon-167x167.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ meta.baseUrl }}icons/apple-touch-icon-180x180.png">
+  <link rel="icon" sizes="128x128" href="{{ meta.baseUrl }}icons/icon-128x128.png">
+  <link rel="icon" sizes="192x192" href="{{ meta.baseUrl }}icons/icon-192x192.png">
+  <link rel="icon" sizes="512x512" href="{{ meta.baseUrl }}icons/icon-512x512.png">
+  <link rel="mask-icon" color="{{ meta.theme }}" href="{{ meta.baseUrl }}icons/safari-pinned-tab.svg">
+  <style>{% include "components/critical.css" %}</style>
+  <link rel="stylesheet" href="{{ meta.baseUrl }}styles.css" media="all">
+</head>
