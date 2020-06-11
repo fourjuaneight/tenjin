@@ -1,0 +1,98 @@
+:root {
+  --reach-skip-nav: 1;
+}
+
+@font-face {
+  font-family: Stranger Slim;
+  src: url('/fonts/Stranger-Slim-subset.woff2') format('woff2'),
+    url('/fonts/Stranger-Slim-subset.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: Dharma;
+  src: url('/fonts/Dharma-subset.woff2') format('woff2'),
+    url('/fonts/Dharma-subset.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+*,
+:after,
+:before {
+  box-sizing: inherit;
+  margin: 0;
+}
+
+html,
+body {
+  background-color: hsl(180, 57%, 48%);
+}
+
+html {
+  box-sizing: border-box;
+  font-feature-settings: 'liga' 1;
+  font-size: 14px;
+  line-height: 1.5;
+  text-rendering: optimizeLegibility;
+  -webkit-overflow-scrolling: touch;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  color: #dedede;
+  font-family: Dharma, sans-serif;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+body div#gatsby-focus-wrapper {
+  margin: 0 auto;
+  max-width: 84rem;
+  position: relative;
+  width: 100%;
+}
+
+button {
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  outline: none;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+#skip-nav-link {
+  background: hsla(327, 68%, 81%, 1);
+  border: 0.25rem solid #34bfc0;
+  clip: rect(0 0 0 0);
+  color: hsla(178, 100%, 17%, 1);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  top: 1rem;
+  width: 1px;
+}
+
+#skip-nav-link:focus {
+  clip: auto;
+  height: auto;
+  padding: 1rem;
+  margin-left: 2rem;
+  position: fixed;
+  width: auto;
+  z-index: 1;
+}
+
+@media screen and (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
