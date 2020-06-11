@@ -1,13 +1,15 @@
-// Import plugins
-const syntaxHighlight = require('@11ty/eleventy-plugin-syntaxhighlight');
-
-// Import transforms
-const minifier = require('./src/transforms/minifier.js');
-const tags = require('./src/transforms/tags.js');
+// Import helpers
+const isoDate = require('./src/config/isoDate');
+const markdown = require('markdown-it');
+const markdownLink = require('markdown-it-link-attributes');
+const minifier = require('./src/config/minifier');
+const regDate = require('./src/config/regDate');
+const relDate = require('./src/config/relDate');
+const uglify = require('./src/config/uglify');
+const zeroValue = require('./src/config/zeroValue');
 
 // Markdown
-const markdown = require('markdown-it');
-let markdownLink = require('markdown-it-link-attributes');
+const markdownItRenderer = new markdown();
 let options = {
   html: true,
   breaks: true,
@@ -20,18 +22,30 @@ let linkOps = {
   },
 };
 
-const elConf = config => {
-  // Plugins
-  config.addPlugin(syntaxHighlight);
-
+module.exports = config => {
   // Libraries
   config.setLibrary('md', markdown(options).use(markdownLink, linkOps));
 
   // Transform
   config.addTransform('minifier', minifier);
+  config.addTransform('uglify', uglify);
 
-  // Passthrough
-  // assets
+  // Date Fileter
+  config.addFilter('isoDate', date => isoDate(date));
+  config.addFilter('relDate', date => relDate(date));
+  config.addFilter('regDate', date => regDate(date));
+
+  // Data modifiers
+  config.addFilter('zeroValue', value => zeroValue(value));
+
+  // markdown filter
+  config.addFilter('markdownify', str => {
+    return markdownItRenderer.renderInline(str);
+  });
+
+  // Passthrough assets
+  config.addPassthroughCopy('src/admin/index.html');
+  config.addPassthroughCopy('src/admin/config.yml');
   config.addPassthroughCopy('src/fonts');
   config.addPassthroughCopy('src/icons');
   config.addPassthroughCopy('src/img');
@@ -54,6 +68,10 @@ const elConf = config => {
   });
   config.addCollection('tags', tags);
 
+  // Watch assets
+  config.addWatchTarget('assets/scss/');
+  config.addWatchTarget('assets/js/');
+
   return {
     dir: {
       data: '_data',
@@ -64,5 +82,3 @@ const elConf = config => {
     passthroughFileCopy: true,
   };
 };
-
-module.exports = elConf;

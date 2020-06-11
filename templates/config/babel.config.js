@@ -1,11 +1,15 @@
 // Learn more about Babel:
 // https://babeljs.io/
-// Dependencies: npm i -D @babel/core @babel/preset-env @babel/register babel-cli browserlist
 
 module.exports = api => {
+  const plugins = [
+    'module:@babel/plugin-proposal-class-properties',
+    'module:@babel/plugin-proposal-optional-chaining',
+    'macros',
+  ];
   const presets = [
     [
-      '@babel/preset-env',
+      'module:@babel/preset-env',
       {
         include: ['transform-arrow-functions'],
       },
@@ -14,6 +18,7 @@ module.exports = api => {
 
   api.cache(false);
   return {
+    plugins,
     presets,
   };
 };

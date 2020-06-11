@@ -1,10 +1,13 @@
 // Learn more about PostCSS:
 // https://github.com/postcss/postcss
-// Dependencies: npm i -D postcss-cli postcss-preset-env
+
+const cssnano = require('cssnano');
+const postcssPresetEnv = require('postcss-preset-env');
+const tailwind = require('tailwindcss');
 
 module.exports = () => ({
-  plugins: {
-    'postcss-preset-env': {
+  plugins: [
+    postcssPresetEnv({
       stage: 3,
       features: {
         'custom-properties': {
@@ -16,7 +19,17 @@ module.exports = () => ({
         flexbox: true,
         grid: false,
       },
-    },
-    cssnano: {},
-  },
+    }),
+    cssnano({
+      preset: [
+        'default',
+        {
+          discardComments: {
+            removeAll: true,
+          },
+        },
+      ],
+    }),
+    tailwind,
+  ],
 });
