@@ -1,0 +1,6 @@
+.cache
+.netlify
+build
+coverage
+node_modules
+public
