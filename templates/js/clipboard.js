@@ -28,7 +28,8 @@ clip.forEach(copy => {
         copy.innerHTML = original;
       }, 1000);
     } catch (_unused) {
-      copy.innerHTML = 'Can\'t copy, hit Ctrl+C!';
+      // eslint-disable-next-line quotes
+      copy.innerHTML = "Can't copy, hit Ctrl+C!";
       setTimeout(() => {
         copy.innerHTML = original;
       }, 1000);

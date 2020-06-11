@@ -1,24 +1,11 @@
 (() => {
-  const version = 'v1';
-  const cacheName = '::';
-  const staticCacheName = `${version}${cacheName}static`;
+  const version = '';
+  const cacheName = ':';
+  const staticCacheName = `${version}:${cacheName}static`;
   const pagesCacheName = `${cacheName}pages`;
   const imagesCacheName = `${cacheName}images`;
-  const staticAssets = [
-    '/',
-    '/posts/',
-    '/offline/',
-    '/fonts/Rubik-Regular.woff',
-    '/fonts/Rubik-Regular.woff2',
-    '/fonts/Rubik-Regular-sub.woff',
-    '/fonts/Rubik-Regular-sub.woff2',
-    '/fonts/Rubik-Bold.woff',
-    '/fonts/Rubik-Bold.woff2',
-    '/fonts/Rubik-Bold-sub.woff',
-    '/fonts/Rubik-Bold-sub.woff2',
-    '/styles.css',
-    '/scripts.js',
-  ];
+  const staticAssets = [];
+
   const updateStaticCache = () =>
     // These items must be cached for the Service Worker to complete installation
     caches
@@ -52,7 +39,9 @@
             .map(key => caches.delete(key))
         )
       );
+
   // Events!
+  /* eslint-disable no-restricted-globals */
   self.addEventListener('message', event => {
     if (event.data.command === 'trimCaches') {
       trimCache(pagesCacheName, 35);
@@ -66,11 +55,18 @@
     event.waitUntil(clearOldCaches().then(() => self.clients.claim()));
   });
   self.addEventListener('fetch', event => {
+    /* eslint-enable */
     const { request } = event;
     const url = new URL(request.url);
-    if (url.href.indexOf('https://www..com') !== 0) return;
-    if (request.method !== 'GET') return;
-    if (url.href.indexOf('?') !== -1) return;
+    if (url.href.indexOf('baseURL') !== 0) {
+      return;
+    }
+    if (request.method !== 'GET') {
+      return;
+    }
+    if (url.href.indexOf('?') !== -1) {
+      return;
+    }
     if (request.headers.get('Accept').includes('text/html')) {
       event.respondWith(
         fetch(request)

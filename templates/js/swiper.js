@@ -7,6 +7,7 @@ import { Swiper, Autoplay } from 'swiper/dist/js/swiper.esm';
 Swiper.use([Autoplay, EffectFade, Navigation, Pagination]);
 
 // Use Swiper
+// eslint-disable-next-line no-unused-vars
 const swiperHero = new Swiper('.swiper', {
   autoplay: {
     delay: 5000,

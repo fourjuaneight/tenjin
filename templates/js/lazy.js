@@ -5,9 +5,9 @@ import LazyLoad from 'vanilla-lazyload';
 
 // Options
 const lazyLoadOptions = {
-  class_error: `error`,
-  class_loading: `loading`,
-  elements_selector: `.lazy`,
+  class_error: 'error',
+  class_loading: 'loading',
+  elements_selector: '.lazy',
   threshold: 500,
 };
 

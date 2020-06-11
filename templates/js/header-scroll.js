@@ -6,6 +6,9 @@ const removeFade = () => header.classList.remove('fade');
 
 window.addEventListener('scroll', () => {
   scrollPos = window.scrollY;
-  if (scrollPos >= header_height) { fade(); }
-  else { removeFade(); }
+  if (scrollPos >= header_height) {
+    fade();
+  } else {
+    removeFade();
+  }
 });
