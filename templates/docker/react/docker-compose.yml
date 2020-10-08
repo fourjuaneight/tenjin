@@ -6,10 +6,10 @@ services:
       dockerfile: Dockerfile
     working_dir: /app
     command:
-      - 'npm'
+      - 'yarn'
       - 'start'
     volumes:
       - .:/app
       - /app/node_modules
     ports:
-      - "8000:8000"
+      - "3000:3000"

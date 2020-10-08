@@ -1,4 +1,4 @@
-FROM node:12.6.0-alpine as builder
+FROM node:14.13.1-alpine as builder
 
 # Get the necessary build tools
 RUN apk upgrade -U -a \
@@ -14,10 +14,10 @@ RUN apk upgrade -U -a \
 
 # install dependencies
 WORKDIR /app
-COPY package*.json ./
-RUN npm install --silent
+COPY package*.json /app/
+RUN yarn install
 
 # Get a clean image with gatsby-cli and the pre-built node modules
-FROM node:12.6.0-alpine
-RUN npm i -g gatsby-cli && gatsby telemetry --disable
+FROM node:14.13.1-alpine
+RUN npm i -g react-scripts
 COPY --from=builder /app/node_modules /app/node_modules
