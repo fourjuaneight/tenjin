@@ -17,7 +17,7 @@ WORKDIR /app
 COPY package*.json /app/
 RUN npm install
 
-# Get a clean image with gatsby-cli and the pre-built node modules
+# Get a clean image with angular cli and the pre-built node modules
 FROM node:14.13.1-alpine
 RUN npm i -g @angular/cli
 COPY --from=builder /app/node_modules /app/node_modules
