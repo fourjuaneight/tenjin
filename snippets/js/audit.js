@@ -1,10 +1,11 @@
 /* eslint-disable sort-keys */
+const AsciiTable = require('ascii-table');
 const { existsSync, mkdirSync, writeFile } = require('fs');
-const process = require('process');
 const browserSync = require('browser-sync').create();
 const chromeLauncher = require('chrome-launcher');
 const lighthouse = require('lighthouse');
-const AsciiTable = require('ascii-table');
+const process = require('process');
+
 // ---------------------------------------------------------------------
 // Performance Testing
 // ---------------------------------------------------------------------

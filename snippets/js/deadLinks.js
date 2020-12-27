@@ -1,7 +1,7 @@
+const AsciiTable = require('ascii-table');
 const { SiteChecker } = require('broken-link-checker');
 const browserSync = require('browser-sync').create();
 const process = require('process');
-const AsciiTable = require('ascii-table');
 
 // ---------------------------------------------------------------------
 // Broken Link Testing
