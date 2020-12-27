@@ -2,14 +2,21 @@ const { resolve } = require('path');
 const glob = require('glob').sync;
 const replace = require('replace-in-file');
 
-const config = require('./config/siteConfig');
+const config = require('./siteConfig');
 
 // Glob options. Pass directory to search and files to ignore
 const cwd = resolve(__dirname, 'public');
 const ignore = ['sw.js'];
 
-// Generate alphanumeric hash
-const makeId = length => {
+/**
+ * Generate alphanumeric hash.
+ * @function
+ *
+ * @param  {number} length hash size
+ *
+ * @return {string}        alphanumeric hash
+ */
+const makeHash = length => {
   let result = '';
   const characters =
     'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -22,12 +29,20 @@ const makeId = length => {
   return result;
 };
 
-// Find all JS, CSS, and font files in rendered output
-const addFiles = async () => {
-  // create matched files array
+/**
+ * Find all JS, CSS, and font assets and create list of their paths.
+ * @function
+ *
+ * @return {string} assets path list
+ */
+const getFiles = () => {
   const files = glob('**/*.{js,css,woff,woff2}', { cwd, ignore });
-  const newFiles = files.map(toCache => `'/${toCache}'`).toString();
+  const filesList = files.map(toCache => `'/${toCache}'`).toString();
 
+  return filesList;
+};
+
+(async () => {
   // find and replace options; add hash ID, files to cache array, and site base URL
   const replaceOptions = {
     files: resolve(cwd, 'sw.js'),
@@ -37,8 +52,8 @@ const addFiles = async () => {
       /baseURL/g,
     ],
     to: [
-      `const staticAssets = [${newFiles}];`,
-      `const version = '${makeId(6)}';`,
+      `const staticAssets = [${getFiles()}];`,
+      `const version = '${makeHash(6)}';`,
       `${config.siteUrl}`,
     ],
   };
@@ -51,6 +66,4 @@ const addFiles = async () => {
   } catch (error) {
     console.error('Error occurred:', error);
   }
-};
-
-addFiles();
+})();
