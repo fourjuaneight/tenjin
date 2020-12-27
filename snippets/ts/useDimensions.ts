@@ -21,6 +21,13 @@ interface UseDimensionsArgs {
   resize?: boolean;
 }
 
+/**
+ * Get bounding client of ref React element.
+ * @function
+ *
+ * @param   {boolean} resize watch for window resize and update dimension properties?
+ * @returns {Array}          [ref element, bounding client properties, element node]
+ */
 const useDimensions = ({
   resize = false,
 }: UseDimensionsArgs = {}): UseDimensionsHook => {
@@ -34,6 +41,7 @@ const useDimensions = ({
   // eslint-disable-next-line consistent-return
   useLayoutEffect(() => {
     if (node) {
+      // update UI thread
       const measure = () =>
         window.requestAnimationFrame(() => {
           const rect = node.getBoundingClientRect();
@@ -44,6 +52,14 @@ const useDimensions = ({
       measure();
 
       if (resize) {
+        if ('ResizeObserver' in window) {
+          const resizeObserver = new ResizeObserver(measure);
+
+          resizeObserver.observe(node);
+
+          return () => resizeObserver.unobserve(node);
+        }
+
         window.addEventListener(
           'resize',
           () => {
@@ -70,7 +86,7 @@ const useDimensions = ({
 
       return () => {};
     }
-  }, [node, resize]);
+  }, [node]);
 
   return [ref, dimensions, node];
 };
