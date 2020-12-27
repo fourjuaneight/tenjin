@@ -13,3 +13,16 @@ services:
       - /app/node_modules
     ports:
       - "3000:3000"
+  prod:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    working_dir: /app
+    command:
+      - 'yarn'
+      - 'build'
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - "3000:3000"

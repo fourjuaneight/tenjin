@@ -1,4 +1,4 @@
-FROM node:14.13.1-alpine as builder
+FROM node:14.15.3-alpine as builder
 
 # Get the necessary build tools
 RUN apk upgrade -U -a \
@@ -18,6 +18,6 @@ COPY package*.json /app/
 RUN npm install
 
 # Get a clean image with angular cli and the pre-built node modules
-FROM node:14.13.1-alpine
+FROM node:14.15.3-alpine
 RUN npm i -g @angular/cli
 COPY --from=builder /app/node_modules /app/node_modules
