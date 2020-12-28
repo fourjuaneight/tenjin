@@ -3,10 +3,14 @@
 
 import 'modern-normalize';
 import 'animate.css/animate.compat.css';
-import intersectionObserver from 'intersection-observer';
+
+import wrapWithProvider from './src/store/reduxWrapper';
 
 import './src/styles/critical.css';
 import './src/styles/tailwind.css';
+
+// Load Redux store
+export const wrapRootElement = wrapWithProvider;
 
 // Load Service Worker on production only.
 export const registerServiceWorker = () => {
@@ -28,9 +32,3 @@ export const onRouteUpdate = ({ prevLocation }) => {
   }
 };
 
-// Intersection Observer polyfill for gatsby-background-image (Safari, IE)
-export const onClientEntry = () => {
-  if (!('IntersectionObserver' in window)) {
-    intersectionObserver();
-  }
-};

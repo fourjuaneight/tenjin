@@ -4,9 +4,6 @@ import { SkipNavLink } from '@reach/skip-nav';
 import Footer from '../footer';
 import Head from '../head';
 import Header from '../header';
-import Steps from '../buildSteps';
-
-import { Main } from './style';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -17,18 +14,19 @@ interface LayoutProps {
  * Main layout
  * @component
  *
- * @param   {object} location router location info
- * @returns {component}       <Layout location={location} />
+ * @param   {LayoutProps} location router location info
+ *
+ * @returns {React.FC}             <Layout location={location} />
  */
-const Layout: React.FC<LayoutProps> = ({ children, location }) => (
+const Layout: React.FC<LayoutProps> = ({ children, location }): React.FC => (
   <>
     <Head location={location} />
     <SkipNavLink id="skip-nav-link">Skip to main content</SkipNavLink>
     <Header />
-    <Main id="reach-skip-nav">
+    <main id="reach-skip-nav">
       {children}
       <Steps />
-    </Main>
+    </main>
     <Footer />
   </>
 );

@@ -3,6 +3,10 @@
 
 import React from 'react';
 import glob from 'glob/sync';
+import wrapWithProvider from './src/store/reduxWrapper';
+
+// Load Redux store
+export const wrapRootElement = wrapWithProvider;
 
 /*
   Add preload links for subset font files.

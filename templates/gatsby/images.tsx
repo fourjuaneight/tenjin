@@ -19,8 +19,8 @@ interface StaticQueryProps {
 interface ImageProps {
   alt: string;
   filename: string;
-  imgStyle: object;
-  style: object;
+  imgStyle: { [property: string]: string };
+  style: { [property: string]: string };
 }
 
 /**
@@ -32,9 +32,15 @@ interface ImageProps {
  * @param   {string} filename image relative filename
  * @param   {object} imgStyle img styles
  * @param   {object} style    wrapper container styles
- * @returns {component}       <Image filename={string} alt={string} style={object} imgStyle={object} />
+ *
+ * @returns {React.FC}        <Image filename={string} alt={string} style={object} imgStyle={object} />
  */
-const Image: React.FC<ImageProps> = ({ alt, filename, imgStyle, style }) => (
+const Image: React.FC<ImageProps> = ({
+  alt,
+  filename,
+  imgStyle,
+  style,
+}): React.FC => (
   <StaticQuery
     query={graphql`
       query {
@@ -54,6 +60,7 @@ const Image: React.FC<ImageProps> = ({ alt, filename, imgStyle, style }) => (
       const image = data.allImageSharp.edges.find(edge =>
         edge.node.fluid.originalName.includes(filename)
       );
+
       if (!image) {
         return null;
       }

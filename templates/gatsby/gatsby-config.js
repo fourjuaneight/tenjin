@@ -29,6 +29,7 @@ module.exports = {
     {
       options: {
         develop: false,
+        ignore: ['/src/styles/critical.css'],
         keyframes: true,
         printRejected: true,
         tailwind: true,
