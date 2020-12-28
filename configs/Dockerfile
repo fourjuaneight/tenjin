@@ -15,9 +15,9 @@ RUN apk upgrade -U -a \
 # install dependencies
 WORKDIR /app
 COPY package*.json /app/
-RUN yarn install
+RUN npm install
 
-# Get a clean image with gatsby-cli and the pre-built node modules
+# Get a clean image with cli tools and the pre-built node modules
 FROM node:14.15.3-alpine
-RUN npm i -g gatsby-cli && gatsby telemetry --disable
+RUN npm i -g <CLI-TOOL>
 COPY --from=builder /app/node_modules /app/node_modules
