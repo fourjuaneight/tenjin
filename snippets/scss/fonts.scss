@@ -1,0 +1,26 @@
+@font-face {
+  font-display: swap;
+  font-family: '<FONT>';
+  font-weight: 400;
+  font-style: normal;
+  src: url('fonts/<FONT>-subset.woff2') format('woff2'),
+    url('fonts/<FONT>-subset.woff') format('woff');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: '<FONT>';
+  font-weight: 400;
+  font-style: italic;
+  src: url('fonts/<FONT>-subset.woff2') format('woff2'),
+    url('fonts/<FONT>-subset.woff') format('woff');
+}
+
+@font-face {
+  font-display: swap;
+  font-family: '<FONT>';
+  font-weight: 600;
+  font-style: bold;
+  src: url('fonts/<FONT>-subset.woff2') format('woff2'),
+    url('fonts/<FONT>-subset.woff') format('woff');
+}
