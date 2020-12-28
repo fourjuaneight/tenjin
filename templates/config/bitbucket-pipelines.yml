@@ -1,4 +1,4 @@
-image: registry.hub.docker.com/fourjuaneight/hugo-gulp:latest
+image: registry.hub.docker.com/<PATH-TO>/<IMAGE>
 pipelines:
 branches:
 master:

@@ -1,7 +1,7 @@
-// Static Testing
-// npm i -D husky lint-staged
+// Learn more about Lint-Staged:
+// https://github.com/okonet/lint-staged#configuration
 
 module.exports = {
-  '*.+(js|css|ms)': ['prettier --write', 'git add'],
   '*.js': ['eslint --fix'],
+  '*.+(js|css|ms)': ['prettier --write', 'git add'],
 };

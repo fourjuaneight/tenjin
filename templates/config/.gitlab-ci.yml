@@ -1,4 +1,4 @@
-image: registry.hub.docker.com/fourjuaneight/hugo-gulp:latest
+image: registry.hub.docker.com/<PATH-TO>/<IMAGE>
 
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
@@ -8,14 +8,4 @@ test:
   - npm install
   - npm run build
   except:
-  - master
-
-pages:
-  script:
-  - npm install
-  - npm run build
-  artifacts:
-    paths:
-    - public
-  only:
   - master
