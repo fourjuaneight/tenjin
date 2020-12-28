@@ -1,0 +1,17 @@
+{
+  "root": "build/",
+  "routes": {
+    "/oauth/eventbrite": "oauth.html",
+    "/**": "index.html"
+  },
+  "https_only": true,
+  "headers": {
+    "/**": {
+      "Cache-Control": "no-cache",
+      "Strict-Transport-Security": "max-age=31557600"
+    },
+    "/static/**": {
+      "Cache-Control": "max-age=31536000"
+    }
+  }
+}
