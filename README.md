@@ -1,6 +1,6 @@
-# Static Templates
+# [GIR](https://zim.fandom.com/wiki/GIR)-lib
 
-This is a simple script that uses [promptui](https://github.com/manifoldco/promptui) and [clipboard](https://github.com/atotto/clipboard) to copy templates, snippets, and config files for commonly used Angular and React configurations, onto the current directory.
+A simple script that uses [promptui](https://github.com/manifoldco/promptui) and [clipboard](https://github.com/atotto/clipboard) to copy templates, snippets, and config files for commonly used Angular and React configurations, onto the current directory.
 
 This is mostly for personal use, but PRs are welcomed. This is my one and only Go script, so please be gentle.
 
