@@ -33,6 +33,8 @@ func moveFile(name string, contents []byte) {
 }
 
 func main() {
+	cGreen := "\033[32m"
+	cReset := "\033[0m"
 	root := "./"
 	directories := []string{"components", "configs", "helpers", "snippets"}
 
@@ -89,9 +91,9 @@ func main() {
 	// execute actions
 	if action == "Copy" {
 		copyFile(fileContent)
-		fmt.Printf("Saved to clipboard!")
+		fmt.Printf(cGreen + "Saved to clipboard!" + cReset)
 	} else {
 		moveFile(file, fileContent)
-		fmt.Println("Saved to current directory!")
+		fmt.Println(cGreen + "Saved to current directory!" + cReset)
 	}
 }
