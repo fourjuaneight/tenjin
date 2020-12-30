@@ -1,7 +1,11 @@
-.PHONY: build install
+.PHONY: run build install
 
-build: version.go main.go go.mod
-	go build "-ldflags=-s -w" ./main.go
+run:
+	go get github.com/erning/gorun
+	chmod +x tenjin.go
+
+build: version.go tenjin.go go.mod
+	go build "-ldflags=-s -w" ./tenjin.go
 
 install:
-	go install ./main.go
+	go install ./tenjin.go

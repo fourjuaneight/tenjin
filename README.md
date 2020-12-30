@@ -1,21 +1,29 @@
-# [GIR](https://zim.fandom.com/wiki/GIR)-lib
+# Tenjin ⛩️
 
 A simple utility that uses [promptui](https://github.com/manifoldco/promptui) and [clipboard](https://github.com/atotto/clipboard) to copy templates, snippets, and config files for commonly used Angular and React configurations, onto the current directory.
 
 This is mostly for personal use, but PRs are welcomed. This is my one and only Go script, so please be gentle.
 
-## Run
+## Usage
+There are 3 ways to run the script:
 
-You can run the script with the help of [gorun](https://github.com/erning/gorun#how-to-build-and-install-gorun-from-source).
-
+### [Gorun](https://github.com/erning/gorun#how-to-build-and-install-gorun-from-source)
 ```sh
-chmod +x main.go
-./main.go
+make run
+# script should run from root of repo
+./tenjin.go
 ```
 
-## Install
-
+### Local Binary
 ```sh
 make build
+# binary should be accessible from root of repo
+./tenjin
+```
+
+### GOPATH Binary
+```sh
 make install
+# binary should be accessible from anywhere
+tenjin
 ```
