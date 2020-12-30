@@ -1,4 +1,4 @@
-module github.com/fourjuaneight/static-templates
+module github.com/fourjuaneight/tenjin
 
 go 1.15
 

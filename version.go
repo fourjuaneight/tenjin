@@ -1,3 +1,3 @@
 package main
 
-const girLib = "0.1.0"
+const tenjin = "0.1.0"
