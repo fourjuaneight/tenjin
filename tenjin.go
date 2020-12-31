@@ -35,8 +35,14 @@ func moveFile(name string, contents []byte) {
 func main() {
 	cGreen := "\033[32m"
 	cReset := "\033[0m"
-	root := "./"
+	repo := "/tenjin/"
 	directories := []string{"components", "configs", "helpers", "snippets"}
+
+	// get home directory
+	home, err := os.UserHomeDir()
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	// create directory selector
 	promptDir := promptui.Select{
@@ -49,7 +55,7 @@ func main() {
 	}
 
 	// read files from selected directory
-	dirPath := root + directory
+	dirPath := home + repo + directory
 	files, err := ioutil.ReadDir(dirPath)
 	if err != nil {
 		log.Fatal(err)
