@@ -1,7 +1,12 @@
-import { useCallback, useEffect, useState } from "react";
-import { useSpring } from "react-spring";
+import { CSSProperties, useCallback, useEffect, useState } from "react";
+import { AnimatedValue, useSpring } from "react-spring";
 
 import usePrefersReducedMotion from "./usePrefersReduceMotion";
+
+interface SpringConfig {
+  tension: number;
+  friction: number;
+}
 
 export interface UseBoopProps {
   x: number;
@@ -9,10 +14,12 @@ export interface UseBoopProps {
   rotation: number;
   scale: number;
   timing: number;
-  springConfig: {
-    tension: number;
-    friction: number;
-  };
+  springConfig: SpringConfig;
+}
+
+interface SpringValues {
+  transform: string;
+  config: SpringConfig;
 }
 
 const useBoop = ({
@@ -28,7 +35,7 @@ const useBoop = ({
 }: UseBoopProps) => {
   const prefersReducedMotion = usePrefersReducedMotion();
   const [isBooped, setIsBooped] = useState<boolean>(false);
-  const style = useSpring({
+  const style = useSpring<SpringValues>({
     transform: isBooped
       ? `translate(${x}px, ${y}px)
          rotate(${rotation}deg)
