@@ -1,11 +1,15 @@
+VERSION := 0.1.0
+
 .PHONY: run build install
 
-run: version.go tenjin.go go.mod
+run: tenjin.go go.mod
 	chmod +x tenjin.go
 	cd "$GOPATH" && go get github.com/erning/gorun
 
-build: version.go tenjin.go go.mod
-	go build "-ldflags=-s -w" ./tenjin.go
+# https://golang.org/cmd/link/
+build: tenjin.go go.mod
+	sed -i '.bak' 's/BuildVersion string = ".*"/BuildVersion string = "${VERSION}"/g' tenjin.go
+	go build -ldflags="-X 'main.BuildVersion=$(VERSION)'" ./tenjin.go
 
-install: version.go tenjin.go go.mod
+install: tenjin.go go.mod
 	go install ./tenjin.go

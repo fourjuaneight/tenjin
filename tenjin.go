@@ -12,6 +12,8 @@ import (
 	"github.com/manifoldco/promptui"
 )
 
+var BuildVersion string = "0.1.0"
+
 func copyFile(contents []byte) {
 	// convert file's []byte to string
 	text := string(contents)
