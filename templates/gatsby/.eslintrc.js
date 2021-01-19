@@ -6,20 +6,22 @@ module.exports = {
     node: true,
   },
   extends: [
-    'airbnb',
-    'eslint:recommended',
-    'plugin:@typescript-eslint/eslint-recommended',
-    'plugin:react/recommended',
-    'prettier',
-    'prettier/@typescript-eslint',
-    'prettier/react',
+    "airbnb",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:react/recommended",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "prettier",
+    "prettier/@typescript-eslint",
+    "prettier/react",
   ],
   globals: {
-    Atomics: 'readonly',
-    SharedArrayBuffer: 'readonly',
+    Atomics: "readonly",
+    SharedArrayBuffer: "readonly",
     tw: true,
   },
-  parser: '@typescript-eslint/parser',
+  parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaVersion: 2020,
     ecmaFeatures: {
@@ -27,54 +29,51 @@ module.exports = {
       impliedStrict: true,
       jsx: true,
     },
-    sourceType: 'module',
+    sourceType: "module",
   },
-  plugins: ['html', 'prettier', 'react', '@typescript-eslint'],
+  plugins: ["html", "prettier", "react", "@typescript-eslint",],
   rules: {
-    'id-length': [
+    "id-length": [
       2,
       {
-        exceptions: ['_', 'a', 'b', 'i', 'x', 'y', 'z'],
+        exceptions: ["_", "a", "b", "i", "x", "y", "z"],
       },
     ],
-    'import/extensions': 0,
-    'import/no-cycle': ['error'],
-    'import/no-unresolved': [2, { caseSensitive: false }],
-    'jsx-a11y/accessible-emoji': 0,
-    'jsx-a11y/anchor-is-valid': [
-      'warn',
+    "jsx-a11y/accessible-emoji": 0,
+    "jsx-a11y/anchor-is-valid": [
+      "warn",
       {
-        aspects: ['invalidHref'],
+        aspects: ["invalidHref"],
       },
     ],
-    'jsx-a11y/href-no-hash': 0,
-    'jsx-a11y/label-has-associated-control': 0,
-    'no-console': [
-      'error',
+    "jsx-a11y/href-no-hash": 0,
+    "jsx-a11y/label-has-associated-control": 0,
+    "no-console": [
+      "error",
       {
-        allow: ['error', 'info'],
+        allow: ["error", "info"],
       },
     ],
-    'no-case-declarations': 0,
-    'no-nested-ternary': 0,
-    'no-useless-constructor': 0,
-    'prettier/prettier': [
-      'error',
+    "no-case-declarations": 0,
+    "no-nested-ternary": 0,
+    "no-useless-constructor": 0,
+    "prettier/prettier": [
+      "error",
       {
-        arrowParens: 'avoid',
+        arrowParens: "avoid",
         bracketSpacing: true,
-        endOfLine: 'auto',
+        endOfLine: "auto",
         printWidth: 80,
-        proseWrap: 'preserve',
+        proseWrap: "preserve",
         requirePragma: false,
         semi: true,
         singleQuote: true,
         tabWidth: 2,
-        trailingComma: 'es5',
+        trailingComma: "es5",
         useTabs: false,
         overrides: [
           {
-            files: '*.json',
+            files: "*.json",
             options: {
               printWidth: 200,
             },
@@ -82,54 +81,54 @@ module.exports = {
         ],
       },
     ],
-    'react/display-name': 0,
-    'react/jsx-filename-extension': [
+    "react/display-name": 0,
+    "react/jsx-filename-extension": [
       1,
       {
-        extensions: ['.js', '.jsx', '.tsx'],
+        extensions: [".js", ".jsx", ".tsx"],
       },
     ],
-    'react/jsx-uses-react': 'error',
-    'react/jsx-uses-vars': 'error',
-    'react/no-danger': 0,
-    'react/no-unescaped-entities': 0,
-    'react/prop-types': 0,
-    '@typescript-eslint/no-unused-vars': [
-      'warn',
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error",
+    "react/no-danger": 0,
+    "react/no-unescaped-entities": 0,
+    "react/prop-types": 0,
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
       {
-        args: 'none',
-        vars: 'local',
-        varsIgnorePattern: '^(React|e|i|it|expect)$',
+        args: "none",
+        vars: "local",
+        varsIgnorePattern: "^(React|e|i|it|expect)$",
       },
     ],
-    '@typescript-eslint/no-useless-constructor': 'error',
+    "@typescript-eslint/no-useless-constructor": "error",
   },
   settings: {
-    'import/resolver': {
+    "import/resolver": {
       node: {
-        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        extensions: [".js", ".jsx", ".ts", ".tsx"],
       },
     },
     linkComponents: [
       // Components used as alternatives to <a> for linking, eg. <Link to={ url } />
-      'Hyperlink',
-      { name: 'Link', linkAttribute: 'to' },
+      "Hyperlink",
+      { name: "Link", linkAttribute: "to" },
     ],
     propWrapperFunctions: [
       // The names of any function used to wrap propTypes, e.g. `forbidExtraProps`. If this isn't set, any propTypes wrapped in a function will be skipped.
-      'forbidExtraProps',
-      { property: 'freeze', object: 'Object' },
-      { property: 'myFavoriteWrapper' },
+      "forbidExtraProps",
+      { property: "freeze", object: "Object" },
+      { property: "myFavoriteWrapper" },
     ],
     react: {
-      createClass: 'createReactClass', // Regex for Component Factory to use,
+      createClass: "createReactClass", // Regex for Component Factory to use,
       // default to "createReactClass"
-      pragma: 'React', // Pragma to use, default to "React"
-      version: 'detect', // React version. "detect" automatically picks the version you have installed.
+      pragma: "React", // Pragma to use, default to "React"
+      version: "detect", // React version. "detect" automatically picks the version you have installed.
       // You can also use `16.0`, `16.3`, etc, if you want to override the detected value.
       // default to latest and warns if missing
       // It will default to "detect" in the future
-      flowVersion: '0.53', // Flow version
+      flowVersion: "0.53", // Flow version
     },
   },
 };
