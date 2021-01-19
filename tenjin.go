@@ -12,7 +12,7 @@ import (
 	"github.com/manifoldco/promptui"
 )
 
-var BuildVersion string = "0.1.0"
+var BuildVersion string = "0.1.1"
 
 func copyFile(contents []byte) {
 	// convert file's []byte to string
@@ -38,7 +38,7 @@ func main() {
 	cGreen := "\033[32m"
 	cReset := "\033[0m"
 	repo := "/tenjin/"
-	directories := []string{"components", "configs", "helpers", "snippets"}
+	directories := []string{"components", "configs", "templates/angular", "templates/cra", "templates/gatsby", "helpers", "snippets"}
 
 	// get home directory
 	home, err := os.UserHomeDir()
