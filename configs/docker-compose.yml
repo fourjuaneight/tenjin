@@ -5,24 +5,20 @@ services:
       context: .
       dockerfile: Dockerfile
     working_dir: /app
-    command:
-      - 'npm'
-      - 'start'
     volumes:
       - .:/app
       - /app/node_modules
     ports:
       - "3000:3000"
+    entrypoint: npm start
   prod:
     build:
       context: .
       dockerfile: Dockerfile
     working_dir: /app
-    command:
-      - 'npm'
-      - 'serve'
     volumes:
       - .:/app
       - /app/node_modules
     ports:
       - "5000:5000"
+    entrypoint: npm run build
