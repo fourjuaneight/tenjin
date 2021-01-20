@@ -1,7 +1,6 @@
 {
   "root": "build/",
   "routes": {
-    "/oauth/eventbrite": "oauth.html",
     "/**": "index.html"
   },
   "https_only": true,

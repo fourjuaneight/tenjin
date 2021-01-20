@@ -1,9 +1,9 @@
 // SSR APIs
 // https://www.gatsbyjs.org/docs/ssr-apis/
 
-import React from 'react';
-import glob from 'glob/sync';
-import wrapWithProvider from './src/store/reduxWrapper';
+import React from "react";
+import glob from "glob/sync";
+import wrapWithProvider from "./src/store/reduxWrapper";
 
 // Load Redux store
 export const wrapRootElement = wrapWithProvider;
@@ -21,16 +21,16 @@ export const onPreRenderHTML = ({
   replaceHeadComponents,
 }) => {
   // match subset fonts
-  const fonts = glob('public/**/*-subset.{woff,woff2}').reverse();
+  const fonts = glob("public/**/*-subset.{woff,woff2}").reverse();
   // get existing head components
   const headComponents = getHeadComponents();
 
   // for each found file, generate a link preload component
-  const files = fonts.map(file => (
+  const files = fonts.map((file) => (
     <link
       key={file}
       rel="preload"
-      href={file.replace('public', '')}
+      href={file.replace("public", "")}
       as="font"
       type={`font/${file.match(/woff2|woff/g)}`}
       crossOrigin="anonymous"
