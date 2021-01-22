@@ -21,7 +21,7 @@ make build
 ./tenjin
 ```
 
-### GOPATH Binary
+### [GOPATH Binary](https://github.com/fourjuaneight/dotfiles/blob/master/homedir/.zshenv#L16-L20)
 ```sh
 make install
 # binary should be accessible from anywhere
