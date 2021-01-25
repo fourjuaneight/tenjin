@@ -53,6 +53,7 @@ typings/
 
 # production
 build
+dist
 public
 .cache
 

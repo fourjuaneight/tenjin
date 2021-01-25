@@ -1,6 +1,7 @@
-.netlify
-coverage
-node_modules
-build
-public
 .cache
+.netlify
+build
+coverage
+dist
+node_modules
+public

@@ -8,10 +8,11 @@
 *.log
 *.pid
 *.seed
-build/Release
+build
 coverage
 cypress/screenshots
 cypress/videos
+dist
 lib-cov
 logs
 node_modules
