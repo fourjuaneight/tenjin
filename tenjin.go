@@ -12,7 +12,7 @@ import (
 	"github.com/manifoldco/promptui"
 )
 
-var BuildVersion string = "0.1.2"
+var BuildVersion string = "0.1.3"
 
 func copyFile(contents []byte) {
 	// convert file's []byte to string
@@ -89,7 +89,7 @@ func main() {
 	// create action selector
 	promptAction := promptui.Select{
 		Label: "Select a action",
-		Items: []string{"Copy", "Save"},
+		Items: []string{"Save", "Copy"},
 	}
 	_, action, err := promptAction.Run()
 	if err != nil {
