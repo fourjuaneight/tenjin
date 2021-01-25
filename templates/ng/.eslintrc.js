@@ -20,14 +20,14 @@ module.exports = {
   parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaVersion: 2020,
-    project: 'tsconfig.json',
+    project: "tsconfig.json",
     sourceType: "module",
   },
   rules: {
     "id-length": [
       2,
       {
-        exceptions: ["_", "a", "b", "i", "x", "y", "z"],
+        exceptions: ["_", "a", "b", "c", "i", "x", "y", "z"],
       },
     ],
     "no-console": [
@@ -62,9 +62,9 @@ module.exports = {
         ],
       },
     ],
-    '@typescript-eslint/explicit-function-return-type': 'off',
+    "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/explicit-module-boundary-types": "off",
-    '@typescript-eslint/interface-name-prefix': 'off',
+    "@typescript-eslint/interface-name-prefix": "off",
     "@typescript-eslint/no-useless-constructor": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-unused-vars": "off",
