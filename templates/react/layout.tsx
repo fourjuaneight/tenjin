@@ -21,9 +21,9 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children, location }): React.FC => (
   <>
     <Head location={location} />
-    <SkipNavLink id="skip-nav-link">Skip to main content</SkipNavLink>
+    <SkipNavLink id='skip-nav-link'>Skip to main content</SkipNavLink>
     <Header />
-    <main id="reach-skip-nav">
+    <main id='reach-skip-nav'>
       {children}
       <Steps />
     </main>

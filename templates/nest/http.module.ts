@@ -3,7 +3,7 @@ import {
   Module,
   OnModuleInit,
   HttpModule as BaseHttpModule,
-} from "@nestjs/common";
+} from '@nestjs/common';
 
 @Module({
   imports: [BaseHttpModule],

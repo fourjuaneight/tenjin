@@ -9,7 +9,7 @@ const range = new RegExp(
  *
  * @param   {string} emojiString the string containing emoji characters
  *
- * @returns {string}             the unicode code
+ * @returns {string} the unicode code
  */
 const convertEmoji = (emojiString: string): string => {
   let comp: string | number;
@@ -39,7 +39,7 @@ const convertEmoji = (emojiString: string): string => {
  *
  * @param  {string} str string string with emojies
  *
- * @return {string}     string with unicode emojies
+ * @return {string} string with unicode emojies
  */
 const emojiUnicode = (str: string): string =>
   str.replace(range, (p1: string) => `${convertEmoji(p1)}`);

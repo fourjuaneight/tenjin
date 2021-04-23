@@ -1,6 +1,6 @@
-import isEqual from "lodash/isEqual";
-import isObject from "lodash/isObject";
-import transform from "lodash/transform";
+import isEqual from 'lodash/isEqual';
+import isObject from 'lodash/isObject';
+import transform from 'lodash/transform';
 
 /**
  * Deep diff between two object, using lodash.

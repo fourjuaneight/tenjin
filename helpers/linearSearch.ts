@@ -5,8 +5,8 @@ const equal = (a: any, b: any): boolean => compare(a, b) === 0;
  * Linear search implementation.
  * @function
  *
- * @param  {*[]} array
- * @param  {*} seekElement
+ * @param  {*[]}      array
+ * @param  {*}        seekElement
  *
  * @return {number[]}
  */

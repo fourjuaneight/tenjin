@@ -63,9 +63,11 @@ const variants: Variants = {
  * Create various size and format variants of an image.
  * @function
  *
- * @param {VOptions[]} data Variants options
- * @param {string}     src  Image to format and convert
- * @param {string}     dest Where to save image
+ * @param   {VOptions[]} data Variants options
+ * @param   {string}     src  Image to format and convert
+ * @param   {string}     dest Where to save image
+ * 
+ * @returns {Promise<void>}
  */
 const fmtImage = async (
   data: VOptions[],

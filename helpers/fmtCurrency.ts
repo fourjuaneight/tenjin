@@ -6,7 +6,7 @@
  * @param  {number}  num             number to convert
  * @param  {boolean} includeCurrency include currency type
  *
- * @return {string}                  dollar amount
+ * @return {string}  dollar amount
  */
 export const formatCurrency = (
   num: number | null,
@@ -37,7 +37,7 @@ export const formatCurrency = (
  *
  * @param  {number} num number to convert
  *
- * @return {string}     comma-separate number
+ * @return {string} comma-separate number
  */
 export const numberWithCommas = (num: number): string => {
   if (!num) {

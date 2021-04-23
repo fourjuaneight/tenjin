@@ -7,7 +7,7 @@
  *
  * @returns {object} record by title key
  */
-const arrayToObject = (array: any[], key = "title"): any => {
+const arrayToObject = (array: any[], key = 'title'): any => {
   const initialValue = {};
 
   return array.reduce(

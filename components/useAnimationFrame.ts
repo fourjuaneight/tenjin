@@ -1,6 +1,6 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef } from 'react';
 
-import animationInterval from "../helpers/animationInterval";
+import animationInterval from '../helpers/animationInterval';
 
 /**
  * Corss-browser, time perfect, animation interval.

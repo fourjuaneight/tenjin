@@ -4,7 +4,7 @@
  *
  * @param   {string} str word to capitalized
  *
- * @returns {string}     capitalized word
+ * @returns {string} capitalized word
  */
 const toCapitalized = (str: string): string =>
   `${str.charAt(0).toUpperCase()}${str.slice(1)}`;

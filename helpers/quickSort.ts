@@ -6,7 +6,7 @@ const lessThan = (a: any, b: any): boolean => compare(a, b) < 0;
  * Quick sort.
  * @function
  *
- * @param   {number[]} originalArray
+ * @param  {number[]} originalArray
  *
  * @return {number[]}
  */

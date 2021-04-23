@@ -7,7 +7,7 @@ import { format } from 'date-fns';
  * @param  {string} time          time string
  * @param  {string} localePattern conversion pattern
  *
- * @return {string}               datetime
+ * @return {string} datetime
  */
 export const timeToLocale = (time: string, localePattern: string): string => {
   const pattern: string = localePattern || 'HH:mm a';
@@ -28,7 +28,7 @@ export const timeToLocale = (time: string, localePattern: string): string => {
  * @param  {string} time        time string
  * @param  {string} timePattern conversion pattern
  *
- * @return {string}             ISO timestamp
+ * @return {string} ISO timestamp
  */
 export const localeToTime = (time: string, timePattern: string): string => {
   const pattern: string = timePattern || 'HH:mm:ss';
@@ -48,7 +48,7 @@ export const localeToTime = (time: string, timePattern: string): string => {
  *
  * @param  {string} date date string
  *
- * @return {Date}        UTC date
+ * @return {Date}   UTC date
  */
 export const removeTimeZone = (date: string | Date): Date => {
   let locDate: Date;

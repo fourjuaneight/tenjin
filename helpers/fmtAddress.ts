@@ -13,7 +13,7 @@ export interface AddressValues {
  *
  * @param   {string}        address coma separated address string
  *
- * @returns {AddressValues}         itemized address object
+ * @returns {AddressValues} itemized address object
  */
 export const separateAddress = (address: string): AddressValues => {
   const arr: string[] = address.split(',');
@@ -43,7 +43,7 @@ export const separateAddress = (address: string): AddressValues => {
  *
  * @param   {AddressValues} address itemized object
  *
- * @returns {string}                comma separated address
+ * @returns {string}        comma separated address
  */
 export const joinAddress = (address: AddressValues): string => {
   // object to array (removes null values)

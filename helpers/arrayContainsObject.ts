@@ -1,4 +1,4 @@
-import { deepCheck } from "./objectsEqual";
+import { deepCheck } from './objectsEqual';
 
 /**
  * Determine if object is found in given array.

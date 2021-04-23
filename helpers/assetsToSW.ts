@@ -14,7 +14,7 @@ const ignore: string[] = ['sw.js'];
  *
  * @param  {number} length hash size
  *
- * @return {string}        alphanumeric hash
+ * @return {string} alphanumeric hash
  */
 const makeHash = (length: number): string => {
   let result: string = '';
@@ -51,7 +51,7 @@ const getFiles = (): string => {
  *
  * @param   {string} str space separate string
  *
- * @returns {string}     camelCased string
+ * @returns {string} camelCased string
  */
 const toCamelCase = (str: string): string =>
   str

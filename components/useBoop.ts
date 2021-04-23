@@ -1,7 +1,7 @@
-import { CSSProperties, useCallback, useEffect, useState } from "react";
-import { AnimatedValue, useSpring } from "react-spring";
+import { CSSProperties, useCallback, useEffect, useState } from 'react';
+import { AnimatedValue, useSpring } from 'react-spring';
 
-import usePrefersReducedMotion from "./usePrefersReduceMotion";
+import usePrefersReducedMotion from './usePrefersReduceMotion';
 
 interface SpringConfig {
   tension: number;

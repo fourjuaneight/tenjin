@@ -1,7 +1,7 @@
-import React, { FunctionComponent, ReactNode } from "react";
-import { animated } from "react-spring";
+import React, { FunctionComponent, ReactNode } from 'react';
+import { animated } from 'react-spring';
 
-import useBoop, { UseBoopProps } from "./useBoop";
+import useBoop, { UseBoopProps } from './useBoop';
 
 export interface BoopProps {
   children: ReactNode;

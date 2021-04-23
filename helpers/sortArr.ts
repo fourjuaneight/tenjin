@@ -6,7 +6,7 @@
  * @param  {string}  key  ket to sort by
  * @param  {boolean} asc  should order by asc order
  *
- * @return {any[]}        sorted array
+ * @return {any[]}   sorted array
  */
 const sortArr = (list: any[], key: string, asc: boolean = true): any[] => {
   const arrayCopy: any[] = [...list];

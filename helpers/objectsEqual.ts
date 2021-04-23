@@ -7,7 +7,7 @@
  * @returns {boolean} is param an object
  */
 export const isObject = (obj: any): boolean =>
-  obj != null && typeof obj === "object";
+  obj != null && typeof obj === 'object';
 
 /**
  * Determine if two objects are the same. Shallow check.

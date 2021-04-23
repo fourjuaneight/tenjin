@@ -4,7 +4,7 @@
  *
  * @param   {string} str dash separate string
  *
- * @returns {string}     camelCased string
+ * @returns {string} camelCased string
  */
 const dashToCamelCase = (str: string): string =>
   str
