@@ -1,4 +1,6 @@
-import { equal, lessThan } from "./comparison";
+// Utils
+const equal = (a: any, b: any): boolean => compare(a, b) === 0;
+const lessThan = (a: any, b: any): boolean => compare(a, b) < 0;
 
 /**
  * Binary search implementation.

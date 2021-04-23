@@ -1,4 +1,5 @@
-import { equal } from "./comparison";
+// Utils
+const equal = (a: any, b: any): boolean => compare(a, b) === 0;
 
 /**
  * Linear search implementation.
