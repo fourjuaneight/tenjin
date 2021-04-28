@@ -3,16 +3,16 @@
 package main
 
 import (
-	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
 
 	"github.com/atotto/clipboard"
+	"github.com/fatih/color"
 	"github.com/manifoldco/promptui"
 )
 
-var BuildVersion string = "0.1.3"
+var BuildVersion string = "0.1.4"
 
 func copyFile(contents []byte) {
 	// convert file's []byte to string
@@ -35,8 +35,6 @@ func moveFile(name string, contents []byte) {
 }
 
 func main() {
-	cGreen := "\033[32m"
-	cReset := "\033[0m"
 	repo := "/tenjin/"
 	directories := []string{"components", "configs", "templates/nest", "templates/ng", "templates/react", "helpers", "snippets"}
 
@@ -97,11 +95,14 @@ func main() {
 	}
 
 	// execute actions
-	if action == "Copy" {
-		copyFile(fileContent)
-		fmt.Printf(cGreen + "Saved to clipboard!" + cReset)
-	} else {
+	switch action {
+	case "Save":
 		moveFile(file, fileContent)
-		fmt.Println(cGreen + "Saved to current directory!" + cReset)
+		color.Cyan("Saved to current directory!")
+	case "Copy":
+		copyFile(fileContent)
+		color.Cyan("Copied to clipboard!")
+	default:
+		color.Red("No selection made.")
 	}
 }
