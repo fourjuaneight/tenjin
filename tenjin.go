@@ -3,16 +3,20 @@
 package main
 
 import (
+	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
+	"regexp"
+	"strings"
 
 	"github.com/atotto/clipboard"
 	"github.com/fatih/color"
 	"github.com/manifoldco/promptui"
+	"github.com/zyedidia/highlight"
 )
 
-var BuildVersion string = "0.1.4"
+var BuildVersion string = "0.1.5"
 
 func copyFile(contents []byte) {
 	// convert file's []byte to string
@@ -31,6 +35,89 @@ func moveFile(name string, contents []byte) {
 	error := ioutil.WriteFile(path+"/"+name, contents, 0755)
 	if error != nil {
 		log.Fatal(error)
+	}
+}
+
+func highlightFile(path string, contents []byte) {
+	// get home directory
+	home, err := os.UserHomeDir()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// get file type
+	pattern := regexp.MustCompile(`.*\.([a-z]+)$`)
+	ext := pattern.ReplaceAllString(path, `$1`)
+
+	// match language
+	langTypes := map[string]string{
+		"css":  "css",
+		"html": "html",
+		"js":   "javascript",
+		"json": "json",
+		"jsx":  "javascript",
+		"scss": "css",
+		"ts":   "typescript",
+		"tsx":  "typescript",
+		"yaml": "yaml",
+	}
+
+	// load the go syntax file
+	syntaxFile, _ := ioutil.ReadFile(home + "/tenjin/syntax/" + langTypes[ext] + ".yaml")
+
+	// parse it into a `*highlight.Def`
+	syntaxDef, err := highlight.ParseDef(syntaxFile)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// new highlighter from definition
+	hl := highlight.NewHighlighter(syntaxDef)
+
+	// convert file's []byte to string
+	text := string(contents)
+	// highlight the string
+	matches := hl.HighlightString(text)
+
+	// split the string into a bunch of lines
+	// print the string
+	lines := strings.Split(text, "\n")
+	for lineN, l := range lines {
+		for colN, c := range l {
+			// check if the group changed at the current position
+			if group, ok := matches[lineN][colN]; ok {
+				// check the group name and set the color accordingly (the colors chosen are arbitrary)
+				if group == highlight.Groups["statement"] {
+					color.Set(color.FgGreen)
+				} else if group == highlight.Groups["preproc"] {
+					color.Set(color.FgHiRed)
+				} else if group == highlight.Groups["special"] {
+					color.Set(color.FgBlue)
+				} else if group == highlight.Groups["constant.string"] {
+					color.Set(color.FgCyan)
+				} else if group == highlight.Groups["constant.specialChar"] {
+					color.Set(color.FgHiMagenta)
+				} else if group == highlight.Groups["type"] {
+					color.Set(color.FgYellow)
+				} else if group == highlight.Groups["constant.number"] {
+					color.Set(color.FgCyan)
+				} else if group == highlight.Groups["comment"] {
+					color.Set(color.FgHiGreen)
+				} else {
+					color.Unset()
+				}
+			}
+			// Print the character
+			fmt.Print(string(c))
+		}
+		// This is at a newline, but highlighting might have been turned off at the very end of the line so we should check that.
+		if group, ok := matches[lineN][len(l)]; ok {
+			if group == highlight.Groups["default"] || group == highlight.Groups[""] {
+				color.Unset()
+			}
+		}
+
+		fmt.Print("\n")
 	}
 }
 
@@ -87,7 +174,7 @@ func main() {
 	// create action selector
 	promptAction := promptui.Select{
 		Label: "Select a action",
-		Items: []string{"Save", "Copy"},
+		Items: []string{"Save", "Copy", "Show"},
 	}
 	_, action, err := promptAction.Run()
 	if err != nil {
@@ -102,6 +189,8 @@ func main() {
 	case "Copy":
 		copyFile(fileContent)
 		color.Cyan("Copied to clipboard!")
+	case "Show":
+		highlightFile(filePath, fileContent)
 	default:
 		color.Red("No selection made.")
 	}
