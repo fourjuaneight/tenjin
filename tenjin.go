@@ -174,7 +174,7 @@ func main() {
 	// create action selector
 	promptAction := promptui.Select{
 		Label: "Select a action",
-		Items: []string{"Save", "Copy", "Show"},
+		Items: []string{"Save", "Copy", "Preview"},
 	}
 	_, action, err := promptAction.Run()
 	if err != nil {
@@ -189,7 +189,7 @@ func main() {
 	case "Copy":
 		copyFile(fileContent)
 		color.Cyan("Copied to clipboard!")
-	case "Show":
+	case "Preview":
 		highlightFile(filePath, fileContent)
 	default:
 		color.Red("No selection made.")
