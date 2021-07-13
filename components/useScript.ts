@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
 /**
  * Dynamically create <script> node.
@@ -8,9 +8,9 @@ import { useEffect } from 'react';
  *
  * @return {void}
  */
-const useScript = (resourceUrl: string): void => {
+export const useScript = (resourceUrl: string): void => {
   useEffect(() => {
-    const script: HTMLScriptElement = document.createElement('script');
+    const script: HTMLScriptElement = document.createElement("script");
     script.src = resourceUrl;
     document.body.appendChild(script);
 
@@ -19,5 +19,3 @@ const useScript = (resourceUrl: string): void => {
     };
   }, [resourceUrl]);
 };
-
-export default useScript;

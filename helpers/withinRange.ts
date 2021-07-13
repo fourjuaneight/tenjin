@@ -8,7 +8,5 @@
  *
  * @returns {boolean} is given value in the range
  */
-const withinRange = (num: number, min: number, max: number): boolean =>
+export const withinRange = (num: number, min: number, max: number): boolean =>
   num >= min && num <= max;
-
-export default withinRange;

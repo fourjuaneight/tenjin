@@ -1,7 +1,7 @@
-import React, { FunctionComponent, ReactNode } from 'react';
-import { animated } from 'react-spring';
+import React, { FunctionComponent, ReactNode } from "react";
+import { animated } from "react-spring";
 
-import useBoop, { UseBoopProps } from './useBoop';
+import useBoop, { UseBoopProps } from "./useBoop";
 
 export interface BoopProps {
   children: ReactNode;
@@ -17,7 +17,7 @@ export interface BoopProps {
  *
  * @returns {FunctionComponent} <Boop />
  */
-const Boop: FunctionComponent<BoopProps> = ({
+export const Boop: FunctionComponent<BoopProps> = ({
   children,
   boopConfig,
 }): FunctionComponent => {
@@ -29,5 +29,3 @@ const Boop: FunctionComponent<BoopProps> = ({
     </animated.button>
   );
 };
-
-export default Boop;

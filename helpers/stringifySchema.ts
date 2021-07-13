@@ -6,7 +6,5 @@
  *
  * @return {string} schema string
  */
-const stringifySchema = (data: any): string =>
+export const stringifySchema = (data: any): string =>
   JSON.stringify(data).replace(/'([a-zA-Z_]+)':/g, '$1:');
-
-export default stringifySchema;

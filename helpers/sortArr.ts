@@ -8,7 +8,7 @@
  *
  * @return {any[]}   sorted array
  */
-const sortArr = (list: any[], key: string, asc: boolean = true): any[] => {
+export const sortArr = (list: any[], key: string, asc: boolean = true): any[] => {
   const arrayCopy: any[] = [...list];
 
   arrayCopy.sort((a, b) => {
@@ -33,5 +33,3 @@ const sortArr = (list: any[], key: string, asc: boolean = true): any[] => {
 
   return arrayCopy;
 };
-
-export default sortArr;

@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from "react";
 
 /**
  * Setup safe setTimeout effect.
@@ -9,7 +9,7 @@ import { useEffect, useRef } from 'react';
  *
  * @return {void}
  */
-const useTimeout = (callback: T, delay: number): void => {
+export const useTimeout = (callback: T, delay: number): void => {
   const savedCallback = useRef<T>(null);
 
   // Remember the latest function.
@@ -29,5 +29,3 @@ const useTimeout = (callback: T, delay: number): void => {
     }
   }, [delay]);
 };
-
-export default useTimeout;

@@ -1,7 +1,7 @@
-import { CSSProperties, useCallback, useEffect, useState } from 'react';
-import { AnimatedValue, useSpring } from 'react-spring';
+import { CSSProperties, useCallback, useEffect, useState } from "react";
+import { AnimatedValue, useSpring } from "react-spring";
 
-import usePrefersReducedMotion from './usePrefersReduceMotion';
+import usePrefersReducedMotion from "./usePrefersReduceMotion";
 
 interface SpringConfig {
   tension: number;
@@ -22,7 +22,7 @@ interface SpringValues {
   config: SpringConfig;
 }
 
-const useBoop = ({
+export const useBoop = ({
   x = 0,
   y = 0,
   rotation = 0,
@@ -69,5 +69,3 @@ const useBoop = ({
 
   return [appliedStyle, trigger];
 };
-
-export default useBoop;

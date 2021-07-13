@@ -6,7 +6,7 @@
  *
  * @return {string} ordinal number
  */
-const toOrdinal = (num: number): string => {
+export const toOrdinal = (num: number): string => {
   const str = ['th', 'st', 'nd', 'rd'];
   // returns a negative number when its first operand (the dividend) is negative
   const val = num % 100;
@@ -15,5 +15,3 @@ const toOrdinal = (num: number): string => {
 
   return `${num}${type}`;
 };
-
-export default toOrdinal;

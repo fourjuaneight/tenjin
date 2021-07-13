@@ -1,4 +1,4 @@
-import { useState, useCallback, useLayoutEffect } from 'react';
+import { useState, useCallback, useLayoutEffect } from "react";
 
 export interface DimensionObject {
   bottom: number;
@@ -28,13 +28,13 @@ interface UseDimensionsArgs {
  * @param   {boolean} resize watch for window resize and update dimension properties?
  * @returns {Array}          [ref element, bounding client properties, element node]
  */
-const useDimensions = ({
+export const useDimensions = ({
   resize = false,
 }: UseDimensionsArgs = {}): UseDimensionsHook => {
   const [dimensions, setDimensions] = useState({});
   const [node, setNode] = useState<HTMLElement | undefined>();
 
-  const ref = useCallback(element => {
+  const ref = useCallback((element) => {
     setNode(element);
   }, []);
 
@@ -52,7 +52,7 @@ const useDimensions = ({
       measure();
 
       if (resize) {
-        if ('ResizeObserver' in window) {
+        if ("ResizeObserver" in window) {
           const resizeObserver = new ResizeObserver(measure);
 
           resizeObserver.observe(node);
@@ -61,7 +61,7 @@ const useDimensions = ({
         }
 
         window.addEventListener(
-          'resize',
+          "resize",
           () => {
             let throttled = false;
             // only run if we're not throttled
@@ -80,7 +80,7 @@ const useDimensions = ({
         );
 
         return () => {
-          window.removeEventListener('resize', measure);
+          window.removeEventListener("resize", measure);
         };
       }
 
@@ -90,5 +90,3 @@ const useDimensions = ({
 
   return [ref, dimensions, node];
 };
-
-export default useDimensions;

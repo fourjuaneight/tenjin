@@ -7,7 +7,7 @@
  *
  * @return  {number} trimmed value
  */
-const roundTo = (num: number, dig: number): number => {
+export const roundTo = (num: number, dig: number): number => {
   let negative: boolean = false;
   let number: number | string = num;
   let digits: number = dig;
@@ -31,5 +31,3 @@ const roundTo = (num: number, dig: number): number => {
 
   return parseFloat(number);
 };
-
-export default roundTo;

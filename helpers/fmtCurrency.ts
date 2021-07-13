@@ -3,7 +3,7 @@
  * Formate float to USD currency.
  * @function
  *
- * @param  {number}  num             number to convert
+ * @param  {number}  num             float number to convert
  * @param  {boolean} includeCurrency include currency type
  *
  * @return {string}  dollar amount

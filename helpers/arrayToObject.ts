@@ -7,7 +7,7 @@
  *
  * @returns {object} record by title key
  */
-const arrayToObject = (array: any[], key = 'title'): any => {
+export const arrayToObject = (array: any[], key = 'title'): any => {
   const initialValue = {};
 
   return array.reduce(
@@ -18,5 +18,3 @@ const arrayToObject = (array: any[], key = 'title'): any => {
     initialValue
   );
 };
-
-export default arrayToObject;

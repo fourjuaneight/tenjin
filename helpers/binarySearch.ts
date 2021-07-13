@@ -11,7 +11,7 @@ const lessThan = (a: any, b: any): boolean => compare(a, b) < 0;
  *
  * @return {number}
  */
-const binarySearch = (sortedArray: any[], seekElement: any): number => {
+export const binarySearch = (sortedArray: any[], seekElement: any): number => {
   // These two indices will contain current array (sub-array) boundaries.
   let startIndex = 0;
   let endIndex = sortedArray.length - 1;
@@ -40,5 +40,3 @@ const binarySearch = (sortedArray: any[], seekElement: any): number => {
   // Return -1 if we have not found anything.
   return -1;
 };
-
-export default binarySearch;

@@ -1,6 +1,6 @@
-import Img from 'gatsby-image';
-import React from 'react';
-import { StaticQuery, graphql } from 'gatsby';
+import Img from "gatsby-image";
+import React from "react";
+import { StaticQuery, graphql } from "gatsby";
 
 interface StaticQueryProps {
   data: {
@@ -57,7 +57,7 @@ const Image: React.FC<ImageProps> = ({
       }
     `}
     render={(data: StaticQueryProps) => {
-      const image = data.allImageSharp.edges.find(edge =>
+      const image = data.allImageSharp.edges.find((edge) =>
         edge.node.fluid.originalName.includes(filename)
       );
 

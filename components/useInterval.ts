@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from "react";
 
 /**
  * Setup safe setInterval effect.
@@ -9,7 +9,7 @@ import { useEffect, useRef } from 'react';
  *
  * @return {void}
  */
-const useInterval = (callback: T, delay: number): void => {
+export const useInterval = (callback: T, delay: number): void => {
   const savedCallback = useRef<T>();
 
   // Remember the latest function.
@@ -29,5 +29,3 @@ const useInterval = (callback: T, delay: number): void => {
     }
   }, [delay]);
 };
-
-export default useInterval;

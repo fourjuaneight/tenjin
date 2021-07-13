@@ -10,7 +10,7 @@ const lessThan = (a: any, b: any): boolean => compare(a, b) < 0;
  *
  * @return {number[]}
  */
-const quickSort = (originalArray: number[]): number[] => {
+export const quickSort = (originalArray: number[]): number[] => {
   // Clone original array to prevent it from modification.
   const array = [...originalArray];
 
@@ -47,5 +47,3 @@ const quickSort = (originalArray: number[]): number[] => {
   // Let's now join sorted left array with center array and with sorted right array.
   return leftArraySorted.concat(centerArray, rightArraySorted);
 };
-
-export default quickSort;

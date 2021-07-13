@@ -7,7 +7,7 @@
  * @param  {function}    callback get time for next frame
  * @return {void}
  */
-const animationInterval = (
+export const animationInterval = (
   ms: number,
   signal: AbortSignal,
   callback: (time?: number) => void
@@ -37,5 +37,3 @@ const animationInterval = (
 
   scheduleFrame(start);
 };
-
-export default animationInterval;

@@ -7,7 +7,7 @@
  *
  * @returns {object} sorted object
  */
-const sortObjectByKey = (obj: any, key: string): any => {
+export const sortObjectByKey = (obj: any, key: string): any => {
   const sorted = obj.sort((a, b) => {
     const x = a[key];
     const y = b[key];
@@ -16,5 +16,3 @@ const sortObjectByKey = (obj: any, key: string): any => {
 
   return sorted;
 };
-
-export default sortObjectByKey;

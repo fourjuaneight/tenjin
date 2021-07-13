@@ -6,7 +6,5 @@
  *
  * @returns {string} capitalized word
  */
-const toCapitalized = (str: string): string =>
+export const toCapitalized = (str: string): string =>
   `${str.charAt(0).toUpperCase()}${str.slice(1)}`;
-
-export default toCapitalized;

@@ -10,7 +10,7 @@ const equal = (a: any, b: any): boolean => compare(a, b) === 0;
  *
  * @return {number[]}
  */
-const linearSearch = (array: any[], seekElement: object): number[] => {
+export const linearSearch = (array: any[], seekElement: object): number[] => {
   const foundIndices: any[] = [];
 
   array.forEach((element, index) => {
@@ -21,5 +21,3 @@ const linearSearch = (array: any[], seekElement: object): number[] => {
 
   return foundIndices;
 };
-
-export default linearSearch;

@@ -11,7 +11,7 @@ import transform from 'lodash/transform';
  *
  * @return {any} data object representing diff
  */
-const objectDiff = (data: any, base: any): any =>
+export const objectDiff = (data: any, base: any): any =>
   transform(data, (result, value, key) => {
     if (!isEqual(value, base[key])) {
       // eslint-disable-next-line no-param-reassign
@@ -21,5 +21,3 @@ const objectDiff = (data: any, base: any): any =>
           : value;
     }
   });
-
-export default objectDiff;

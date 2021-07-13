@@ -1,4 +1,4 @@
-import { KeyboardEvent, useState, useEffect } from 'react';
+import { KeyboardEvent, useState, useEffect } from "react";
 
 /**
  * Determines if given key has been pressed.
@@ -9,7 +9,7 @@ import { KeyboardEvent, useState, useEffect } from 'react';
  *
  * @return {boolean}           has given key been pressed
  */
-const useKeyPress = (targetKey: string): boolean => {
+export const useKeyPress = (targetKey: string): boolean => {
   // State for keeping track of whether key is pressed
   const [keyPressed, setKeyPressed] = useState<boolean>(false);
 
@@ -29,16 +29,14 @@ const useKeyPress = (targetKey: string): boolean => {
 
   // Add event listeners
   useEffect(() => {
-    window.addEventListener('keydown', downHandler);
-    window.addEventListener('keyup', upHandler);
+    window.addEventListener("keydown", downHandler);
+    window.addEventListener("keyup", upHandler);
     // Remove event listeners on cleanup
     return () => {
-      window.removeEventListener('keydown', downHandler);
-      window.removeEventListener('keyup', upHandler);
+      window.removeEventListener("keydown", downHandler);
+      window.removeEventListener("keyup", upHandler);
     };
   }, []); // Empty array ensures that effect is only run on mount and unmount
 
   return keyPressed;
 };
-
-export default useKeyPress;

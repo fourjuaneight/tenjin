@@ -1,12 +1,12 @@
-import { resolve } from 'path';
-import glob from 'glob';
-import replace from 'replace-in-file';
+import { resolve } from "path";
+import glob from "glob";
+import replace from "replace-in-file";
 
-import { siteUrl, title } from './siteConfig';
+import { siteUrl, title } from "./siteConfig";
 
 // Glob options. Pass directory to search and files to ignore
-const cwd = resolve(__dirname, 'public');
-const ignore: string[] = ['sw.js'];
+const cwd = resolve(__dirname, "public");
+const ignore: string[] = ["sw.js"];
 
 /**
  * Generate alphanumeric hash.
@@ -17,9 +17,9 @@ const ignore: string[] = ['sw.js'];
  * @return {string} alphanumeric hash
  */
 const makeHash = (length: number): string => {
-  let result: string = '';
+  let result: string = "";
   const characters: string =
-    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
   const charactersLength: number = characters.length;
 
   for (let i = 0; i < length; i += 1) {
@@ -36,11 +36,11 @@ const makeHash = (length: number): string => {
  * @return {string} assets path list
  */
 const getFiles = (): string => {
-  const files: string[] = glob.sync('**/*.{js,css,woff,woff2}', {
+  const files: string[] = glob.sync("**/*.{js,css,woff,woff2}", {
     cwd,
     ignore,
   });
-  const filesList: string = files.map(toCache => `'/${toCache}'`).toString();
+  const filesList: string = files.map((toCache) => `'/${toCache}'`).toString();
 
   return filesList;
 };
@@ -61,7 +61,7 @@ const toCamelCase = (str: string): string =>
 (async () => {
   // find and replace options; add hash ID, files to cache array, and site base URL
   const replaceOptions = {
-    files: resolve(cwd, 'sw.js'),
+    files: resolve(cwd, "sw.js"),
     from: [
       /(const)\s(staticAssets)\s=\s?\[\];/g,
       /const\sversion\s=\s'';/g,
@@ -80,8 +80,8 @@ const toCamelCase = (str: string): string =>
   try {
     await replace(replaceOptions);
     // eslint-disable-next-line no-console
-    console.info('SW updated.');
+    console.info("SW updated.");
   } catch (error) {
-    throw new Error('Error occurred:', error);
+    throw new Error("Error occurred:", error);
   }
 })();

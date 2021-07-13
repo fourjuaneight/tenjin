@@ -11,7 +11,7 @@ const lessThanOrEqual = (a: any, b: any): boolean =>
  *
  * @return {number[]}
  */
-const mergeSortedArrays = (
+export const mergeSortedArrays = (
   leftArray: number[],
   rightArray: number[]
 ): number[] => {
@@ -53,7 +53,7 @@ const mergeSortedArrays = (
  *
  * @return {number[]}
  */
-const mergeSort = (originalArray: number[]): number[] => {
+export const mergeSort = (originalArray: number[]): number[] => {
   // If array is empty or consists of one element then return this array since it is sorted.
   if (originalArray.length <= 1) {
     return originalArray;
@@ -71,5 +71,3 @@ const mergeSort = (originalArray: number[]): number[] => {
   // Merge two sorted arrays into one.
   return mergeSortedArrays(leftSortedArray, rightSortedArray);
 };
-
-export default mergeSort;

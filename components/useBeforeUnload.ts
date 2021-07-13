@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
 /**
  * Intercept browser unload.
@@ -8,10 +8,12 @@ import { useEffect } from 'react';
  *
  * @return {void}
  */
-const useBeforeUnload = (value: ((evt: BeforeUnloadEvent) => any) | string) => {
+export const useBeforeUnload = (
+  value: ((evt: BeforeUnloadEvent) => any) | string
+) => {
   const handleBeforeunload = (evt: BeforeUnloadEvent) => {
     let returnValue;
-    if (typeof value === 'function') {
+    if (typeof value === "function") {
       returnValue = value(evt);
     } else {
       returnValue = value;
@@ -25,10 +27,8 @@ const useBeforeUnload = (value: ((evt: BeforeUnloadEvent) => any) | string) => {
   };
 
   useEffect(() => {
-    window.addEventListener('beforeunload', handleBeforeunload);
+    window.addEventListener("beforeunload", handleBeforeunload);
 
-    return () => window.removeEventListener('beforeunload', handleBeforeunload);
+    return () => window.removeEventListener("beforeunload", handleBeforeunload);
   }, []);
 };
-
-export default useBeforeUnload;

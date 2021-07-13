@@ -6,7 +6,7 @@
  *
  * @returns {string} filename
  */
-const stringToFilename = (str: string): string =>
+export const stringToFilename = (str: string): string =>
   str
     .replace(/\.\s/g, "-")
     .replace(/,\s/g, "-")
@@ -23,5 +23,3 @@ const stringToFilename = (str: string): string =>
     .replace(/\s/g, "_")
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "");
-
-export default stringToFilename;

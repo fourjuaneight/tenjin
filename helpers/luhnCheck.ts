@@ -5,7 +5,7 @@
  * @param {number | string} num
  * @returns {boolean} true if sum is divisible by 10, false otherwise
  */
-const luhnCheck = (num: number | string): boolean => {
+export const luhnCheck = (num: number | string): boolean => {
   // obtain array of digits
   let arr = (num + "")
     .split("")
@@ -23,5 +23,3 @@ const luhnCheck = (num: number | string): boolean => {
 
   return sum % 10 === 0;
 };
-
-export luhnCheck;

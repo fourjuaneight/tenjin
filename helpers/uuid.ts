@@ -10,7 +10,7 @@ const hex: string[] = [...Array(256).keys()].map((index: number) =>
  *
  * @return {string} natively randomized uuid string
  */
-const uuid = (): string => {
+export const uuid = (): string => {
   // randomized 16 byte buffer
   const rand: Uint8Array = crypto.getRandomValues(new Uint8Array(16));
 
@@ -27,5 +27,3 @@ const uuid = (): string => {
 
   return randString.join('');
 };
-
-export default uuid;

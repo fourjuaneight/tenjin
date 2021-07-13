@@ -1,6 +1,6 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef } from "react";
 
-import animationInterval from '../helpers/animationInterval';
+import animationInterval from "../helpers/animationInterval";
 
 /**
  * Corss-browser, time perfect, animation interval.
@@ -10,7 +10,7 @@ import animationInterval from '../helpers/animationInterval';
  * @param   {function} callback get time for next frame
  * @returns {void}
  */
-const useAnimationFrame = (
+export const useAnimationFrame = (
   ms: number,
   callback: (time?: number) => void
 ): void => {
@@ -28,5 +28,3 @@ const useAnimationFrame = (
     return () => controller.abort();
   }, [ms]);
 };
-
-export default useAnimationFrame;

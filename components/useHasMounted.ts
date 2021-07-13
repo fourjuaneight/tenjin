@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
 // To avoid issues, we need to ensure that the rehydrated app matches the original HTML. We initialize a piece of state, hasMounted, to false. While it's false, we don't bother rendering the "real" content. Inside the useEffect call, we immediately trigger a re-render, setting hasMounted to true. When this value is true, the "real" content gets rendered.
 
@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
  *
  * @return {boolean} determine if component has mounted
  */
-const useHasMounted = (): boolean => {
+export const useHasMounted = (): boolean => {
   const [hasMounted, setHasMounted] = useState<boolean>(false);
 
   useEffect(() => {
@@ -17,5 +17,3 @@ const useHasMounted = (): boolean => {
 
   return hasMounted;
 };
-
-export default useHasMounted;
