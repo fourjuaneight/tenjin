@@ -1,3 +1,5 @@
+import { range } from "./emojiUnicode";
+
 /**
  * Convert string into a filename.
  * @function
@@ -8,6 +10,8 @@
  */
 export const stringToFilename = (str: string): string =>
   str
+    .replace(range, "")
+    .replace(/^\s/g, "")
     .replace(/\.\s/g, "-")
     .replace(/,\s/g, "-")
     .replace(/\s::\s/g, "-")
