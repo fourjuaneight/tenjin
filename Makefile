@@ -4,7 +4,7 @@ VERSION := 0.1.5
 
 run: tenjin.go go.mod
 	chmod +x tenjin.go
-	cd "$GOPATH" && go get github.com/erning/gorun
+	cd "${GOPATH}" && go install github.com/erning/gorun
 
 # https://golang.org/cmd/link/
 build: tenjin.go go.mod
