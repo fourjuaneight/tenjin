@@ -1,0 +1,15 @@
+{
+  "name": "Big Pixel Codespace",
+  "dockerFile": "Dockerfile",
+  "appPort": 1313,
+  "extensions": [
+    "budparr.language-hugo-vscode",
+    "fivethree.vscode-hugo-snippets"
+  ],
+  "settings": {
+    "workbench.colorCustomizations": {
+      "statusBar.background": "#ff4088",
+      "statusBar.foreground": "#ffffff"
+    }
+  }
+}

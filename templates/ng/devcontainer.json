@@ -1,0 +1,18 @@
+{
+  "name": "Big Pixel Codespace",
+  "dockerFile": "Dockerfile",
+  "appPort": 3000,
+  "extensions": [
+    "angular.ng-template",
+    "fivethree.vscode-ionic-snippets",
+    "johnpapa.angular2"
+  ],
+  "settings": {
+    "angular.experimental-ivy": true,
+    "angular.trace.server": "messages",
+    "workbench.colorCustomizations": {
+      "statusBar.background": "#e23238",
+      "statusBar.foreground": "#263340"
+    }
+  }
+}

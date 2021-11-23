@@ -1,0 +1,11 @@
+{
+  "name": "Big Pixel Codespace",
+  "dockerFile": "Dockerfile",
+  "appPort": 3000,
+  "settings": {
+    "workbench.colorCustomizations": {
+      "statusBar.background": "#D73E4B",
+      "statusBar.foreground": "#263340"
+    }
+  }
+}

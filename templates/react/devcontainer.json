@@ -1,0 +1,15 @@
+{
+  "name": "Big Pixel Codespace",
+  "dockerFile": "Dockerfile",
+  "appPort": 3000,
+  "extensions": [
+    "jpoissonnier.vscode-styled-components",
+    "skyran.js-jsx-snippets"
+  ],
+  "settings": {
+    "workbench.colorCustomizations": {
+      "statusBar.background": "#7ED0EF",
+      "statusBar.foreground": "#0B0D0F"
+    }
+  }
+}
