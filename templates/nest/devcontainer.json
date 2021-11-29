@@ -1,8 +1,10 @@
 {
   "name": "Big Pixel Codespace",
   "dockerFile": "Dockerfile",
+  "containerUser": "node",
   "appPort": 3000,
   "settings": {
+    "terminal.integrated.automationShell.linux" : "/usr/bin/zsh",
     "workbench.colorCustomizations": {
       "statusBar.background": "#D73E4B",
       "statusBar.foreground": "#263340"

@@ -1,6 +1,7 @@
 {
   "name": "Big Pixel Codespace",
   "dockerFile": "Dockerfile",
+  "containerUser": "node",
   "appPort": 8080,
   "extensions": [
     "denoland.vscode-deno",
@@ -9,13 +10,14 @@
   "settings": {
     "deno.enable": true,
     "deno.lint": true,
+    "deno.suggest.imports.hosts": {
+      "https://cdn.skypack.dev": false
+    },
     "deno.unstable": true,
+    "terminal.integrated.automationShell.linux" : "/usr/bin/zsh",
     "workbench.colorCustomizations": {
       "statusBar.background": "#161e2e",
       "statusBar.foreground": "#ffffff"
-    },
-    "deno.suggest.imports.hosts": {
-      "https://cdn.skypack.dev": false
     }
   }
 }

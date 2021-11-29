@@ -1,6 +1,7 @@
 {
   "name": "Big Pixel Codespace",
   "dockerFile": "Dockerfile",
+  "containerUser": "node",
   "appPort": 3000,
   "extensions": [
     "angular.ng-template",
@@ -10,6 +11,7 @@
   "settings": {
     "angular.experimental-ivy": true,
     "angular.trace.server": "messages",
+    "terminal.integrated.automationShell.linux" : "/usr/bin/zsh",
     "workbench.colorCustomizations": {
       "statusBar.background": "#e23238",
       "statusBar.foreground": "#263340"
