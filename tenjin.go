@@ -123,7 +123,7 @@ func highlightFile(path string, contents []byte) {
 
 func main() {
 	repo := "/tenjin/"
-	directories := []string{"components", "configs", "templates/nest", "templates/ng", "templates/react", "helpers", "snippets"}
+	directories := []string{"components", "configs", "templates/deno", "templates/hugo", "templates/nest", "templates/node", "templates/ng", "templates/react", "helpers", "snippets"}
 
 	// get home directory
 	home, err := os.UserHomeDir()
