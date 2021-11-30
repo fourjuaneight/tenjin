@@ -1,0 +1,19 @@
+{
+  "name": "Go Codespace",
+  "dockerFile": "Dockerfile",
+  "containerUser": "node",
+  "remoteUser": "node",
+  "extensions": [
+    "golang.go"
+  ],
+  "settings": {
+    "go.useCodeSnippetsOnFunctionSuggest": true,
+    "go.useLanguageServer": true,
+    "terminal.integrated.automationShell.linux" : "/usr/bin/zsh",
+    "terminal.integrated.defaultProfile.linux": "zsh",
+    "workbench.colorCustomizations": {
+      "statusBar.background": "#87C2D4",
+      "statusBar.foreground": "#0B0D0F"
+    }
+  }
+}
