@@ -1,12 +1,14 @@
 {
-  "name": "Big Pixel Codespace",
+  "name": "Deno Codespace",
   "dockerFile": "Dockerfile",
   "containerUser": "node",
+  "remoteUser": "node",
   "appPort": 8080,
   "extensions": [
     "denoland.vscode-deno",
     "laurencebahiirwa.deno-std-lib-snippets"
   ],
+  "postCreateCommand": "npm install",
   "settings": {
     "deno.enable": true,
     "deno.lint": true,

@@ -1,13 +1,15 @@
 {
-  "name": "Big Pixel Codespace",
+  "name": "Angular Codespace",
   "dockerFile": "Dockerfile",
   "containerUser": "node",
+  "remoteUser": "node",
   "appPort": 3000,
   "extensions": [
     "angular.ng-template",
     "fivethree.vscode-ionic-snippets",
     "johnpapa.angular2"
   ],
+  "postCreateCommand": "npm install",
   "settings": {
     "angular.experimental-ivy": true,
     "angular.trace.server": "messages",

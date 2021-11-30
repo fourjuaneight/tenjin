@@ -1,8 +1,10 @@
 {
-  "name": "Big Pixel Codespace",
+  "name": "Node Codespace",
   "dockerFile": "Dockerfile",
   "containerUser": "node",
+  "remoteUser": "node",
   "extensions": [],
+  "postCreateCommand": "npm install",
   "settings": {
     "terminal.integrated.automationShell.linux" : "/usr/bin/zsh",
     "workbench.colorCustomizations": {
