@@ -11,6 +11,7 @@
   "postCreateCommand": "npm install",
   "settings": {
     "terminal.integrated.automationShell.linux" : "/usr/bin/zsh",
+    "terminal.integrated.defaultProfile.linux": "zsh",
     "workbench.colorCustomizations": {
       "statusBar.background": "#ff4088",
       "statusBar.foreground": "#ffffff"

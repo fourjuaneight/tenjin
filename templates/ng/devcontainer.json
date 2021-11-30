@@ -14,6 +14,7 @@
     "angular.experimental-ivy": true,
     "angular.trace.server": "messages",
     "terminal.integrated.automationShell.linux" : "/usr/bin/zsh",
+    "terminal.integrated.defaultProfile.linux": "zsh",
     "workbench.colorCustomizations": {
       "statusBar.background": "#e23238",
       "statusBar.foreground": "#263340"

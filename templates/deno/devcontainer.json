@@ -8,7 +8,6 @@
     "denoland.vscode-deno",
     "laurencebahiirwa.deno-std-lib-snippets"
   ],
-  "postCreateCommand": "npm install",
   "settings": {
     "deno.enable": true,
     "deno.lint": true,
@@ -17,6 +16,7 @@
     },
     "deno.unstable": true,
     "terminal.integrated.automationShell.linux" : "/usr/bin/zsh",
+    "terminal.integrated.defaultProfile.linux": "zsh",
     "workbench.colorCustomizations": {
       "statusBar.background": "#161e2e",
       "statusBar.foreground": "#ffffff"
