@@ -27,7 +27,7 @@ clip.addEventListener('click', () => {
     }, 3000);
   } catch (_unused) {
     // notified copying failed
-    clip.innerHTML = 'Can't copy, hit Ctrl+C!';
+    clip.innerHTML = "Can't copy, hit Ctrl+C!";
     // and remove message after 3 seconds
     setTimeout(() => {
       clip.innerHTML = original;
