@@ -1,5 +1,5 @@
 /**
- * Safe number trimming. toFixed alternative, which will round up or down for you depending on the values beyond 2 decimals.
+ * Safe number rounding. toFixed alternative, which will round up or down for you depending on the values beyond 2 decimals.
  * @function
  *
  * @param   {number} num number to trim
@@ -26,7 +26,7 @@ export const roundTo = (num: number, dig: number): number => {
   number = (Math.round(number) / multiplicator).toFixed(digits);
 
   if (negative) {
-    number = (number * -1).toFixed(digits);
+    number = ((number as unknown as number) * -1).toFixed(digits);
   }
 
   return parseFloat(number);
