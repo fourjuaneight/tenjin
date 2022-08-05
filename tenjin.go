@@ -16,7 +16,7 @@ import (
 	"github.com/zyedidia/highlight"
 )
 
-var BuildVersion string = "0.1.5"
+var BuildVersion string = "0.1.6"
 
 func copyFile(contents []byte) {
 	// convert file's []byte to string
