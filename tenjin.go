@@ -38,7 +38,7 @@ func moveFile(name string, contents []byte) {
 	}
 }
 
-func highlightFile(path string, contents []byte) {
+func highlightFile(name string, path string, contents []byte) {
 	// get home directory
 	home, err := os.UserHomeDir()
 	if err != nil {
@@ -46,11 +46,12 @@ func highlightFile(path string, contents []byte) {
 	}
 
 	// get file type
-	pattern := regexp.MustCompile(`.*\.([a-z]+)$`)
-	ext := pattern.ReplaceAllString(path, `$1`)
+	pattern := regexp.MustCompile(`.*\.([a-z]{1,3})$`)
+	ext := pattern.ReplaceAllString(name, `$1`)
 
 	// match language
 	langTypes := map[string]string{
+		"conf": "conf",
 		"css":  "css",
 		"html": "html",
 		"js":   "javascript",
@@ -61,9 +62,13 @@ func highlightFile(path string, contents []byte) {
 		"tsx":  "typescript",
 		"yaml": "yaml",
 	}
+	lang := langTypes["conf"]
+	if ext != name {
+		lang = langTypes[ext]
+	}
 
 	// load the go syntax file
-	syntaxFile, _ := ioutil.ReadFile(home + "/tenjin/syntax/" + langTypes[ext] + ".yaml")
+	syntaxFile, _ := ioutil.ReadFile(home + "/tenjin/syntax/" + lang + ".yaml")
 
 	// parse it into a `*highlight.Def`
 	syntaxDef, err := highlight.ParseDef(syntaxFile)
@@ -199,7 +204,7 @@ func main() {
 		copyFile(fileContent)
 		color.Cyan("Copied to clipboard!")
 	case "Preview":
-		highlightFile(filePath, fileContent)
+		highlightFile(file, filePath, fileContent)
 	default:
 		color.Red("No selection made.")
 	}
