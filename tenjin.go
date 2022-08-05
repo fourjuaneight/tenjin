@@ -155,9 +155,18 @@ func main() {
 	}
 
 	// create file selector
+	searcher := func(input string, index int) bool {
+		file := fileNames[index]
+		name := strings.Replace(strings.ToLower(file), " ", "", -1)
+		input = strings.Replace(strings.ToLower(input), " ", "", -1)
+
+		return strings.Contains(name, input)
+	}
+
 	promptFile := promptui.Select{
-		Label: "Select a file",
-		Items: fileNames,
+		Label:    "Select a file",
+		Items:    fileNames,
+		Searcher: searcher,
 	}
 	_, file, err := promptFile.Run()
 	if err != nil {
