@@ -1,4 +1,4 @@
-FROM node:16.13.2-alpine as builder
+FROM node:16.15.1-alpine as builder
 
 # Get the necessary build tools
 RUN apk upgrade -U -a \
@@ -18,5 +18,5 @@ COPY package*.json /app/
 RUN npm install
 
 # Get a clean image with cli tools and the pre-built node modules
-FROM node:16.13.2-alpine
+FROM node:16.15.1-alpine
 COPY --from=builder /app/node_modules /app/node_modules
