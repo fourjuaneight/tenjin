@@ -8,7 +8,11 @@
  *
  * @return {any[]}   sorted array
  */
-export const sortArr = (list: any[], key: string, asc: boolean = true): any[] => {
+export const sortArr = <Type extends unkown>(
+  list: Type[],
+  key: string,
+  asc: boolean = true
+): Type[] => {
   const arrayCopy: any[] = [...list];
 
   arrayCopy.sort((a, b) => {

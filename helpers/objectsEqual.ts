@@ -6,7 +6,7 @@
  *
  * @returns {boolean} is param an object
  */
-export const isObject = (obj: any): boolean =>
+export const isObject = <Type extends unkown>(obj: Type): boolean =>
   obj != null && typeof obj === "object";
 
 /**
@@ -18,7 +18,7 @@ export const isObject = (obj: any): boolean =>
  *
  * @returns {boolean} are objects equal
  */
-export const shallowCheck = (obj1: any, obj2: any): boolean => {
+export const shallowCheck = <Obj1, Obj2>(obj1: Obj1, obj2: Obj2): boolean => {
   const keys1 = Object.keys(obj1);
   const keys2 = Object.keys(obj2);
 
@@ -44,7 +44,7 @@ export const shallowCheck = (obj1: any, obj2: any): boolean => {
  *
  * @returns {boolean} are objects equal
  */
-export const deepCheck = (obj1: any, obj2: any): boolean => {
+export const deepCheck = <Obj1, Obj2>(obj1: Obj1, obj2: Obj2): boolean => {
   const keys1 = Object.keys(obj1);
   const keys2 = Object.keys(obj2);
 

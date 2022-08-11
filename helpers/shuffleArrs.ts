@@ -6,7 +6,7 @@
  * @param {any[]} array
  * @returns {any[]} shuffled array
  */
-export const shuffleArrs = ([...arr]: any[]) => {
+export const shuffleArrs = <Type extends unkown>([...arr]: Type[]) => {
   let match = arr.length;
 
   while (match) {
