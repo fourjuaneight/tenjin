@@ -12,10 +12,11 @@ import (
 	"github.com/atotto/clipboard"
 	"github.com/fatih/color"
 	"github.com/manifoldco/promptui"
+	"github.com/urfave/cli/v2"
 	"github.com/zyedidia/highlight"
 )
 
-var BuildVersion string = "0.1.6"
+var BuildVersion string = "1.0.0"
 
 func copyFile(contents []byte) {
 	// convert file's []byte to string
@@ -125,16 +126,8 @@ func highlightFile(name string, path string, contents []byte) {
 	}
 }
 
-func main() {
-	repo := "/tenjin/"
-	directories := []string{"components", "configs", "templates/deno", "templates/go", "templates/hugo", "templates/nest", "templates/node", "templates/ng", "templates/react", "helpers", "snippets"}
-
-	// get home directory
-	home, err := os.UserHomeDir()
-	if err != nil {
-		log.Fatal(err)
-	}
-
+func prompt(directories []string, home string, repo string, selectedAction string) {
+	action := selectedAction
 	// create directory selector
 	promptDir := promptui.Select{
 		Label: "Select a directory",
@@ -184,14 +177,18 @@ func main() {
 		log.Fatal(err)
 	}
 
-	// create action selector
-	promptAction := promptui.Select{
-		Label: "Select a action",
-		Items: []string{"Save", "Copy", "Preview"},
-	}
-	_, action, err := promptAction.Run()
-	if err != nil {
-		log.Fatal(err)
+	// create action selector if no action was passed
+	if selectedAction == "" {
+		promptAction := promptui.Select{
+			Label: "Select a action",
+			Items: []string{"Save", "Copy", "Preview"},
+		}
+		_, actionSelector, err := promptAction.Run()
+		if err != nil {
+			log.Fatal(err)
+		} else {
+			action = actionSelector
+		}
 	}
 
 	// execute actions
@@ -206,5 +203,66 @@ func main() {
 		highlightFile(file, filePath, fileContent)
 	default:
 		color.Red("No selection made.")
+	}
+}
+
+func main() {
+	var action string
+	repo := "/tenjin/"
+	directories := []string{"components", "configs", "templates/deno", "templates/go", "templates/hugo", "templates/nest", "templates/node", "templates/ng", "templates/react", "helpers", "snippets"}
+
+	// get home directory
+	home, err := os.UserHomeDir()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// versioning
+	cli.VersionFlag = &cli.BoolFlag{
+		Name:    "version",
+		Aliases: []string{"v"},
+		Usage:   "print app version",
+	}
+
+	// help
+	cli.AppHelpTemplate = `NAME:
+	{{.Name}} - {{.Usage}}
+
+VERSION:
+	{{.Version}}
+
+USAGE:
+	{{.HelpName}} [optional options]
+
+OPTIONS:
+{{range .VisibleFlags}}	{{.}}{{ "\n" }}{{end}}	
+`
+	cli.HelpFlag = &cli.BoolFlag{
+		Name:    "help",
+		Aliases: []string{"h"},
+		Usage:   "show help",
+	}
+
+	// execute app
+	app := &cli.App{
+		Name:    "tenjin",
+		Usage:   "Simple code snippet manager",
+		Version: BuildVersion,
+		Flags: []cli.Flag{
+			&cli.StringFlag{
+				Name:        "action",
+				Aliases:     []string{"a"},
+				Usage:       "file handling action",
+				Destination: &action,
+			},
+		},
+		Action: func(*cli.Context) error {
+			prompt(directories, home, repo, action)
+			return nil
+		},
+	}
+
+	if err := app.Run(os.Args); err != nil {
+		log.Fatal(err)
 	}
 }
