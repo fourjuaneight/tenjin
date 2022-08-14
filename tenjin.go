@@ -4,7 +4,6 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
 	"log"
 	"os"
 	"regexp"
@@ -32,7 +31,7 @@ func moveFile(name string, contents []byte) {
 		log.Println(err)
 	}
 	// save file to cwd
-	error := ioutil.WriteFile(path+"/"+name, contents, 0755)
+	error := os.WriteFile(path+"/"+name, contents, 0755)
 	if error != nil {
 		log.Fatal(error)
 	}
@@ -68,7 +67,7 @@ func highlightFile(name string, path string, contents []byte) {
 	}
 
 	// load the go syntax file
-	syntaxFile, _ := ioutil.ReadFile(home + "/tenjin/syntax/" + lang + ".yaml")
+	syntaxFile, _ := os.ReadFile(home + "/tenjin/syntax/" + lang + ".yaml")
 
 	// parse it into a `*highlight.Def`
 	syntaxDef, err := highlight.ParseDef(syntaxFile)
@@ -148,7 +147,7 @@ func main() {
 
 	// read files from selected directory
 	dirPath := home + repo + directory
-	files, err := ioutil.ReadDir(dirPath)
+	files, err := os.ReadDir(dirPath)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -180,7 +179,7 @@ func main() {
 
 	// get file contents
 	filePath := dirPath + "/" + file
-	fileContent, err := ioutil.ReadFile(filePath)
+	fileContent, err := os.ReadFile(filePath)
 	if err != nil {
 		log.Fatal(err)
 	}
