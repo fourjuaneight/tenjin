@@ -2,7 +2,7 @@
 
 A simple utility that uses [promptui](https://github.com/manifoldco/promptui) and [clipboard](https://github.com/atotto/clipboard) to copy templates, snippets, and config files for commonly used Angular and React configurations, onto the current directory.
 
-This is mostly for personal use, but PRs are welcomed. This is my one and only Go script, so please be gentle.
+You can run `tenjin -h` for more info on how to use the app.
 
 ## Usage
 There are 3 ways to run the script:
