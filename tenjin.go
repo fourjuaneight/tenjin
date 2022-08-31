@@ -193,13 +193,13 @@ func prompt(directories []string, home string, repo string, selectedAction strin
 
 	// execute actions
 	switch action {
-	case "Save":
+	case "save":
 		moveFile(file, fileContent)
 		color.Cyan("Saved to current directory!")
-	case "Copy":
+	case "copy":
 		copyFile(fileContent)
 		color.Cyan("Copied to clipboard!")
-	case "Preview":
+	case "preview":
 		highlightFile(file, filePath, fileContent)
 	default:
 		color.Red("No selection made.")
