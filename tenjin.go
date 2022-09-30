@@ -209,7 +209,7 @@ func prompt(directories []string, home string, repo string, selectedAction strin
 func main() {
 	var action string
 	repo := "/tenjin/"
-	directories := []string{"components", "configs", "templates/deno", "templates/go", "templates/hugo", "templates/nest", "templates/node", "templates/ng", "templates/react", "helpers", "snippets"}
+	directories := []string{"actions", "components", "configs", "templates/deno", "templates/go", "templates/hugo", "templates/nest", "templates/node", "templates/ng", "templates/react", "helpers", "snippets"}
 
 	// get home directory
 	home, err := os.UserHomeDir()
