@@ -161,9 +161,10 @@ func prompt(directories []string, home string, repo string, selectedAction strin
 	}
 
 	promptFile := promptui.Select{
-		Label:    "Select a file",
-		Items:    fileNames,
-		Searcher: searcher,
+		Label:             "Select a file",
+		Items:             fileNames,
+		Searcher:          searcher,
+		StartInSearchMode: true,
 	}
 	_, file, err := promptFile.Run()
 	if err != nil {
