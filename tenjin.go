@@ -127,7 +127,7 @@ func highlightFile(name string, path string, contents []byte) {
 }
 
 func prompt(directories []string, home string, repo string, selectedAction string) {
-	action := selectedAction
+	action := strings.ToLower(selectedAction)
 	// create directory selector
 	promptDir := promptui.Select{
 		Label: "Select a directory",
@@ -188,7 +188,7 @@ func prompt(directories []string, home string, repo string, selectedAction strin
 		if err != nil {
 			log.Fatal(err)
 		} else {
-			action = actionSelector
+			action = strings.ToLower(actionSelector)
 		}
 	}
 
