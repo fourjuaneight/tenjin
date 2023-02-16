@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="{{ meta.lang }}">
+{% include "head.njk" %}
+<body>
+    {% include "header.njk" %}
+
+    <main>
+        {{ content | safe }}
+    </main>
+
+    {% include "footer.njk" %}
+
+    <script type="text/javascript" src="{{ '/assets/scripts/main.js' | url }}"></script>
+    <!--! LAST BUILD: {{ build.env}} {{ build.timestamp | dateToISO }} -->
+</body>
+</html>
