@@ -1,86 +1,86 @@
+interface FetchEvent extends Event {
+  request: Request;
+  respondWith(response: Promise<Response> | Response): Promise<Response>;
+}
+
 (() => {
-  const version = '';
-  const cacheName = '';
-  const staticCacheName = `${version}:${cacheName}:static`;
-  const pagesCacheName = `${cacheName}:pages`;
-  const imagesCacheName = `${cacheName}:images`;
-  const staticAssets = [];
+  const version: string = '';
+  const cacheName: string = ':';
+  const staticCacheName: string = `${version}:${cacheName}static`;
+  const pagesCacheName: string = `${cacheName}pages`;
+  const imagesCacheName: string = `${cacheName}images`;
+  const staticAssets: string[] = [];
 
   const updateStaticCache = () =>
     // These items must be cached for the Service Worker to complete installation
     caches
       .open(staticCacheName)
-      .then(cache =>
+      .then((cache) =>
         cache.addAll(
-          staticAssets.map(url => new Request(url, { credentials: 'include' }))
-        )
+          staticAssets.map(
+            (url) => new Request(url, { credentials: 'include' }),
+          ),
+        ),
       );
-
-  const stashInCache = (name, request, response) => {
-    caches.open(name).then(cache => cache.put(request, response));
+  const stashInCache = (
+    name: string,
+    request: RequestInfo,
+    response: Response,
+  ) => {
+    caches.open(name).then((cache) => cache.put(request, response));
   };
-
   // Limit the number of items in a specified cache.
-  const trimCache = (name, maxItems) => {
-    caches.open(name).then(cache => {
-      cache.keys().then(keys => {
+  const trimCache = (name: string, maxItems: number) => {
+    caches.open(name).then((cache) => {
+      cache.keys().then((keys) => {
         if (keys.length > maxItems) {
           cache.delete(keys[0]).then(trimCache(cacheName, maxItems));
         }
       });
     });
   };
-
   // Remove caches whose name is no longer valid
   const clearOldCaches = () =>
     caches
       .keys()
-      .then(keys =>
+      .then((keys) =>
         Promise.all(
           keys
-            .filter(key => key.indexOf(version) !== 0)
-            .map(key => caches.delete(key))
-        )
+            .filter((key) => key.indexOf(version) !== 0)
+            .map((key) => caches.delete(key)),
+        ),
       );
 
   // Events!
-  /* eslint-disable no-restricted-globals */
-  self.addEventListener('message', event => {
+  self.addEventListener('message', (event) => {
     if (event.data.command === 'trimCaches') {
       trimCache(pagesCacheName, 35);
       trimCache(imagesCacheName, 20);
     }
   });
-
-  self.addEventListener('install', event => {
+  self.addEventListener('install', (event) => {
     event.waitUntil(updateStaticCache().then(() => self.skipWaiting()));
   });
-
-  self.addEventListener('activate', event => {
+  self.addEventListener('activate', (event) => {
     event.waitUntil(clearOldCaches().then(() => self.clients.claim()));
   });
-
-  self.addEventListener('fetch', event => {
-    /* eslint-enable */
+  self.addEventListener('fetch', (event: FetchEvent) => {
     const { request } = event;
     const url = new URL(request.url);
 
-    if (url.href.indexOf('baseURL') !== 0) {
+    if (url.href.indexOf('') !== 0) {
       return;
     }
-
     if (request.method !== 'GET') {
       return;
     }
-
     if (url.href.indexOf('?') !== -1) {
       return;
     }
-
     if (request.headers.get('Accept').includes('text/html')) {
       event.respondWith(
         fetch(request)
-          .then(response => {
+          .then((response) => {
             const copy = response.clone();
             if (
               staticAssets.includes(url.pathname) ||
@@ -90,37 +90,32 @@
             } else {
               stashInCache(pagesCacheName, request, copy);
             }
-
             return response;
           })
           .catch(() =>
             // CACHE or FALLBACK
             caches
               .match(request)
-              .then(response => response || caches.match('/offline/'))
-          )
+              .then((response) => response || caches.match('/offline/')),
+          ),
       );
-
       return;
     }
-
     event.respondWith(
       fetch(request)
-        .then(response => {
+        .then((response) => {
           if (request.headers.get('Accept').includes('image')) {
             const copy = response.clone();
-
             stashInCache(imagesCacheName, request, copy);
           }
-
           return response;
         })
         .catch(() =>
           caches
             .match(request)
-            .then(response => response)
-            .catch(console.error)
-        )
+            .then((response) => response)
+            .catch(console.error),
+        ),
     );
   });
 })();
