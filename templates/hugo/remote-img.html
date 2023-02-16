@@ -1,0 +1,40 @@
+{{/*  Render attributes  */}}
+{{ $isHidden := cond (ne .hidden nil) "true" "false" }}
+{{ $isSmall := cond (ne .small nil) "true" "false" }}
+{{ $maxWidth := cond (ne .small nil) "max-w-xxxxs" "max-w-xs" }}
+{{ $cacheKey := print .src (now.Format "2006-01-02") }}
+{{/*  Conditional attributes  */}}
+{{ $alt := cond (ne .alt nil) .alt "" }}
+{{ $iClasses := cond (ne .iClasses nil) .iClasses "" }}
+{{ $pClasses := cond (ne .pClasses nil) .pClasses "" }}
+{{ $size := cond (ne .size nil) .size "300" }}
+{{/*  Image  */}}
+{{ $source := newScratch }}
+{{ $source.Set "img" .src }}
+{{ with resources.GetRemote .src (dict "key" $cacheKey) }}
+  {{ with .Err }}
+    {{ warnf "%s" . }}
+    {{ $source.Set "img" .src }}
+  {{ else }}
+    {{ $source.Set "img" . }}
+  {{ end }}
+{{ end }}
+{{ $img := $source.Get "img" }}
+
+<picture
+  class="{{ with $pClasses }}{{ . }}{{ else }}img-wrap flex items-center justify-center my-4 w-full{{ end }}"
+  data-test="{{ $img }}"
+>
+  {{ $webpPrimary := $img.Resize (print $size "x webp drawing") }}
+  <source srcset="{{ $webpPrimary.Permalink }}" type="image/webp" />
+  {{ $imgResized := $img.Resize (print $size "x jpeg") }}
+  <img
+    src="{{ $imgResized.Permalink }}"
+    alt="{{ $alt }}"
+    class="{{ with $iClasses }}{{ . }}{{ else }}{{ $maxWidth }} w-full{{ end }}"
+    width="{{ $imgResized.Width }}"
+    data-small="{{ $isSmall }}"
+    aria-hidden="{{ $isHidden }}"
+    loading="lazy"
+  />
+</picture>

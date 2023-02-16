@@ -1,0 +1,25 @@
+{{ $shortName := .Site.Title | replaceRE "\\s?([a-zA-Z])\\w+" "$1" }}
+{{ $icons := slice "120" "152" "167" "180" "256" "512" }}
+{{ $limit := sub (len $icons) 1 }}
+
+{
+  "background_color": "{{ .Site.Params.meta.background }}",
+  "display": "standalone",
+  "name": "{{ .Site.Title }}",
+  "short_name": "{{ $shortName }}",
+  "start_url": "/",
+  "theme_color": "{{ .Site.Params.meta.theme }}",
+  "icons": [
+    {{ range $i, $size := $icons }}
+      {{ $dimensions := print $size "x" $size }}
+      {{ $icon := print "icons/icon-" $dimensions ".png" }}
+      {{ $comma := cond (ne $i $limit) "," "" }}
+
+      {
+        "src": "{{ $icon }}",
+        "sizes": "{{ $dimensions }}",
+        "type": "image/png"
+      }{{ $comma }}
+    {{ end }}
+  ]
+}

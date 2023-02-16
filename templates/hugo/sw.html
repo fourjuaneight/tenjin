@@ -1,0 +1,21 @@
+{{/*  Transpiled Service Worker  */}}
+{{ $opts := dict "minified" true "compact" true }}
+
+{{ $swTemp := resources.Get "scripts/sw.ts" | resources.ExecuteAsTemplate "swTemp.ts" . }}
+{{ $swTS := $swTemp | babel }}
+{{ $swJS := slice $swTS | resources.Concat "sw.js" }}
+{{ $sw := $swJS | resources.Minify }}
+
+<script>
+  if (navigator.serviceWorker) {
+    navigator.serviceWorker.register("{{ $sw.Permalink }}", { scope: "/" });
+    navigator.serviceWorker.ready.then(registration => {
+      console.log('SW Ready!');
+    });
+    window.addEventListener("load", () => {
+      if (navigator.serviceWorker.controller) {
+        navigator.serviceWorker.controller.postMessage({ command: "trimCaches" });
+      }
+    });
+  }
+</script>

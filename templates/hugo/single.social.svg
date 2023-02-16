@@ -1,0 +1,3 @@
+{{ $check := cond (eq .Params.og nil) .Title .Params.og }}
+{{ $title := $check }}
+{{ partial "social-image.html" (dict "title" $title) }}

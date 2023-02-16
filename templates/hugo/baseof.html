@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="{{ with .Site.LanguageCode }}{{ . }}{{ else }}en-US{{ end }}">
+  {{ partial "head.html" . }}
+
+  <body>
+    {{ partial "header.html" . }}
+
+    <main>
+      {{ block "main" . }}{{ end }}
+    </main>
+
+    {{ partial "footer.html" . }}
+
+    {{ if hugo.Environment | eq "production" }}
+      {{ partial "sw.html" . }}
+    {{ end }}
+
+    {{ block "styles" . }}{{ end }}
+    {{ block "scripts" . }}{{ end }}
+
+    {{/*  Transpiled scripts  */}}
+    {{ $opts := dict "minified" true "compact" true }}
+
+    {{- $scriptTS := resources.Get "scripts/script.ts" | babel -}}
+    {{ $script := slice $scriptTS | resources.Concat "script.js" }}
+
+    <script defer src="{{ $script.Permalink }}" ></script>
+  </body>
+</html>

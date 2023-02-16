@@ -1,0 +1,9 @@
+{{ $baseurl := urls.Parse .Page.Site.BaseURL }}
+{{ $desturl := urls.Parse .Destination }}
+<a
+  href="{{ .Destination | safeURL }}"
+  {{ with .Title}}title="{{ . }}"{{ end }}
+  {{ if and (strings.HasPrefix .Destination "http") (not (strings.HasPrefix $desturl.Host $baseurl.Host)) }}
+    target="_blank" rel="noopener noreferrer"
+  {{ end }}
+>{{ htmlUnescape .Text }}</a>

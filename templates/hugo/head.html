@@ -1,0 +1,136 @@
+{{ $title := cond (ne .Params.seo_title nil) .Params.seo_title .Title }}
+{{ $description := cond (eq .IsHome true) .Site.Params.meta.description .Params.description }}
+
+{{ $socialMain := resources.Get "img/social.jpeg" }}
+{{ $socialPage := print .Permalink "social.jpeg" }}
+{{ $socialHome := cond (eq .IsHome true) $socialMain.Permalink $socialPage }}
+{{ $socialImgPath := cond (eq .Kind "term") $socialMain.Permalink $socialHome }}
+
+<head>
+  <base href="{{ .Permalink }}" />
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  {{ hugo.Generator }}
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+  <meta
+    name="viewport"
+    content="width=device-width,minimum-scale=1.0,initial-scale=1.0,maximum-scale=5.0,viewport-fit=cover"
+  />
+  <title>
+    {{ if .IsHome }}
+      {{ .Site.Title }}
+    {{ else }}
+      {{ .Title }} | {{ .Site.Title }}
+    {{ end }}
+  </title>
+  <link rel="canonical" href="{{ .Permalink }}" />
+  {{ $about := resources.Get "img/about.png" }}
+  <meta name="description" content="{{ $description }}" />
+  <meta property="author" content="{{ .Site.Params.meta.author }}" />
+  <meta
+    property="og:description"
+    content="{{ $description }}"
+  />
+  <meta property="og:site_name" content="{{ .Site.Title }}" />
+  <meta property="og:title" content="{{ $title }}" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="{{ $socialImgPath }}" />
+  <meta property="og:image:secure_url" content="{{ $socialImgPath }}" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:url" content="{{ .Permalink }}" />
+  <meta property="twitter:site" content="{{ .Site.Params.meta.twitter }}" />
+  <meta name="twitter:image" content="{{ $socialImgPath }}" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta
+    name="twitter:description"
+    content="{{ $description }}"
+  />
+  <meta name="twitter:title" content="{{ $title }}" />
+  {{- if and (eq .Section "blog") (eq .Kind "page") -}}
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": "{{ .Permalink }}",
+        },
+        "headline": "{{ $title }}",
+        "image": "{{ $socialImgPath }}",
+        "author": {
+          "@type": "Person",
+          "name": "{{ .Site.Params.meta.author }}",
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "{{ .Site.Params.meta.author }}",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "{{ $about.Permalink }}",
+          },
+        },
+        "datePublished": "{{ .Date.Format "2006-01-02" }}",
+        "dateModified": "{{ .Date.Format "2006-01-02" }}",
+      }
+    </script>
+  {{ else }}
+    <script type="application/ld+json">
+      {
+        "@context": "http://schema.org",
+        "@type": "WebSite",
+        "name": "{{ $title }}",
+        "url": "{{ .Permalink }}"
+      }
+    </script>
+  {{ end }}
+  <meta name="image" content="{{ $about.Permalink }}" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <meta name="apple-mobile-web-app-title" content="{{ .Site.Title }}" />
+  {{ partial "icons.html" . }}
+  {{ $spt := resources.Get "icons/safari-pinned-tab.svg" }}
+  <link rel="mask-icon" color="{{ .Site.Params.meta.theme }}" href="{{ $spt.Permalink }}" />
+  <link
+    rel="alternate"
+    type="application/rss+xml"
+    title="{{ .Site.Title }}"
+    href="{{ .Site.BaseURL }}/blog/index.xml"
+  />
+  <link
+    rel="alternate"
+    type="application/feed+json"
+    title="{{ .Site.Title }}"
+    href="{{ .Site.BaseURL }}/blog/feed.json"
+  />
+  <link
+    rel="sitemap"
+    type="application/xml"
+    href="{{ .Site.BaseURL }}/sitemap.xml"
+  />
+  <link rel="manifest" href="{{ .Site.BaseURL }}/manifest.json" />
+  <meta name="theme-color" content="{{ .Site.Params.meta.background }}" />
+
+  {{ partial "fonts.html" . }}
+
+  {{ $reset := resources.Get "css/reset.css" | resources.PostCSS }}
+  {{ $fonts := resources.Get "css/fonts.css" | resources.ExecuteAsTemplate "fonts.css" . }}
+  {{ $critical := resources.Get "css/critical.css" | resources.PostCSS }}
+  {{ $aboveFold := slice $reset $fonts $critical | resources.Concat "css/atf.css" | resources.Minify }}
+  {{ $rawCSS := $aboveFold.Content | safeCSS }}
+  <style>{{ $rawCSS }}</style>
+
+  {{ partial "fonts-loading.html" . }}
+
+  {{ $tailwind := resources.Get "css/tw.css" }}
+  {{ $main := resources.Get "css/main.css" }}
+  {{ $styles := slice $tailwind $main | resources.Concat "styles.css" | resources.PostCSS | resources.Minify }}
+  <link rel="stylesheet" href="{{ $styles.Permalink }}" />
+  {{ if hugo.Environment | eq "production" }}
+    <script defer data-domain="{{ .Site.BaseURL }}" src="https://plausible.io/js/plausible.js"></script>
+  {{ end }}
+</head>

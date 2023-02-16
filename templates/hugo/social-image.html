@@ -1,0 +1,62 @@
+{{ $fontFamily := '' }}
+{{ $fontWeight := 500 }}
+{{ $height := 125 }}
+{{ $transList := slice "2" "1.80" "1.40" "1" }}
+{{ $titleSplit := split .title " " }}
+{{ $titleCount := sub (len $titleSplit) 1 }}
+{{ $transY := index $transList $titleCount }}
+
+<svg
+  width="100%"
+  height="100%"
+  viewBox="0 0 1200 630"
+  version="1.1"
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  xmlns:serif="http://www.serif.com/"
+  style="
+    fill-rule: evenodd;
+    clip-rule: evenodd;
+    stroke-linejoin: round;
+    stroke-miterlimit: 2;
+  "
+>
+  <style type="text/css">
+    @font-face {
+      font-family: '{{ $fontFamily }}';
+      font-weight: {{ $fontWeight }};
+      font-style: normal;
+      src: url('') format('woff');
+    }
+  </style>
+  <g id="background" transform="matrix(6.02725,0,0,3.59373,-1046.62,-454.473)">
+    <rect
+      x="173.647"
+      y="126.463"
+      width="199.095"
+      height="175.306"
+      style="fill: rgb(51, 51, 51)"
+    />
+  </g>
+  <g id="title" style="transform: translate(40px, calc({{ $height }}px * {{ $transY }}))">
+    {{ range $index, $word := $titleSplit }}
+    {{ $indexHeight := mul $height $index }}
+    {{ $offset := cond (eq $index 0) 0 $indexHeight }}
+    <text
+      id="main-{{ $index }}"
+      x="0px"
+      y="{{ $offset }}px"
+      font-family="{{ $fontFamily }}"
+      style="
+        font-family: '{{ $fontFamily }}';
+        font-weight: {{ $fontWeight }};
+        font-size: {{ $height }}px;
+        fill: white;
+        text-shadow: 0.15rem 0.15rem #859faa;
+      "
+    >
+      {{ $word }}
+    </text>
+    {{ end }}
+  </g>
+</svg>

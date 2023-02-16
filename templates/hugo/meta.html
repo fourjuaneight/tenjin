@@ -1,0 +1,23 @@
+<section class="flex items-center justify-between mb-3 w-full">
+  <time
+    class="text-meta whitespace-nowrap"
+    datetime='{{ .Date.Format "2006-01-02" }}'
+  >
+    {{ .Date.Format "2006-01-02" }}
+  </time>
+  <ul class="flex flex-wrap items-center justify-end list-none p-0">
+    {{/* Loop over tags list in front-matter */}}
+    {{ range $key, $tag := .Params.tags }}
+      <li class="m-0">
+        <a
+          class="tags focus:no-underline hover:no-underline no-underline text-meta visited:text-meta whitespace-nowrap"
+          href="/tags/{{ $tag }}"
+          itemprop="about"
+        >
+          <span class="mr-1 text-tertiary" aria-hidden="true">#</span>
+          {{ $tag }}
+        </a>
+      </li>
+    {{ end }}
+  </ul>
+</section>

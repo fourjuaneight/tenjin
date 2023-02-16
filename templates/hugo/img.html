@@ -1,0 +1,59 @@
+{{/*  Get image types  */}}
+{{ $svg := .src | findRE "svg" }}
+{{ $gif := .src | findRE "gif" }}
+{{ $type := .src | replaceRE "(.*).(png|jpg|jpeg|svg|gif)" "$2" }}
+{{ $imgMain := .src | replaceRE "(.*).(png|jpg|jpeg|svg|gif)" "$1" }}
+
+{{/*  Create filenames  */}}
+{{ $img := print $imgMain "." $type }}
+
+{{/*  Render attributes  */}}
+{{ $isHidden := cond (ne .hidden nil) "true" "false" }}
+{{ $isSmall := cond (ne .small nil) "true" "false" }}
+{{ $maxWidth := cond (ne .small nil) "max-w-xxxxs" "max-w-xs" }}
+
+{{/*  Render conditionally by file type  */}}
+{{ if or (eq (index $svg 0) "svg") (eq (index $gif 0) "gif") }}
+  {{ $simple := resources.Get (print "/img/" $img) }}
+  <img
+    src="{{ $simple.Permalink }}"
+    alt="{{ .alt }}"
+    class="{{ with .iClasses }}{{ . }}{{ else }}mb-2 w-full{{ end }}"
+    width="{{ .size }}"
+    aria-hidden="{{ $isHidden }}"
+    loading="lazy"
+    {{ if ne .tabindex nil }}tabindex="{{ .tabindex }}"{{ end }}
+    {{ with .active }}data-active="{{ . }}"{{ end }}
+  />
+{{ else }}
+  {{ if ne .caption nil }}
+  <figure
+    class="bg-background-dark flex flex-col h-full items-center justify-start mx-auto my-6 p-2 rounded w-auto"
+  >
+  {{ end }}
+  {{ $imgPrimary := resources.Get (print "/img/" $img) }}
+  <picture
+    class="{{ with .pClasses }}{{ . }}{{ else }}img-wrap flex items-center justify-center{{ if eq .caption nil }} my-4{{ end }} w-full{{ end }}"
+    {{ if ne .tabindex nil }}tabindex="{{ .tabindex }}"{{ end }}
+  >
+    {{ $webpPrimary := $imgPrimary.Resize (print .size "x webp drawing") }}
+    <source srcset="{{ $webpPrimary.Permalink }}" type="image/webp" />
+    {{ $imgResized := $imgPrimary.Resize (print .size "x png") }}
+    <img
+      src="{{ $imgResized.Permalink }}"
+      alt="{{ .alt }}"
+      class="{{ with .iClasses }}{{ . }}{{ else }}{{ $maxWidth }} w-full{{ end }}"
+      width="{{ $imgResized.Width }}"
+      data-small="{{ $isSmall }}"
+      aria-hidden="{{ $isHidden }}"
+      loading="lazy"
+      {{ with .active }}data-active="{{ . }}"{{ end }}
+    />
+  </picture>
+  {{ with .caption }}
+    <figcaption class="max-w-lg mb-0 mt-2 text-center text-meta text-xs">{{ . }}</figcaption>
+  {{ end }}
+  {{ if ne .caption nil }}
+  </figure>
+  {{ end }}
+{{ end }}
