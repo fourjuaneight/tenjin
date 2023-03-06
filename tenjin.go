@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"path/filepath"
 	"regexp"
 	"strings"
 
@@ -17,6 +18,27 @@ import (
 )
 
 var BuildVersion string = "1.0.0"
+
+func getDirectories(home string) []string {
+	var directories []string
+	err := filepath.Walk(home, func(path string, info os.FileInfo, err error) error {
+		if err == nil && info.IsDir() {
+			// remove home directory from path
+			path = strings.Replace(path, home, "", 1)
+			// filter hidden directories and
+			if !strings.Contains(path, ".") {
+				directories = append(directories, path)
+			}
+		}
+		return nil
+	})
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return directories
+}
 
 func copyFile(contents []byte) {
 	// convert file's []byte to string
@@ -214,13 +236,13 @@ func prompt(directories []string, home string, repo string, selectedAction strin
 func main() {
 	var action string
 	repo := "/tenjin/"
-	directories := []string{"actions", "components", "configs", "templates/11ty", "templates/deno", "templates/go", "templates/hugo", "templates/nest", "templates/node", "templates/ng", "templates/react", "helpers", "scripts", "styling", "util"}
 
 	// get home directory
 	home, err := os.UserHomeDir()
 	if err != nil {
 		log.Fatal(err)
 	}
+	directories := getDirectories(home + repo)
 
 	// versioning
 	cli.VersionFlag = &cli.BoolFlag{
