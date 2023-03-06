@@ -153,8 +153,9 @@ func highlightFile(name string, path string, contents []byte) {
 	}
 }
 
-func prompt(directories []string, home string, repo string, selectedAction string, preSelectedDirectory string) {
+func prompt(directories []string, home string, repo string, selectedAction string, preSelectedDirectory string, preSelectedPosition int) {
 	directory := preSelectedDirectory
+	postion := preSelectedPosition
 	action := strings.ToLower(selectedAction)
 
 	// if no directory is selected, prompt for one
@@ -194,15 +195,18 @@ func prompt(directories []string, home string, repo string, selectedAction strin
 		return strings.Contains(name, input)
 	}
 
+	// select file and get position
 	promptFile := promptui.Select{
-		Label:    "Select a file",
-		Items:    fileNames,
-		Searcher: searcher,
+		Label:     "Select a file",
+		Items:     fileNames,
+		Searcher:  searcher,
+		CursorPos: postion,
 	}
-	_, file, err := promptFile.Run()
+	selPos, file, err := promptFile.Run()
 	if err != nil {
 		log.Fatal(err)
 	}
+	postion = selPos
 
 	// get file contents
 	filePath := dirPath + "/" + file
@@ -235,7 +239,8 @@ func prompt(directories []string, home string, repo string, selectedAction strin
 		color.Cyan("Copied to clipboard!")
 	case "preview":
 		highlightFile(file, filePath, fileContent)
-		prompt(directories, home, repo, "", directory)
+		// return to file selection prompt
+		prompt(directories, home, repo, "", directory, postion)
 	default:
 		color.Red("No selection made.")
 	}
@@ -292,7 +297,7 @@ OPTIONS:
 			},
 		},
 		Action: func(*cli.Context) error {
-			prompt(directories, home, repo, action, "")
+			prompt(directories, home, repo, action, "", 0)
 			return nil
 		},
 	}
