@@ -26,7 +26,7 @@ func getDirectories(home string) []string {
 			// remove home directory from path
 			path = strings.Replace(path, home, "", 1)
 			// filter hidden directories and
-			if !strings.Contains(path, ".") {
+			if !strings.Contains(path, ".") && path != "" {
 				directories = append(directories, path)
 			}
 		}
@@ -235,7 +235,7 @@ func prompt(directories []string, home string, repo string, selectedAction strin
 
 func main() {
 	var action string
-	repo := "/tenjin/"
+	repo := "/tenjin/templates/"
 
 	// get home directory
 	home, err := os.UserHomeDir()
