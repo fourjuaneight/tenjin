@@ -5,7 +5,7 @@
  * @param obj any key value pair object
  * @returns {string[]} array of query string parameters
  */
-export const objToQueryString = <Type extends unkown>(obj: Type) =>
+export const objToQueryString = <T>(obj: T) =>
   Object.keys(obj).map((key) => {
     const value = obj[key];
     const fmtValue =

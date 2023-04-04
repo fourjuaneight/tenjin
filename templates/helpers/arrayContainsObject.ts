@@ -9,5 +9,5 @@ import { deepCheck } from './objectsEqual';
  *
  * @returns {boolean} is obj in array
  */
-export const arrayContainsObject = (arr: any[], obj: any): boolean =>
+export const arrayContainsObject = <A, O>(arr: A[], obj: O): boolean =>
   arr.some((elem) => deepCheck(elem, obj));

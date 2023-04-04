@@ -5,7 +5,7 @@
  * @param {any[]} arr array of datasets
  * @returns {any[][]} possible permutations
  */
-export const permutations = <Type extends unkown>(arr: Type[]): Type[][] => {
+export const permutations = <T>(arr: T[]): T[][] => {
   if (arr.length <= 2) return arr.length === 2 ? [arr, [arr[1], arr[0]]] : arr;
 
   // combine all permutations in one array

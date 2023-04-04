@@ -24,7 +24,7 @@ export const compare = (a: string | number, b: string | number): number => {
  *
  * @return {boolean}
  */
-export const equal = (a: any, b: any): boolean => compare(a, b) === 0;
+export const equal = <A, B>(a: A, b: B): boolean => compare(a, b) === 0;
 
 /**
  * Checks if variable "a" is less than "b".
@@ -35,7 +35,7 @@ export const equal = (a: any, b: any): boolean => compare(a, b) === 0;
  *
  * @return {boolean}
  */
-export const lessThan = (a: any, b: any): boolean => compare(a, b) < 0;
+export const lessThan = <A, B>(a: A, b: B): boolean => compare(a, b) < 0;
 
 /**
  * Checks if variable "a" is less than or equal to "b".
@@ -46,7 +46,7 @@ export const lessThan = (a: any, b: any): boolean => compare(a, b) < 0;
  *
  * @return {boolean}
  */
-export const lessThanOrEqual = (a: any, b: any): boolean =>
+export const lessThanOrEqual = <A, B>(a: A, b: B): boolean =>
   lessThan(a, b) || equal(a, b);
 
 /**
@@ -58,7 +58,7 @@ export const lessThanOrEqual = (a: any, b: any): boolean =>
  *
  * @return {boolean}
  */
-export const greaterThan = (a: any, b: any): boolean => compare(a, b) > 0;
+export const greaterThan = <A, B>(a: A, b: B): boolean => compare(a, b) > 0;
 
 /**
  * Checks if variable "a" is greater than or equal to "b".
@@ -69,5 +69,5 @@ export const greaterThan = (a: any, b: any): boolean => compare(a, b) > 0;
  *
  * @return {boolean}
  */
-export const greaterThanOrEqual = (a: any, b: any): boolean =>
+export const greaterThanOrEqual = <A, B>(a: A, b: B): boolean =>
   greaterThan(a, b) || equal(a, b);

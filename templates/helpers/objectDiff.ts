@@ -1,6 +1,4 @@
-import isEqual from "lodash/isEqual";
-import isObject from "lodash/isObject";
-import transform from "lodash/transform";
+import { difference, isEqual, isObject, transform } from "lodash";
 
 /**
  * Deep diff between two object, using lodash.
@@ -11,7 +9,7 @@ import transform from "lodash/transform";
  *
  * @return {any} data object representing diff
  */
-export const objectDiff = <Type extends unkown>(data: Type, base: Type): Type =>
+export const objectDiff = <T>(data: T, base: T): T =>
   transform(data, (result, value, key) => {
     if (!isEqual(value, base[key])) {
       // eslint-disable-next-line no-param-reassign

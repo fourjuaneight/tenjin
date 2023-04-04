@@ -7,10 +7,7 @@
  *
  * @returns {array} array with copies of data
  */
-export const multiplyArray = <Type extends unkown>(
-  arr: Type[],
-  copies: number
-): Type[] => {
+export const multiplyArray = <T>(arr: T[], copies: number): T[] => {
   const array: any[] = Array(copies)
     .fill(0)
     .map(() => Object.assign({}, arr));

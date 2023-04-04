@@ -7,10 +7,7 @@
  *
  * @returns {object} record by title key
  */
-export const arrayToObject = <Type extends unknown>(
-  array: any[],
-  key = "title"
-): Type => {
+export const arrayToObject = <A, T>(array: A[], key = "title"): Type => {
   const initialValue = {};
 
   return array.reduce(

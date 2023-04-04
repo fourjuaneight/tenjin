@@ -6,7 +6,7 @@
  *
  * @returns {boolean} is param an object
  */
-export const isObject = <Type extends unkown>(obj: Type): boolean =>
+export const isObject = <T>(obj: T): boolean =>
   obj != null && typeof obj === "object";
 
 /**

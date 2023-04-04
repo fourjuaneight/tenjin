@@ -1,6 +1,11 @@
 // Util
-const equal = (a: any, b: any): boolean => compare(a, b) === 0;
-const lessThan = (a: any, b: any): boolean => compare(a, b) < 0;
+const compare = (a: string | number, b: string | number): number => {
+  if (a === b) return 0;
+
+  return a < b ? -1 : 1;
+};
+const equal = (a: : string | number, b: : string | number): boolean => compare(a, b) === 0;
+const lessThan = (a: : string | number, b: : string | number): boolean => compare(a, b) < 0;
 
 /**
  * Quick sort.
@@ -31,9 +36,9 @@ export const quickSort = (originalArray: number[]): number[] => {
   while (array.length) {
     const currentElement = array.shift();
 
-    if (equal(currentElement, pivotElement)) {
+    if (equal(currentElement, pivotElement as number)) {
       centerArray.push(currentElement);
-    } else if (lessThan(currentElement, pivotElement)) {
+    } else if (lessThan(currentElement, pivotElement as number)) {
       leftArray.push(currentElement);
     } else {
       rightArray.push(currentElement);

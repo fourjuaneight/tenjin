@@ -9,7 +9,7 @@ import { useEffect, useRef } from "react";
  *
  * @return {void}
  */
-export const useInterval = (callback: T, delay: number): void => {
+export const useInterval = <T>(callback: T, delay: number): void => {
   const savedCallback = useRef<T>();
 
   // Remember the latest function.

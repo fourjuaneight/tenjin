@@ -1,5 +1,10 @@
 // Utils
-const equal = (a: any, b: any): boolean => compare(a, b) === 0;
+const compare = (a: string | number, b: string | number): number => {
+  if (a === b) return 0;
+
+  return a < b ? -1 : 1;
+};
+const equal = (a: : string | number, b: : string | number): boolean => compare(a, b) === 0;
 
 /**
  * Linear search implementation.
@@ -10,7 +15,7 @@ const equal = (a: any, b: any): boolean => compare(a, b) === 0;
  *
  * @return {number[]}
  */
-export const linearSearch = (array: any[], seekElement: object): number[] => {
+export const linearSearch = <A>(array: A[], seekElement: : string | number): number[] => {
   const foundIndices: any[] = [];
 
   array.forEach((element, index) => {

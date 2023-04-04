@@ -7,10 +7,7 @@
  *
  * @returns {object} sorted object
  */
-export const sortObjectByKey = <Type extends unkown>(
-  obj: Type,
-  key: string
-): Type => {
+export const sortObjectByKey = <T>(obj: T, key: string): T => {
   const sorted = obj.sort((a, b) => {
     const x = a[key];
     const y = b[key];

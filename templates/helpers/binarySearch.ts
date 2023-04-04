@@ -1,6 +1,11 @@
 // Utils
-const equal = (a: any, b: any): boolean => compare(a, b) === 0;
-const lessThan = (a: any, b: any): boolean => compare(a, b) < 0;
+const compare = (a: string | number, b: string | number): number => {
+  if (a === b) return 0;
+
+  return a < b ? -1 : 1;
+};
+const equal = (a: : string | number, b: : string | number): boolean => compare(a, b) === 0;
+const lessThan = (a: : string | number, b: : string | number): boolean => compare(a, b) < 0;
 
 /**
  * Binary search implementation.
@@ -11,7 +16,7 @@ const lessThan = (a: any, b: any): boolean => compare(a, b) < 0;
  *
  * @return {number}
  */
-export const binarySearch = (sortedArray: any[], seekElement: any): number => {
+export const binarySearch = <A>(sortedArray: A[], seekElement: : string | number): number => {
   // These two indices will contain current array (sub-array) boundaries.
   let startIndex = 0;
   let endIndex = sortedArray.length - 1;
