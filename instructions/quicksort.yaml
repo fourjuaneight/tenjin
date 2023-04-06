@@ -1,0 +1,45 @@
+quicksort_algorithm:
+  - step: Base case
+    description: |
+      Check if the input array has one or no elements. If so, the array is already sorted.
+      Return the input array as is.
+  - step: Select pivot
+    description: |
+      Choose a pivot element from the input array. This can be done in various ways, such as
+      picking the first element, the last element, the median, or a random element. The pivot
+      selection method can impact the performance of the algorithm.
+  - step: Partition
+    description: |
+      Partition the input array around the pivot element. Rearrange the elements so that all
+      elements less than the pivot come before it, and all elements greater than the pivot come
+      after it. The final position of the pivot element will be its correct position in the
+      sorted array. Keep track of the pivot index.
+  - step: Recursive calls
+    description: |
+      Recursively apply the Quicksort algorithm to the two sub-arrays created by partitioning:
+      one sub-array containing elements before the pivot, and the other containing elements
+      after the pivot. This will eventually sort all elements in the input array.
+  - step: Concatenate
+    description: |
+      Concatenate the sorted sub-arrays and the pivot element in the correct order to form the
+      final sorted array. Since the recursive calls ensure the sub-arrays are sorted and the
+      pivot is in its correct position, concatenating them will produce the completely sorted
+      array.
+
+quicksort_notes:
+  - note: Performance
+    description: |
+      The performance of the Quicksort algorithm depends on the pivot selection strategy and
+      the input data. In the worst case, it has a time complexity of O(n^2), but in the average
+      case, it has a time complexity of O(n log n). A random or median-of-three pivot selection
+      strategy can help avoid the worst-case scenario.
+  - note: In-place sorting
+    description: |
+      Quicksort can be implemented as an in-place sorting algorithm, meaning it does not require
+      additional memory to be allocated for sorting the input array. This is achieved by
+      modifying the input array directly during partitioning and recursive calls.
+  - note: Generics and comparisons
+    description: |
+      When implementing the Quicksort algorithm using generics, ensure that the generic type
+      supports the required comparison operations. In Rust, for example, you can use the
+      `PartialOrd` or `Ord` trait to ensure that the generic type supports ordering comparisons.
