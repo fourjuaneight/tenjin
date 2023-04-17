@@ -9,6 +9,8 @@ permissions:
 
 env:
   DIST: dist
+  NODE_VERSION: 16.19.1
+  PNPM_VERSION: 8.2.0
 
 jobs:
   build:
@@ -21,16 +23,16 @@ jobs:
           ref: ${{ github.head_ref }}
           fetch-depth: 0
 
-      - name: Use Node 16.15.1
+      - name: Setup Node
         uses: actions/setup-node@v2
         with:
-          node-version: 16.15.1
+          node-version: ${{ env.NODE_VERSION }}
 
       - name: Install pnpm
         uses: pnpm/action-setup@v2.0.1
         id: pnpm-install
         with:
-          version: 7
+          version: ${{ env.PNPM_VERSION }}
           run_install: false
 
       - name: Get pnpm store directory
