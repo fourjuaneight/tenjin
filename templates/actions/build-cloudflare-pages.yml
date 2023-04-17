@@ -1,4 +1,4 @@
-name: Build and Deploy
+name: Build and Publish to Cloudflare Pages
 
 on: [push]
 
@@ -60,8 +60,8 @@ jobs:
           name: ${{ env.DIST }}
           path: ./${{ env.DIST }}
 
-  deploy:
-    name: Deploy to Cloudflare Pages
+  publish:
+    name: Deploy Site
     runs-on: ubuntu-20.04
     env:
       CLOUDFLARE_API_TOKEN: ${{secrets.CLOUDFLARE_API_TOKEN}}
