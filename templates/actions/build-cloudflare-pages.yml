@@ -14,8 +14,6 @@ jobs:
   build:
     name: Build Site
     runs-on: ubuntu-20.04
-    env:
-      HUGO_VERSION: 0.111.3
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
@@ -52,7 +50,7 @@ jobs:
         run: pnpm install
 
       - name: Build Site
-        run: npm run build:prod
+        run: npm run build
 
       - name: Upload Output
         uses: actions/upload-artifact@v3
@@ -75,7 +73,6 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: ${{ env.DIST }}
-          # this is done to match the expected output directory
           path: ~/work/${{ env.GITHUB_REPOSITORY }}/${{ env.DIST }}
 
       - name: Publish
