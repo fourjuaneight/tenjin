@@ -1,0 +1,79 @@
+name: Build Hugo Site
+
+on: [push]
+
+permissions:
+  contents: read
+  deployments: write
+  id-token: write
+
+env:
+  DIST: dist
+  NODE_VERSION: 16.15.1
+  PNPM_VERSION: 7
+  GO_VERSION: 1.20.3
+  HUGO_VERSION: 0.111.3
+
+jobs:
+  build:
+    name: Build Site
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+
+      - name: Use Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2.0.1
+        id: pnpm-install
+        with:
+          version: ${{ env.PNPM_VERSION }}
+          run_install: false
+
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        run: |
+          echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Use Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '>=${{ env.GO_VERSION }}'
+
+      - name: Install Hugo
+        run: |
+          wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${{ env.HUGO_VERSION }}_linux-amd64.deb \
+          && sudo dpkg -i ${{ runner.temp }}/hugo.deb
+
+      - name: Install Dart Sass Embedded
+        run: sudo snap install dart-sass-embedded
+
+      - name: Build
+        env:
+          HUGO_ENVIRONMENT: production
+          HUGO_ENV: production
+        run: hugo --gc --minify
+
+      - name: Upload Output
+        uses: actions/upload-artifact@v3
+        with:
+          name: dist
+          path: ./${{ env.DIST }}
