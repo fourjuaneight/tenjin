@@ -1,0 +1,88 @@
+name: Build and Deploy
+
+on: [push]
+
+permissions:
+  contents: read
+  deployments: write
+  id-token: write
+
+env:
+  DIST: dist
+
+jobs:
+  build:
+    name: Build Site
+    runs-on: ubuntu-20.04
+    env:
+      HUGO_VERSION: 0.111.3
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+
+      - name: Use Node 16.15.1
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.15.1
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2.0.1
+        id: pnpm-install
+        with:
+          version: 7
+          run_install: false
+
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        run: |
+          echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build Site
+        run: npm run build:prod
+
+      - name: Upload Output
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ env.DIST }}
+          path: ./${{ env.DIST }}
+
+  deploy:
+    name: Deploy to Cloudflare Pages
+    runs-on: ubuntu-20.04
+    env:
+      CLOUDFLARE_API_TOKEN: ${{secrets.CLOUDFLARE_API_TOKEN}}
+      ACCOUNT_ID: ${{secrets.ACCOUNT_ID}}
+      PROJECT_NAME: ${{secrets.PROJECT_NAME}}
+      DIRECTORY: ${{secrets.DIRECTORY}}
+      GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+    needs: build
+    steps:
+      - name: Download Output
+        uses: actions/download-artifact@v3
+        with:
+          name: ${{ env.DIST }}
+          # this is done to match the expected output directory
+          path: ~/work/${{ env.GITHUB_REPOSITORY }}/${{ env.DIST }}
+
+      - name: Publish
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{secrets.CLOUDFLARE_API_TOKEN}}
+          accountId: ${{secrets.ACCOUNT_ID}}
+          projectName: ${{secrets.PROJECT_NAME}}
+          directory: ${{secrets.DIRECTORY}}
+          gitHubToken: ${{secrets.GITHUB_TOKEN}}
