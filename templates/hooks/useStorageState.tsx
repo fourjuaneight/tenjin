@@ -82,3 +82,30 @@ export const useLocalStorage = <T,>(
   // Return the state and setter function
   return [value, setValue];
 };
+
+/**
+ * Custom hook to manage cookies in a React app.
+ *
+ * @param {string} name - Name of the cookie to manage.
+ * @returns {[string | null, (value: string, days?: number) => void]} - An array containing the cookie value and a setter function.
+ */
+export const useCookie = (
+  name: string
+): [string | null, (value: string, days?: number) => void] => {
+  const [cookieValue, setCookieValue] = useState<string | null>(null);
+
+  useEffect(() => {
+    const value = getCookie(name);
+    setCookieValue(value);
+  }, [name]);
+
+  const updateCookie = useCallback(
+    (value: string, days?: number) => {
+      setCookie(name, value, days);
+      setCookieValue(value);
+    },
+    [name]
+  );
+
+  return [cookieValue, updateCookie];
+};
