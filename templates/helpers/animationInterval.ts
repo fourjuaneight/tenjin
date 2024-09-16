@@ -15,14 +15,6 @@ export const animationInterval = (
   // time since creation of doc, for current frame
   const start: number = document.timeline.currentTime;
 
-  // abort if needed
-  const frame = (time: number): void => {
-    if (signal.aborted) return;
-
-    callback(time);
-    scheduleFrame(time);
-  };
-
   // prepare frame and ship
   const scheduleFrame = (time: number): void => {
     const elapsed: number = time - start;
@@ -33,6 +25,14 @@ export const animationInterval = (
 
     // sync w/ other animations, stop when page in background, provide time for next frame
     setTimeout(() => requestAnimationFrame(frame), delay);
+  };
+
+  // abort if needed
+  const frame = (time: number): void => {
+    if (signal.aborted) return;
+
+    callback(time);
+    scheduleFrame(time);
   };
 
   scheduleFrame(start);
