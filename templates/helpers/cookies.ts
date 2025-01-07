@@ -1,9 +1,5 @@
 /**
  * Sets a cookie with an optional expiration time.
- *
- * @param name - The name of the cookie.
- * @param value - The value of the cookie.
- * @param expires - The expiration time in seconds or a specific Date object.
  */
 export const setCookie = (
   name: string,
@@ -29,9 +25,6 @@ export const setCookie = (
 
 /**
  * Retrieves the value of a specified cookie.
- *
- * @param name - The name of the cookie to retrieve.
- * @returns The value of the cookie, or null if not found.
  */
 export const getCookie = (name: string): string | null => {
   const nameEQ = `${name}=`

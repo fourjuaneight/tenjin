@@ -5,11 +5,6 @@ export const range = new RegExp(
 
 /**
  * Get the unicode code of an emoji in base 16.
- * @function
- *
- * @param   {string} emojiString the string containing emoji characters
- *
- * @returns {string} the unicode code
  */
 export const convertEmoji = (emojiString: string): string => {
   let comp: string | number;
@@ -35,11 +30,6 @@ export const convertEmoji = (emojiString: string): string => {
 
 /**
  * Takes a string and replaces unicode.
- * @function
- *
- * @param  {string} str string string with emojies
- *
- * @return {string} string with unicode emojies
  */
 export const emojiUnicode = (str: string): string =>
   str.replace(range, (p1: string) => `${convertEmoji(p1)}`);

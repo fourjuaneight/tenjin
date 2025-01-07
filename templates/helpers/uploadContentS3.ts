@@ -14,14 +14,12 @@ const s3 = new AWS.S3({
 
 /**
  * Upload asset to S3 bucket.
- * @function
- * @async
  *
- * @param {Buffer} data raw buffer data
- * @param {string} type file type
- * @param {string} name file name
- * @param {string} base database name
- * @returns {string} upload response code and message
+ * @param data raw buffer data
+ * @param type file type
+ * @param name file name
+ * @param base database name
+ * @returns upload response code and message
  */
 export const uploadContent = async (
   data: Buffer,

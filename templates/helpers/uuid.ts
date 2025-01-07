@@ -1,14 +1,13 @@
-// 0-255 numbers array > hex string > prepend a 0 = 256 hex values
-// hoisted to avoid recalculating
+/**
+ * 0-255 numbers array > hex string > prepend a 0 = 256 hex values
+ * hoisted to avoid recalculating
+ */
 const hex: string[] = [...Array(256).keys()].map((index: number) =>
   index.toString(16).padStart(2, '0')
 );
 
 /**
- * Simple UUID generating.
- * @function
- *
- * @return {string} natively randomized uuid string
+ * Natively randomized UUID string generation.
  */
 export const uuid = (): string => {
   // randomized 16 byte buffer

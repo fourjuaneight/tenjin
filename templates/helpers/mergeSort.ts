@@ -3,13 +3,7 @@ const lessThanOrEqual = (a: any, b: any): boolean =>
   lessThan(a, b) || equal(a, b);
 
 /**
- * Merge arrays.
- * @function
- *
- * @param  {number[]} leftArray
- * @param  {number[]} rightArray
- *
- * @return {number[]}
+ * Merge sorted arrays.
  */
 export const mergeSortedArrays = (
   leftArray: number[],
@@ -47,11 +41,6 @@ export const mergeSortedArrays = (
 
 /**
  * Merge sort.
- * @function
- *
- * @param  {number[]} originalArray
- *
- * @return {number[]}
  */
 export const mergeSort = (originalArray: number[]): number[] => {
   // If array is empty or consists of one element then return this array since it is sorted.

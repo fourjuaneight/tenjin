@@ -4,10 +4,6 @@ interface Aggregate {
 
 /**
  * Aggregates unique values in an array.
- * @function
- *
- * @param {array} iterable array of items to count
- * @returns {object} object with unique items and their count
  */
 export const countUnique = (iterable: string[]) =>
   iterable.reduce((acc: Aggregate, item) => {
@@ -18,10 +14,6 @@ export const countUnique = (iterable: string[]) =>
 /**
  * Aggregates unique values in an array.
  * Sorted by count descending.
- * @function
- *
- * @param {array} iterable array of items to count
- * @returns {object} object with unique items and their count
  */
 export const countUniqueSorted = (iterable: string[]) =>
   Object.entries(countUnique(iterable))

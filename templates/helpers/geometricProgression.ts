@@ -1,11 +1,5 @@
 /**
  * Initializes an array containing the numbers in the specified range where start and end are inclusive and the ratio between two terms is step.
- * @function
- * 
- * @param {number} end
- * @param {number} start
- * @param {number} step
- * @returns {number[]}
  */
 const geometricProgression = (end: number, start = 1, step = 2): number[] =>
   // create an array of the desired length

@@ -1,12 +1,5 @@
 /**
  * Sort given array by key in descending/ascending order.
- * @function
- *
- * @param  {any[]}   list array to sort
- * @param  {string}  key  ket to sort by
- * @param  {boolean} asc  should order by asc order
- *
- * @return {any[]}   sorted array
  */
 export const sortArr = <T>(
   list: T[],

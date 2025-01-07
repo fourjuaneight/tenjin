@@ -8,12 +8,6 @@ const equal = (a: : string | number, b: : string | number): boolean => compare(a
 
 /**
  * Linear search implementation.
- * @function
- *
- * @param  {*[]}      array
- * @param  {*}        seekElement
- *
- * @return {number[]}
  */
 export const linearSearch = <A>(array: A[], seekElement: : string | number): number[] => {
   const foundIndices: any[] = [];

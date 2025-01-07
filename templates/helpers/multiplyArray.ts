@@ -1,11 +1,5 @@
 /**
- * Copy array by given n times.
- * @function
- *
- * @param   {array} arr data to multiply
- * @param   {number} copies number of copies
- *
- * @returns {array} array with copies of data
+ * Copy array by given number times.
  */
 export const multiplyArray = <T>(arr: T[], copies: number): T[] => {
   const array: any[] = Array(copies)

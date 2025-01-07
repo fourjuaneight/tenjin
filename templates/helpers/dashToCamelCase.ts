@@ -1,10 +1,5 @@
 /**
- * Dashed string to camel case.
- * @function
- *
- * @param   {string} str dash separate string
- *
- * @returns {string} camelCased string
+ * Convert dashed string to camel case.
  */
 export const dashToCamelCase = (str: string): string =>
   str

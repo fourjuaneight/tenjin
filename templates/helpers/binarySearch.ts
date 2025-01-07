@@ -9,12 +9,6 @@ const lessThan = (a: : string | number, b: : string | number): boolean => compar
 
 /**
  * Binary search implementation.
- * @function
- *
- * @param  {*[]}    sortedArray
- * @param  {*}      seekElement
- *
- * @return {number}
  */
 export const binarySearch = <A>(sortedArray: A[], seekElement: : string | number): number => {
   // These two indices will contain current array (sub-array) boundaries.

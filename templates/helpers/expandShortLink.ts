@@ -1,11 +1,6 @@
 /* eslint-disable sort-keys */
 /**
- * Expand shortend URLs.
- * @function
- *
- * @param   {string}          url shortned url string
- *
- * @returns {Promise<string>} expanded URL
+ * Expand shortend URLs via Fetch.
  */
 export const expandLinks = async (url: string): Promise<string> => {
   try {
@@ -27,12 +22,6 @@ export const expandLinks = async (url: string): Promise<string> => {
 
 /**
  * Get expanded URLs.
- * @function
- *
- * @param   {string}          str   string to replace
- * @param   {RegExp}          regex pattern to match
- *
- * @returns {Promise<string>} list of expanded URLs from str
  */
 export const expandShortLink = async (str: string, regex: RegExp): Promise<string> => {
   const promises: Promise<string>[] = [];

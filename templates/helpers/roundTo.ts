@@ -1,11 +1,8 @@
 /**
  * Safe number rounding. toFixed alternative, which will round up or down for you depending on the values beyond 2 decimals.
- * @function
  *
- * @param   {number} num number to trim
- * @param   {number} dig amount of digits trimmed to
- *
- * @return  {number} trimmed value
+ * @param num number to trim
+ * @param dig amount of digits trimmed to
  */
 export const roundTo = (num: number, dig: number): number => {
   let negative: boolean = false;

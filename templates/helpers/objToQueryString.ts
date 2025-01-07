@@ -1,9 +1,5 @@
 /**
- * Convert an object to a query string for GQL.
- * @function
- *
- * @param obj any key value pair object
- * @returns {string[]} array of query string parameters
+ * Convert an object to a query string for GraphQL.
  */
 export const objToQueryString = <T>(obj: T) =>
   Object.keys(obj).map((key) => {

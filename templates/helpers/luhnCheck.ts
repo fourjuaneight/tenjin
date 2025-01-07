@@ -1,9 +1,6 @@
 /**
  * Implementation of the Luhn Algorithm used to validate a variety of identification numbers, such as credit card numbers, IMEI numbers, National Provider Identifier numbers etc.
- * @function
- *
- * @param {number | string} num
- * @returns {boolean} true if sum is divisible by 10, false otherwise
+ * https://w.wiki/HD5
  */
 export const luhnCheck = (num: number | string): boolean => {
   // obtain array of digits

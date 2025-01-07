@@ -1,22 +1,11 @@
 /**
- * Determine param is an object.
- * @function
- *
- * @param   {object}  obj param to check against
- *
- * @returns {boolean} is param an object
+ * Determines if the given parameter is an object.
  */
 export const isObject = <T>(obj: T): boolean =>
   obj != null && typeof obj === "object";
 
 /**
  * Determine if two objects are the same. Shallow check.
- * @function
- *
- * @param   {object}  obj1 main object to compare
- * @param   {object}  obj2 secondary object to compare
- *
- * @returns {boolean} are objects equal
  */
 export const shallowCheck = <Obj1, Obj2>(obj1: Obj1, obj2: Obj2): boolean => {
   const keys1 = Object.keys(obj1);
@@ -37,12 +26,6 @@ export const shallowCheck = <Obj1, Obj2>(obj1: Obj1, obj2: Obj2): boolean => {
 
 /**
  * Determine if two objects are the same. Deep check.
- * @function
- *
- * @param   {object}  obj1 main object to compare
- * @param   {object}  obj2 secondary object to compare
- *
- * @returns {boolean} are objects equal
  */
 export const deepCheck = <Obj1, Obj2>(obj1: Obj1, obj2: Obj2): boolean => {
   const keys1 = Object.keys(obj1);

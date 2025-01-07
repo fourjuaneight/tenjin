@@ -1,10 +1,5 @@
 /**
  * Creates an array of numbers in the arithmetic progression, starting with the given positive integer and up to the specified limit.
- * @function
- *
- * @param {number} number
- * @param {number} limit
- * @returns {number[]}
  */
 export const arithmeticProgression = (
   number: number,

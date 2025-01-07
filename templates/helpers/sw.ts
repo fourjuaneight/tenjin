@@ -3,6 +3,9 @@ interface FetchEvent extends Event {
   respondWith(response: Promise<Response> | Response): Promise<Response>;
 }
 
+/**
+ * Service Worker for caching static assets and pages.
+ */
 (() => {
   const version: string = '';
   const cacheName: string = ':';

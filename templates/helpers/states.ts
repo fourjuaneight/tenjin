@@ -3,6 +3,9 @@ export interface StatesValues {
   name: string;
 }
 
+/**
+ * List of US state names with their official abbreviation.
+ */
 export const states: StatesValues[] = [
   {
     abbreviation: "AL",

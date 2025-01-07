@@ -1,4 +1,4 @@
-// Util
+// Utils
 const compare = (a: string | number, b: string | number): number => {
   if (a === b) return 0;
 
@@ -9,11 +9,6 @@ const lessThan = (a: : string | number, b: : string | number): boolean => compar
 
 /**
  * Quick sort.
- * @function
- *
- * @param  {number[]} originalArray
- *
- * @return {number[]}
  */
 export const quickSort = (originalArray: number[]): number[] => {
   // Clone original array to prevent it from modification.

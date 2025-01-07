@@ -1,10 +1,6 @@
 /**
  * Randomizes the order of the values of an array, returning a new array.
- * Uses Fisher-Yates algorithm.
- * @function
- *
- * @param {any[]} array
- * @returns {any[]} shuffled array
+ * Uses Fisher-Yates algorithm: https://w.wiki/8Zj
  */
 export const shuffleArrs = <Type>([...arr]: T[]) => {
   let match = arr.length;

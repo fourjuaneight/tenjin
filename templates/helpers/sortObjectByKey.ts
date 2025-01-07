@@ -1,11 +1,5 @@
 /**
- * Sort object by key.
- * @function
- *
- * @param   {object} obj object to sort
- * @param   {string} key key to sort by
- *
- * @returns {object} sorted object
+ * Sort an object by key.
  */
 export const sortObjectByKey = <T>(obj: T, key: string): T => {
   const sorted = obj.sort((a, b) => {

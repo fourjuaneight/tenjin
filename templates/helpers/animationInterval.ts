@@ -1,11 +1,9 @@
 /**
  * Corss-browser, time perfect, animation interval.
- * @function
  *
  * @param  {number}      ms when to ship animation; interval
  * @param  {AbortSignal} signal performant abort of interval
  * @param  {function}    callback get time for next frame
- * @return {void}
  */
 export const animationInterval = (
   ms: number,

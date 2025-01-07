@@ -1,12 +1,6 @@
 /* eslint-disable sort-keys */
 /**
- * Formate float to USD currency.
- * @function
- *
- * @param  {number}  num             float number to convert
- * @param  {boolean} includeCurrency include currency type
- *
- * @return {string}  dollar amount
+ * Convert float to USD currency.
  */
 export const formatCurrency = (
   num: number | null,
@@ -32,12 +26,7 @@ export const formatCurrency = (
 };
 
 /**
- * Format number to comma-separate.
- * @function
- *
- * @param  {number} num number to convert
- *
- * @return {string} comma-separate number
+ * Convert number to comma-separate.
  */
 export const numberWithCommas = (num: number): string => {
   if (!num) {
