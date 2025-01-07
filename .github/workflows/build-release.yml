@@ -1,0 +1,83 @@
+name: Build and Release
+
+on:
+  push:
+    tags:
+      - '*'
+
+permissions:
+  contents: read
+  deployments: write
+  id-token: write
+
+jobs:
+  build:
+    name: Build App
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+
+      - name: Use Go 1.22.0
+        uses: actions/setup-go@v4
+        with:
+          go-version: '>=1.22.0'
+
+      - name: Build
+        run: make build
+
+      - name: Upload Output
+        id: artifact-upload-step
+        uses: actions/upload-artifact@v4
+        with:
+          name: tenjin
+          path: ./tenjin
+
+  changelog:
+    name: Update Changelog
+    runs-on: ubuntu-20.04
+    needs: build
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
+          fetch-depth: 0
+
+      - name: Set up git-cliff
+        uses: kenji-miyake/setup-git-cliff@v1
+
+      - name: Generate Changelog
+        run: git cliff -v -o CHANGELOG.md -c cliff.toml
+
+      - name: Update Changelog
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          branch: main
+          commit_message: 'chore: Update Changelog.'
+
+      - name: Date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+
+      - name: Tag Link
+        id: tagLink
+        run: echo "::set-output name=link::$(echo $GITHUB_REF_NAME | sed 's/v//g' | sed 's/\.//g')"
+
+      - name: Tag Name
+        id: tagName
+        run: echo "::set-output name=name::$(echo $GITHUB_REF_NAME | sed 's/v//g')"
+
+      - name: Download Artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: tenjin
+
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          name: '${{ steps.tagName.outputs.name }}'
+          body: 'See [Changelog](${{ github.server_url }}/${{ github.repository }}/blob/main/CHANGELOG.md#${{ steps.tagLink.outputs.link }}---${{ steps.date.outputs.date }}) for release notes.'
+          files: ./binary/tenjin
