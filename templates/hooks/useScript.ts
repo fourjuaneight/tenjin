@@ -2,11 +2,6 @@ import { useEffect } from "react";
 
 /**
  * Dynamically create <script> node.
- * @function
- *
- * @param  {string} resourceUrl script source
- *
- * @return {void}
  */
 export const useScript = (resourceUrl: string): void => {
   useEffect(() => {

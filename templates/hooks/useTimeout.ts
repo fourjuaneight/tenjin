@@ -2,12 +2,6 @@ import { useEffect, useRef } from "react";
 
 /**
  * Setup safe setTimeout effect.
- * @function
- *
- * @param  {T}      callback function to run at timeout
- * @param  {number} delay    timeout delay in milliseconds
- *
- * @return {void}
  */
 export const useTimeout = <T>(callback: T, delay: number): void => {
   const savedCallback = useRef<T>(null);

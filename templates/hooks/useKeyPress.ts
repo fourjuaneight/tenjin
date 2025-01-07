@@ -3,11 +3,6 @@ import { KeyboardEvent, useState, useEffect } from "react";
 /**
  * Determines if given key has been pressed.
  * https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/key/Key_Values
- * @function
- *
- * @param  {string}  targetKey possible key values
- *
- * @return {boolean}           has given key been pressed
  */
 export const useKeyPress = (targetKey: string): boolean => {
   // State for keeping track of whether key is pressed

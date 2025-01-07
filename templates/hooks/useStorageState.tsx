@@ -2,10 +2,6 @@ import { useState, useEffect, Dispatch, SetStateAction } from "react";
 
 /**
  * Sets a cookie with an optional expiration time.
- *
- * @param name - The name of the cookie.
- * @param value - The value of the cookie.
- * @param expires - The expiration time in seconds or a specific Date object.
  */
 export const setCookie = (
   name: string,
@@ -31,9 +27,6 @@ export const setCookie = (
 
 /**
  * Retrieves the value of a specified cookie.
- *
- * @param name - The name of the cookie to retrieve.
- * @returns The value of the cookie, or null if not found.
  */
 export const getCookie = (name: string): string | null => {
   const nameEQ = `${name}=`
@@ -51,7 +44,36 @@ export const getCookie = (name: string): string | null => {
   return null
 }
 
+/**
+ * Custom hook to manage cookies in a React app.
+ *
+ * @param name - Name of the cookie to manage.
+ * @returns An array containing the cookie value and a setter function.
+ */
+export const useCookie = (
+  name: string
+): [string | null, (value: string, days?: number) => void] => {
+  const [cookieValue, setCookieValue] = useState<string | null>(null);
 
+  useEffect(() => {
+    const value = getCookie(name);
+    setCookieValue(value);
+  }, [name]);
+
+  const updateCookie = useCallback(
+    (value: string, days?: number) => {
+      setCookie(name, value, days);
+      setCookieValue(value);
+    },
+    [name]
+  );
+
+  return [cookieValue, updateCookie];
+};
+
+/**
+ * Store useState in sessionStorage
+ */
 export const useSessionStorage = <T,>(
   key: string,
   initialValue: T
@@ -94,6 +116,9 @@ export const useSessionStorage = <T,>(
   return [value, setValue];
 };
 
+/**
+ * Store useState in localStorage
+ */
 export const useLocalStorage = <T,>(
   key: string,
   initialValue: T
@@ -133,31 +158,4 @@ export const useLocalStorage = <T,>(
 
   // Return the state and setter function
   return [value, setValue];
-};
-
-/**
- * Custom hook to manage cookies in a React app.
- *
- * @param {string} name - Name of the cookie to manage.
- * @returns {[string | null, (value: string, days?: number) => void]} - An array containing the cookie value and a setter function.
- */
-export const useCookie = (
-  name: string
-): [string | null, (value: string, days?: number) => void] => {
-  const [cookieValue, setCookieValue] = useState<string | null>(null);
-
-  useEffect(() => {
-    const value = getCookie(name);
-    setCookieValue(value);
-  }, [name]);
-
-  const updateCookie = useCallback(
-    (value: string, days?: number) => {
-      setCookie(name, value, days);
-      setCookieValue(value);
-    },
-    [name]
-  );
-
-  return [cookieValue, updateCookie];
 };

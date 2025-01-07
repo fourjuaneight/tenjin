@@ -31,18 +31,12 @@ const isRenderingOnServer = typeof window === "undefined";
 /**
  * For our initial server render, we won't know if the user prefers reduced motion, but it doesn't matter.
  * This value will be overwritten on the client, before any animations occur.
- * @function
- *
- * @return {boolean} is server rendered
  */
 const getInitialState = (): boolean =>
   isRenderingOnServer ? true : !window.matchMedia(QUERY).matches;
 
 /**
  * Get prefers-reduced-motion preference value for JS based animations.
- * @function
- *
- * @return {boolean} does user have a reduce-motion preference
  */
 export const usePrefersReducedMotion = (): boolean => {
   const [prefersReducedMotion, setPrefersReducedMotion] =
@@ -66,12 +60,7 @@ export const usePrefersReducedMotion = (): boolean => {
 };
 
 /**
- * Custom hook for creating a "boop" animation effect.`
- * @function
- *
- * @param {UseBoopProps} params
- *
- * @return {UseBoopProps} CSS style to be applied and a trigger function to start the boop effect
+ * Custom hook for creating a "boop" animation effect.
  */
 export const useBoop = ({
   x = 0,
@@ -123,12 +112,6 @@ export const useBoop = ({
 
 /**
  * Spring based boop animation wrapper.
- * @function
- *
- * @param   {ReactNode}         children
- * @param   {UseBoopProps}      boopConfig
- *
- * @returns {FunctionComponent} <Boop />
  */
 export const Boop: FunctionComponent<BoopProps> = ({
   children,

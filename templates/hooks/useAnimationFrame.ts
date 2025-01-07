@@ -2,12 +2,10 @@ import { useEffect, useRef } from "react";
 
 /**
  * Corss-browser, time perfect, animation interval.
- * @function
  *
- * @param  {number}      ms when to ship animation; interval
- * @param  {AbortSignal} signal performant abort of interval
- * @param  {function}    callback get time for next frame
- * @return {void}
+ * @param ms when to ship animation; interval
+ * @param signal performant abort of interval
+ * @param callback get time for next frame
  */
 export const animationInterval = (
   ms: number,
@@ -42,11 +40,9 @@ export const animationInterval = (
 
 /**
  * Corss-browser, time perfect, animation interval.
- * @hook
  *
- * @param   {number}   ms when to ship animation; interval
- * @param   {function} callback get time for next frame
- * @returns {void}
+ * @param ms when to ship animation; interval
+ * @param callback get time for next frame
  */
 export const useAnimationFrame = (
   ms: number,

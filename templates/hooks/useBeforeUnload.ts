@@ -2,11 +2,6 @@ import { useEffect } from "react";
 
 /**
  * Intercept browser unload.
- * @function
- *
- * @param  {function | string} event handler
- *
- * @return {void}
  */
 export const useBeforeUnload = (
   value: ((evt: BeforeUnloadEvent) => any) | string

@@ -23,10 +23,8 @@ interface UseDimensionsArgs {
 
 /**
  * Get bounding client of ref React element.
- * @function
  *
- * @param   {boolean} resize watch for window resize and update dimension properties?
- * @returns {Array}          [ref element, bounding client properties, element node]
+ * @param resize watch for window resize and update dimension properties?
  */
 export const useDimensions = ({
   resize = false,
