@@ -1,7 +1,10 @@
-import { fromJS } from "immutable";
+interface IState {
+  [key: string]: any;
+}
 
-import { IState } from "./types";
-
+/**
+ * Load state from session storage
+ */
 export const loadState = (): IState | undefined => {
   try {
     const serializedState: string | null =
@@ -11,7 +14,7 @@ export const loadState = (): IState | undefined => {
       return undefined;
     }
 
-    return fromJS(JSON.parse(serializedState));
+    return JSON.parse(serializedState);
   } catch (error) {
     console.error("Load State Error:", error);
 
@@ -19,6 +22,9 @@ export const loadState = (): IState | undefined => {
   }
 };
 
+/**
+ * Save state to session storage
+ */
 export const saveState = (state: IState) => {
   try {
     const serializedState: string = JSON.stringify(state);

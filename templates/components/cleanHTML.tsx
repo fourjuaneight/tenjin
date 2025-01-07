@@ -8,13 +8,7 @@ interface CleanHTMLProps {
 
 /**
  * Sanitized HTML; ensures only specified tags attributes pass through.
- * @component
- *
- * @param   {string}            html raw HTML string
- *
- * @returns {FunctionComponent} <CleanHTML html={html} />
  */
-
 export const CleanHTML: FunctionComponent<CleanHTMLProps> = ({
   html,
 }): FunctionComponent => {
