@@ -1,7 +1,9 @@
 /* eslint-disable quotes */
 const clip = document.querySelector('button.clip-btn');
 
-// create selection range for <code> element
+/**
+ * Create selection range for <code> element.
+ */
 clip.addEventListener('click', () => {
   const selection: Selection = window.getSelection();
   const range: Range = document.createRange();

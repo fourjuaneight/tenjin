@@ -36,11 +36,6 @@ type Data = {
 
 /**
  * HTML Head
- * @component
- *
- * @param   {ILocation} location router location info
- *
- * @returns {React.FC}
  */
 const Head: React.FC<HeadProps> = ({ location }): React.FC => {
   const {

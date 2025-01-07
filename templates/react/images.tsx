@@ -26,14 +26,11 @@ interface ImageProps {
 /**
  * Static Image Query
  * Queries all images at a set max-width and allows filtering of specific image via props
- * @component
  *
- * @param   {string} alt      alt text
- * @param   {string} filename image relative filename
- * @param   {object} imgStyle img styles
- * @param   {object} style    wrapper container styles
- *
- * @returns {React.FC}        <Image filename={string} alt={string} style={object} imgStyle={object} />
+ * @param alt alt text
+ * @param filename image relative filename
+ * @param imgStyle img styles
+ * @param style wrapper container styles
  */
 const Image: React.FC<ImageProps> = ({
   alt,

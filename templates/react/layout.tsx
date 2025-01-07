@@ -12,11 +12,6 @@ interface LayoutProps {
 
 /**
  * Main layout
- * @component
- *
- * @param   {LayoutProps} location router location info
- *
- * @returns {React.FC}             <Layout location={location} />
  */
 const Layout: React.FC<LayoutProps> = ({ children, location }): React.FC => (
   <>
