@@ -1,6 +1,6 @@
 module github.com/fourjuaneight/tenjin
 
-go 1.20
+go 1.25.0
 
 require (
 	github.com/atotto/clipboard v0.1.2
@@ -24,7 +24,7 @@ require (
 	github.com/ysmood/goob v0.4.0 // indirect
 	github.com/ysmood/gson v0.7.3 // indirect
 	github.com/ysmood/leakless v0.8.0 // indirect
-	golang.org/x/image v0.18.0 // indirect
+	golang.org/x/image v0.38.0 // indirect
 	golang.org/x/sys v0.5.0 // indirect
 	gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
